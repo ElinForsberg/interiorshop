@@ -30,8 +30,6 @@ async function registerUser(req, res, next) {
     isAdmin
    })
    
-    
-
    const user = await UserModel.findOne({email: req.body.email}).select('-password');
     
     res.status(201).json(user);
@@ -40,4 +38,28 @@ async function registerUser(req, res, next) {
   }
 }
 
-module.exports = { registerUser }
+async function loginUser(req, res) {
+    const { email, password} = req.body;
+    const user = await UserModel.findOne({email});
+  
+    if (!user || !await bcrypt.compare(password, user.password)) {
+        return res.status(401).json("Wrong email or password");
+      }
+      req.session.user = {
+        _id: user._id,
+        email: user.email,
+        name: user.name,
+        isAdmin: user.isAdmin
+      };
+    console.log(req.session.user);
+    const loggedInUser = await UserModel.findOne({email: email}).select('-password');
+    
+    res.status(200).json(loggedInUser);
+  }
+
+  async function logoutUser(req, res) {
+    req.session = null;
+    res.status(204).json("Successfully logged out");
+  }
+
+module.exports = { registerUser, loginUser, logoutUser }

@@ -9,13 +9,34 @@ GET http://localhost:3000/api/prod_PG7lIFMnfosp5H
 ###
 
 // create an user
-POST http://localhost:3000/api/register
+POST http://localhost:3000/api/user/register
 Content-Type: application/json
 
 {
     "name": "Elin Forsberg",
     "password": "Kaninen10?",
-    "email": "kaninen@hotmail.com"
+    "email": "kaninen2@hotmail.com"
     
 }
 ###
+
+//login
+POST http://localhost:3000/api/user/login
+Content-Type: application/json
+
+ {
+    "email": "kaninen2@hotmail.com",
+    "password": "Kaninen10?"
+     
+}
+###
+
+//logout
+POST http://localhost:3000/api/user/logout
+Content-Type: application/json
+
+{
+     "email": "kaninen2@hotmail.com",
+    "password": "Kaninen10?"
+    
+}
