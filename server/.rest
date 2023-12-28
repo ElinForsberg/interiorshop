@@ -1,7 +1,21 @@
-//hämta alla produkter
+//get all products
 GET http://localhost:3000/api/products
 
 ###
 
-//hämta produkt efter id
+//get one product by id
 GET http://localhost:3000/api/prod_PG7lIFMnfosp5H
+
+###
+
+// create an user
+POST http://localhost:3000/api/register
+Content-Type: application/json
+
+{
+    "name": "Elin Forsberg",
+    "password": "Kaninen10?",
+    "email": "kaninen@hotmail.com"
+    
+}
+###

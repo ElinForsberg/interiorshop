@@ -1,7 +1,8 @@
 const express = require("express");
 const cors = require("cors");
 const cookieSession = require("cookie-session");
-const {productRouter} = require("../src/resources/product/product.router")
+const {productRouter} = require("../src/resources/product/product.router");
+const { userRouter } = require("./resources/user/user.router");
 const app = express();
 app.use(express.json());
 app.use(cors({ origin: true, credentials: true }));
@@ -17,6 +18,7 @@ app.use(
 );
 
 app.use("/api", productRouter);
+app.use("/api", userRouter);
 
 app.use((req, res) => {
     console.log("!404!");
