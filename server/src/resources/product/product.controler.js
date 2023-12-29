@@ -1,6 +1,7 @@
 const { initStripe } = require("../../stripe");
 const stripe = initStripe();
 
+//Get all products from Stripe
 const getProducts = async (req,res) => {
     try {
         const products= await stripe.products.list({
@@ -10,13 +11,14 @@ const getProducts = async (req,res) => {
          res.status(200).json(products)
     } catch(err){
         console.log(err);
-        res.status(400).json("something went wrong")
+        res.status(400).json(err.message)
     }
 } 
 
+//Get one product by id from Stripe
 const getProductById = async (req,res) => {
     try {
-        const productId = String(req.params.id); // Convert to string explicitly
+        const productId = String(req.params.id); // Convert to string
         const productById = await stripe.products.retrieve(productId);
         
         if (!productById || productById.deleted){
@@ -28,7 +30,7 @@ const getProductById = async (req,res) => {
             return res.status(404).json(`Product with ID ${req.params.id} was not found`);
         }
         console.log(err);
-        res.status(400).json("something went wrong")
+        res.status(400).json(err.message)
     }
 }
 
