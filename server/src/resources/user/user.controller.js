@@ -41,7 +41,7 @@ async function registerUser(req, res, next) {
 async function loginUser(req, res) {
     const { email, password} = req.body;
     const user = await UserModel.findOne({email});
-  
+  try{
     if (!user || !await bcrypt.compare(password, user.password)) {
         return res.status(401).json("Wrong email or password");
       }
@@ -55,7 +55,11 @@ async function loginUser(req, res) {
     const loggedInUser = await UserModel.findOne({email: email}).select('-password');
     
     res.status(200).json(loggedInUser);
+  } catch(error) {
+    res.status(404).json(error.message);
   }
+  }
+    
 
   async function logoutUser(req, res) {
     req.session = null;
