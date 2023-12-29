@@ -1,0 +1,7 @@
+//hämta alla produkter
+GET http://localhost:3000/api/products
+
+###
+
+//hämta produkt efter id
+GET http://localhost:3000/api/prod_PG7lIFMnfosp5H
