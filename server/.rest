@@ -40,3 +40,67 @@ Content-Type: application/json
     "password": "Kaninen10?"
     
 }
+###
+
+// create product in mongoDb
+POST http://localhost:3000/api/products
+Content-Type: application/json
+
+{
+    "title": "Luke matbord med stolar",
+    "stripeId":"prod_PGRhJaO9TkWXOz",
+    "inStock": 90
+}
+###
+
+// Create a checkout session in stripe
+POST http://localhost:3000/api/registerCheckout
+Content-Type: application/json
+
+[
+  {
+    "product": "price_1ORyr9KUxLTbuUGLEgOi0al1",
+    "quantity": 2
+  },
+  {
+    "product": "price_1ORw4QKUxLTbuUGLq2qu2qSU",
+    "quantity": 1
+  }
+]
+###
+
+POST http://localhost:3000/api/verifySession
+Content-Type: application/json
+
+{
+    "sessionId": "cs_test_b1AOCqcJPOcWa8CbrCBWmeUUksVA4DDsyoYvyKBYPnJkGljqmXv1lQ220C",
+    
+       "customer": "sixten",
+        "email": "sixten@hotmail.com",
+     "adress":{
+        "city":"Grimsborg",
+        "country":"Sweden",
+        "street":"Bejovägen",
+        "street2": "",
+        "postal_code":"94782"
+    },
+
+    "products":[
+        {
+        "product":"63d8e86b841cfe788d00a561",
+        "quantity":2,
+        "stripeId": "63d8e86b841cfe788d00a561"
+        },
+        {
+        "product":"63e12cef1162f6ba695b6509",
+        "quantity":2,
+        "stripeId": "63e12cef1162f6ba695b6509"
+        }
+        ]
+   
+    
+}
+###
+
+ 
+        

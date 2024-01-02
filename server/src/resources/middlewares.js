@@ -1,4 +1,4 @@
-function validate(schema) {
+const validate = (schema) => {
 
     return  function (req, res, next) {
       const { error } =  schema.validate(req.body);
@@ -8,4 +8,24 @@ function validate(schema) {
     };
   }
 
-  module.exports = { validate };
+  const authorization = (req, res, next) => {
+    console.log(req.session);
+    if (req.session.user){
+        next();
+    } else {
+      return res.status(401).json("You need to log in");
+    }
+  }
+  
+  const isAdmin = (req, res, next) => {
+    const user = req.session.user;
+    if(user.isAdmin === false){
+      return res.status(403).json("You are not admin");
+     
+    } else {
+      next()
+    }
+  }
+  
+  module.exports = { validate, authorization, isAdmin };
+  

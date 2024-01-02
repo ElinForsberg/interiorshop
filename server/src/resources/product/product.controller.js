@@ -1,5 +1,6 @@
 const { initStripe } = require("../../stripe");
 const stripe = initStripe();
+const { ProductModel } = require("./product.model")
 
 //Get all products from Stripe
 const getProducts = async (req,res) => {
@@ -34,4 +35,36 @@ const getProductById = async (req,res) => {
     }
 }
 
-module.exports = { getProducts, getProductById }
+//Get product by category
+const getProductByCategory = async (req, res) => {
+    try {
+    const productsByCategory = await ProductModel.find({categories: req.params.id})
+    console.log(productsByCategory);
+    
+    res.status(200).json(productsByCategory)
+    } catch (error) {
+        res.status(404).json(error);
+    }
+    
+}
+
+const createProduct = async(req,res) => {
+   
+    const {title, inStock, stripeId} = req.body;
+    console.log(title);
+    try {
+
+        const product = await ProductModel.create({
+            stripeId: stripeId,
+            title: title,
+            inStock: inStock,
+            
+        });
+       
+        res.status(201).json(product)
+    } catch (error) {
+        res.status(400).json(error.message);
+    }   
+}
+
+module.exports = { getProducts, getProductById, getProductByCategory, createProduct }
