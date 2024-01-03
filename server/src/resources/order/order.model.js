@@ -14,13 +14,15 @@ const OrderSchema = new Schema({
     type: String,
     required: true,
   },
-  address: {
-    city: String,
-    country: String,
-    street: String,
-    street2: String,
-    postal_code: String,
-  },
+  
+    address: {
+      city: { type: String },
+      country: { type: String },
+      street: { type: String },
+      street2: { type: String },
+      postal_code: { type: String },
+    },
+  
   totalSum: {
     type: Number,
     required: true,

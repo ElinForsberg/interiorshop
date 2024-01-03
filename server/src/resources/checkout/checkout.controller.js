@@ -2,6 +2,7 @@ const { initStripe } = require("../../stripe");
 const stripe = initStripe();
 const CLIENT_URL = "http://localhost:5173";
 const { OrderModel } = require("../order/order.model")
+const { ProductModel } = require("../product/product.model")
 const registerCheckout = async (req,res) => {
     
     try {
@@ -10,10 +11,11 @@ const registerCheckout = async (req,res) => {
             line_items: req.body.map((item) => {
                 return {
                     price: item.product,
-                    quantity: item.quantity,                     
+                    quantity: item.quantity,                 
                 };  
                               
-            }),      
+            }),  
+            expand: ["line_items"],      
             shipping_address_collection: {
                 allowed_countries: ['SE'],
               },          
@@ -57,23 +59,42 @@ const verifyPayment = async (req, res) => {
             customer: customerDetails.name || 'Unknown',
             email: customerDetails.email || 'Unknown',
             address: {
-                city: customerDetails.city || 'Unknown',
-                country: customerDetails.country || 'Unknown',
-                street: customerDetails.line1 || 'Unknown',
-                street2: customerDetails.line2 || '',
-                postal_code: customerDetails.postal_code || '',
-            },
+                city: customerDetails.address.city || 'Unknown',
+                country: customerDetails.address.country || 'Unknown',
+                street: customerDetails.address.line1 || 'Unknown',
+                street2: customerDetails.address.line2 || '',
+                postal_code: customerDetails.address.postal_code || '',
+              },
+            
             totalSum: (parseFloat(session.amount_total) / 100).toFixed(2),
             products: products.data.map((item) => ({
+                
                 description: item.description,
+                stripeId: item.price.product,
                 quantity: item.quantity,
                 price: (parseFloat(item.price.unit_amount) / 100).toFixed(2),
                 currency: item.price.currency,
                 total: (parseFloat(item.amount_total) / 100).toFixed(2),
+                
             })),
         };
         console.log(customerDetails);
+        console.log("prod", products);
         const order = await new OrderModel(orderData).save();
+
+        // Update inStock for purchased products
+        for (const product of order.products) {
+            console.log('Searching for product :', product);
+            const foundProduct = await ProductModel.findOne({ stripeId: product.stripeId });
+            console.log("found product", foundProduct);
+            if (foundProduct) {
+                foundProduct.inStock = foundProduct.inStock - product.quantity;
+                await foundProduct.save();
+            }
+        }
+        
+        console.log(order);
+        
         return res.status(201).json(order);
     } catch (error) {
         console.error('Error in verifyPayment:', error);

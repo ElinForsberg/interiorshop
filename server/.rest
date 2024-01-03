@@ -73,9 +73,9 @@ POST http://localhost:3000/api/verifySession
 Content-Type: application/json
 
 {
-    "sessionId": "cs_test_b1AOCqcJPOcWa8CbrCBWmeUUksVA4DDsyoYvyKBYPnJkGljqmXv1lQ220C",
+    "sessionId": "cs_test_b14SHk5bUVPvmiFueOd8g9ckDTWT8qvhs1fC1UvK89Bo1oZzWsJZRBFGkB",
     
-       "customer": "sixten",
+       "customer": "cus_PIfUb9us3zRTi4",
         "email": "sixten@hotmail.com",
      "adress":{
         "city":"Grimsborg",
@@ -88,13 +88,13 @@ Content-Type: application/json
     "products":[
         {
         "product":"63d8e86b841cfe788d00a561",
-        "quantity":2,
-        "stripeId": "63d8e86b841cfe788d00a561"
+        "quantity":2
+        
         },
         {
         "product":"63e12cef1162f6ba695b6509",
-        "quantity":2,
-        "stripeId": "63e12cef1162f6ba695b6509"
+        "quantity":2
+        
         }
         ]
    
