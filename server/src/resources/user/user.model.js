@@ -10,7 +10,8 @@ const userValidateSchema = Joi.object({
   .required()
   .min(6)
   .pattern(passwordRegex)
-  .message('Password must contain at least one capital letter, one number, one special character, and be at least 8 characters long')
+  .message('Password must contain at least one capital letter, one number, one special character, and be at least 8 characters long'),
+  isAdmin: Joi.boolean() 
 });
 
 const userSchema = new Schema({

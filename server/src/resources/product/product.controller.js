@@ -16,6 +16,16 @@ const getProducts = async (req,res) => {
     }
 } 
 
+//Get all products from MongoDb
+const getAllProducts = async (req, res) => {
+    try {
+        const products = await ProductModel.find()
+        res.status(200).json(products)
+        } catch (error) {
+            res.status(404).json(error);
+        }
+}
+
 //Get one product by id from Stripe
 const getProductById = async (req,res) => {
     try {
@@ -67,4 +77,4 @@ const createProduct = async(req,res) => {
     }   
 }
 
-module.exports = { getProducts, getProductById, getProductByCategory, createProduct }
+module.exports = { getProducts, getAllProducts, getProductById, getProductByCategory, createProduct }

@@ -6,11 +6,15 @@ const OrderSchema = new Schema({
     type: Date,
     default: Date.now,
   },
-  customer: {
+  name: {
     type: String,
     required: true,
   },
   email: {
+    type: String,
+    required: true,
+  },
+  customerId: {
     type: String,
     required: true,
   },

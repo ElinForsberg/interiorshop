@@ -3,7 +3,8 @@ const cors = require("cors");
 const cookieSession = require("cookie-session");
 const {productRouter} = require("./resources/product/product.router");
 const { userRouter } = require("./resources/user/user.router");
-const { checkoutRouter } = require("./resources/checkout/checkout.router")
+const { checkoutRouter } = require("./resources/checkout/checkout.router");
+const { orderRouter } = require("./resources/order/order.router");
 
 const app = express();
 app.use(express.json());
@@ -21,7 +22,8 @@ app.use(
 
 app.use("/api", productRouter);
 app.use("/api", userRouter);
-app.use("/api/", checkoutRouter)
+app.use("/api/", checkoutRouter);
+app.use("/api", orderRouter);
 
 app.use((req, res) => {
     console.log("!404!");
