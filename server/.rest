@@ -1,10 +1,15 @@
-//get all products
+//get all products from Stripe
 GET http://localhost:3000/api/products
 
 ###
 
-//get one product by id
-GET http://localhost:3000/api/prod_PG7lIFMnfosp5H
+//Get all products from MongoDb
+GET http://localhost:3000/api/dbproducts
+
+###
+
+//get one product by id from Stripe
+GET http://localhost:3000/api/products/prod_PG7lIFMnfosp5H
 
 ###
 
@@ -13,10 +18,10 @@ POST http://localhost:3000/api/user/register
 Content-Type: application/json
 
 {
-    "name": "Elin Forsberg",
-    "password": "Kaninen10?",
-    "email": "kaninen2@hotmail.com"
-    
+    "name": "Sixten Blixten",
+    "password": "Sixten10?",
+    "email": "blixten2@hotmail.com",
+    "isAdmin": true
 }
 ###
 
@@ -69,6 +74,7 @@ Content-Type: application/json
 ]
 ###
 
+// Verify session recieved from stripe and create order in mongodb
 POST http://localhost:3000/api/verifySession
 Content-Type: application/json
 
@@ -98,9 +104,11 @@ Content-Type: application/json
         }
         ]
    
-    
 }
 ###
+//Get all orders, only if isAdmin = true
+GET http://localhost:3000/api/orders
+###
 
- 
-        
+//Get personal orders if logged in user
+GET http://localhost:3000/api/orders/personal

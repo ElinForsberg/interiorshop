@@ -56,8 +56,9 @@ const verifyPayment = async (req, res) => {
         const customerDetails = session.customer_details || {};
         const orderData = {
             created: formattedDate,
-            customer: customerDetails.name || 'Unknown',
+            name: customerDetails.name || 'Unknown',
             email: customerDetails.email || 'Unknown',
+            customerId: session.customer || 'Unknown',
             address: {
                 city: customerDetails.address.city || 'Unknown',
                 country: customerDetails.address.country || 'Unknown',
@@ -78,7 +79,7 @@ const verifyPayment = async (req, res) => {
                 
             })),
         };
-        console.log(customerDetails);
+        console.log("session", session);
         console.log("prod", products);
         const order = await new OrderModel(orderData).save();
 
