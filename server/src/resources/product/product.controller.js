@@ -45,19 +45,26 @@ const getProductById = async (req,res) => {
     }
 }
 
-//Get product by category
-const getProductByCategory = async (req, res) => {
-    try {
-    const productsByCategory = await ProductModel.find({categories: req.params.id})
-    console.log(productsByCategory);
-    
-    res.status(200).json(productsByCategory)
-    } catch (error) {
-        res.status(404).json(error);
-    }
-    
-}
 
+//Update inStock as admin in mongoDb
+const updateProductInStock = async (req, res) => {
+        try{
+         const product = await ProductModel.findOne({_id: req.params.id})
+            if(!product){
+             return res.status(404).json(`Product with ${req.params.id} was not found`)
+           }    
+     
+         const updatedProduct = await ProductModel.findByIdAndUpdate(req.params.id, req.body, { new: true });
+     
+             res.status(200).json(updatedProduct)
+     
+             } catch (error) {
+                 res.status(404).json(error);
+             
+         }
+     }
+
+//Create new product in mongodB
 const createProduct = async(req,res) => {
    
     const {title, inStock, stripeId} = req.body;
@@ -77,4 +84,4 @@ const createProduct = async(req,res) => {
     }   
 }
 
-module.exports = { getProducts, getAllProducts, getProductById, getProductByCategory, createProduct }
+module.exports = { getProducts, getAllProducts, getProductById, updateProductInStock, createProduct }

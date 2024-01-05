@@ -112,3 +112,11 @@ GET http://localhost:3000/api/orders
 
 //Get personal orders if logged in user
 GET http://localhost:3000/api/orders/personal
+###
+
+PUT http://localhost:3000/api/products/659360aed83f1476b314a4f7
+Content-Type: application/json
+
+{
+  "inStock": 50
+}
