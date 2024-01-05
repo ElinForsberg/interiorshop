@@ -1,12 +1,13 @@
 const express = require("express");
-const { getProducts, getAllProducts, getProductById, createProduct } = require("./product.controller")
+const { getProducts, getAllProducts, getProductById, createProduct, updateProductInStock } = require("./product.controller")
 const { ProductModel, productValidateSchema } = require("./product.model")
 const {validate} = require('../middlewares')
 const productRouter = express.Router()
 
-.get("/products", getProducts)
-.get("/dbproducts", getAllProducts)
-.get ('/products/:id', getProductById)
-.post('/products', validate(productValidateSchema) ,createProduct);
+productRouter.get("/products", getProducts)
+productRouter.get("/dbproducts", getAllProducts)
+productRouter.get ('/products/:id', getProductById)
+productRouter.post('/products', validate(productValidateSchema) ,createProduct);
+productRouter.put('/products/:id', updateProductInStock);
 
 module.exports = { productRouter };
