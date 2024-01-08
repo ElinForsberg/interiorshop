@@ -30,8 +30,8 @@ POST http://localhost:3000/api/user/login
 Content-Type: application/json
 
  {
-    "email": "kaninen2@hotmail.com",
-    "password": "Kaninen10?"
+    "email": "blixten2@hotmail.com",
+    "password": "Sixten10?"
      
 }
 ###
@@ -41,8 +41,8 @@ POST http://localhost:3000/api/user/logout
 Content-Type: application/json
 
 {
-     "email": "kaninen2@hotmail.com",
-    "password": "Kaninen10?"
+     "email": "blixten2@hotmail.com",
+    "password": "Sixten10?"
     
 }
 ###
@@ -102,7 +102,8 @@ Content-Type: application/json
         "quantity":2
         
         }
-        ]
+        ],
+        "isShipped": false
    
 }
 ###
@@ -114,9 +115,20 @@ GET http://localhost:3000/api/orders
 GET http://localhost:3000/api/orders/personal
 ###
 
+// as admin change quantity in stock
 PUT http://localhost:3000/api/products/659360aed83f1476b314a4f7
 Content-Type: application/json
 
 {
-  "inStock": 50
+  "inStock": 90
 }
+###
+
+// as admin set order to shipped
+PATCH http://localhost:3000/api/orders/6597d7e747965b1ee6a7a85e/
+Content-Type: application/json
+
+{
+  "isShipped": true
+}
+###

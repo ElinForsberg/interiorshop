@@ -78,6 +78,7 @@ const verifyPayment = async (req, res) => {
                 total: (parseFloat(item.amount_total) / 100).toFixed(2),
                 
             })),
+            isShipped: false,
         };
         console.log("session", session);
         console.log("prod", products);

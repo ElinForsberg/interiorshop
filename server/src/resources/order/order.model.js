@@ -1,3 +1,4 @@
+const { boolean } = require('joi');
 const {Schema, model, models} = require('mongoose');
 
 // Define the schema for the Order
@@ -42,6 +43,11 @@ const OrderSchema = new Schema({
       stripeId: String,
     },
   ],
+  isShipped: {
+    type: Boolean,
+    default: false,
+    required: true,
+  }
 });
 
 // Create the Mongoose model for the Order

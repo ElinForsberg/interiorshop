@@ -1,10 +1,9 @@
 const { OrderModel } = require("./order.model")
 
 //get all orders only as admin
-async function getOrders(req, res) {
-    const orders = await OrderModel.find({}).populate("customer");
+const getOrders = async (req, res) => {
+    const orders = await OrderModel.find({});
     try {
-      
       console.log("orders", orders);
       res.status(200).json(orders);
     } catch (error) {
@@ -31,6 +30,26 @@ async function getOrders(req, res) {
       res.status(500).json({ message: "Internal Server error" });
     }
   };
+
+  // as Admin, mark an order as Shipped
+  const markOrderAsShipped = async (req, res) => {
+    try {
+      const orderId = req.params.id;
+      const { isShipped } = req.body; // Extract isShipped from the request body
+  
+      const updatedOrder = await OrderModel.findOneAndUpdate(
+        { _id: orderId },
+        { $set: { isShipped } }, // Update isShipped based on the received value
+        { new: true }
+      );
+  
+      res.status(200).json(updatedOrder);
+    } catch (error) {
+      res.status(401).json(error.message);
+    }
+  };
+  
+  
   
 
-  module.exports = { getOrders, getPersonalOrders };
+  module.exports = { getOrders, getPersonalOrders, markOrderAsShipped };
