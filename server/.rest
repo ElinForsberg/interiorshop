@@ -18,10 +18,9 @@ POST http://localhost:3000/api/user/register
 Content-Type: application/json
 
 {
-    "name": "Sixten Blixten",
-    "password": "Sixten10?",
-    "email": "blixten2@hotmail.com",
-    "isAdmin": true
+    "name": "Pelle Persson",
+    "password": "Pelle10?",
+    "email": "pelle@hotmail.com"
 }
 ###
 
