@@ -8,7 +8,14 @@ const { orderRouter } = require("./resources/order/order.router");
 
 const app = express();
 app.use(express.json());
-app.use(cors({ origin: true, credentials: true }));
+const CLIENT_URL = "http://localhost:5173";
+app.use(
+  cors({
+    origin: CLIENT_URL,
+    credentials: true,
+  })
+);
+
 app.use(
   cookieSession({
     name: "session",
@@ -22,7 +29,7 @@ app.use(
 
 app.use("/api", productRouter);
 app.use("/api", userRouter);
-app.use("/api/", checkoutRouter);
+app.use("/api", checkoutRouter);
 app.use("/api", orderRouter);
 
 app.use((req, res) => {

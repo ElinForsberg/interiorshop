@@ -82,14 +82,7 @@ Content-Type: application/json
     "sessionId": "cs_test_b14SHk5bUVPvmiFueOd8g9ckDTWT8qvhs1fC1UvK89Bo1oZzWsJZRBFGkB",
     
        "customer": "cus_PIfUb9us3zRTi4",
-        "email": "sixten@hotmail.com",
-     "adress":{
-        "city":"Grimsborg",
-        "country":"Sweden",
-        "street":"Bejovägen",
-        "street2": "",
-        "postal_code":"94782"
-    },
+       
 
     "products":[
         {
