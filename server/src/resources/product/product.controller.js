@@ -3,18 +3,25 @@ const stripe = initStripe();
 const { ProductModel } = require("./product.model")
 
 //Get all products from Stripe
-const getProducts = async (req,res) => {
+const getProducts = async (req, res) => {
     try {
-        const products= await stripe.products.list({
-            limit: 10,
+        const products = await stripe.products.list({
+            limit: 50,
             expand: ["data.default_price"],
-         });
-         res.status(200).json(products)
-    } catch(err){
+        });
+
+        // Convert the Stripe response to JSON explicitly
+        const productsJSON = JSON.parse(JSON.stringify(products));
+
+        res.setHeader('Content-Type', 'application/json'); // Set content type to JSON
+        res.status(200).json(productsJSON);
+    } catch (err) {
         console.log(err);
-        res.status(400).json(err.message)
+        res.status(400).json({ error: err.message });
     }
-} 
+};
+
+
 
 //Get all products from MongoDb
 const getAllProducts = async (req, res) => {
