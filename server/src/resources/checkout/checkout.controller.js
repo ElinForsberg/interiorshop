@@ -3,6 +3,8 @@ const stripe = initStripe();
 const CLIENT_URL = "http://localhost:5173";
 const { OrderModel } = require("../order/order.model")
 const { ProductModel } = require("../product/product.model")
+
+
 const registerCheckout = async (req,res) => {
     
     try {

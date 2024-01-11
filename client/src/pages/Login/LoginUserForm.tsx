@@ -1,7 +1,7 @@
 import Button from "@mui/material/Button"
 import TextField from "@mui/material/TextField"
 import { Controller, useForm } from "react-hook-form"
-import { LoginUser, useLoginUserMutation, useLogoutUserMutation } from "../../services/users";
+import { LoginUser, useLoginUserMutation, useLogoutUserMutation } from "../../redux/services/usersApi";
 
 
 function LoginUserForm() {

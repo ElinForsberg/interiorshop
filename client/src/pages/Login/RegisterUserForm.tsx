@@ -1,6 +1,6 @@
 import { useForm, Controller } from 'react-hook-form';
 import { TextField, Button } from '@mui/material';
-import { useRegisterUserMutation, RegisterUser } from '../../services/users';
+import { useRegisterUserMutation, RegisterUser } from '../../redux/services/usersApi';
 
 function RegisterUserForm() {
   
