@@ -61,10 +61,16 @@ async function loginUser(req, res) {
   }
   }
     
-
   async function logoutUser(req, res) {
     req.session = null;
     res.status(204).json("Successfully logged out");
   }
 
-module.exports = { registerUser, loginUser, logoutUser }
+  async function authorize(req, res) {
+    if (!req.session.user._id) {
+      return res.status(401).json("You are not logged in");
+    }
+    res.status(200).json(req.session);
+  }
+
+module.exports = { registerUser, loginUser, logoutUser, authorize }

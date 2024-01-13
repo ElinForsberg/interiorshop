@@ -1,5 +1,5 @@
 import { useParams } from 'react-router-dom';
-import { useGetProductByIdQuery } from '../../services/products';
+import { useGetProductByIdQuery } from '../../redux/services/productsApi';
 
 function ProductPage() {
     const { id } = useParams<{ id: string }>(); // Ensure 'id' is always a string

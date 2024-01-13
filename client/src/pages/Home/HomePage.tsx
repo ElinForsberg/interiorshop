@@ -1,5 +1,6 @@
 
-import {  useGetProductsQuery, useGetQuantityInStockQuery } from '../../services/products'
+import {  useGetProductsQuery, useGetQuantityInStockQuery } from '../../redux/services/productsApi'
+import ProductCard from './ProductCard';
 
 
 
@@ -21,8 +22,13 @@ function HomePage() {
 
   return (
     <div>
-      
-    </div>
+    {productsData?.data.map((product) => {
+      // Find corresponding quantity data for the current product
+      const quantity = quantityData?.find((q) => q.stripeId === product.id);
+      const inStock = quantity?.inStock || 0; // Default to 0 if quantity is undefined
+      return <ProductCard key={product.id} stripeProduct={product} productInStock={inStock} />;
+    })}
+  </div>
   );
 }
 

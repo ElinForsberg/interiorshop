@@ -13,14 +13,17 @@ export type StripeProduct = {
     unit_amount_decimal: number;
   };
   description: string;
-  images: string[];
+  images: string;
   metadata: {
     category: string;
   };
   name: string;
 };
 
-export type StripeProducts = StripeProduct[];
+export type StripeProducts = {
+  object: string;
+  data: StripeProduct[];
+};
 
 export type ProductInStock = {
     _id: string,
@@ -28,6 +31,8 @@ export type ProductInStock = {
     stripeId: string,
     inStock: number
 };
+
+export type ProductsInStock = ProductInStock[];
 
 export const productsApi = createApi({
   reducerPath: 'productsApi',
@@ -39,7 +44,7 @@ export const productsApi = createApi({
     getProductById: builder.query<StripeProduct, string>({
       query: (productId) => `products/${productId}`,
     }),
-    getQuantityInStock: builder.query<ProductInStock, void>({
+    getQuantityInStock: builder.query<ProductsInStock, void>({
      query: () => 'dbproducts',   
     })
   }),
