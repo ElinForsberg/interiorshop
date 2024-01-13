@@ -4,7 +4,8 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
-import { Button, CardActionArea, CardActions } from '@mui/material';
+import { Button, ButtonGroup, CardActionArea, CardActions } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 
 interface ProductCardProps {
     stripeProduct: StripeProduct;
@@ -13,10 +14,20 @@ interface ProductCardProps {
 
   const ProductCard: React.FC<ProductCardProps> = ({ stripeProduct, productInStock }) => {
     // Render your product details using the 'product' prop
+    const navigate = useNavigate();
+    const formattedPrice = new Intl.NumberFormat('sv-SE', {
+        style: 'currency',
+        currency: 'SEK',
+        minimumFractionDigits: 2,
+      }).format(stripeProduct.default_price.unit_amount_decimal / 100);
+    const handleClick = () => {
+        // Navigate to the product page with the specific product ID
+        navigate(`/products/${stripeProduct.id}`);
+      };
     return (
       
         <Card sx={{ maxWidth: 345 }}>
-      <CardActionArea>
+      <CardActionArea onClick={handleClick}>
         <CardMedia
           component="img"
           height="140"
@@ -30,14 +41,18 @@ interface ProductCardProps {
             {stripeProduct.description}
           </Typography>
           <Typography variant="body2" color="text.secondary">
+           Pris:  {formattedPrice}
+          </Typography>
+          <Typography variant="body2" color="text.secondary">
            Antal i lager:  {productInStock}
           </Typography>
         </CardContent>
       </CardActionArea>
       <CardActions>
-        <Button size="small" color="primary">
-          Buy
-        </Button>
+      <ButtonGroup variant="outlined" aria-label="outlined button group">
+        <Button> - </Button>
+        <Button> + </Button>
+</ButtonGroup>
       </CardActions>
     </Card>
     
