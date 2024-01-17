@@ -34,7 +34,15 @@ interface ProductCardProps {
 
       const handleAddToCart = () => {
         // Dispatch addToCart action with the selected product
-        dispatch(addToCart({ id: stripeProduct.id, name: stripeProduct.name, price: formattedPrice, image: stripeProduct.images, quantity:1 }));   
+        dispatch(addToCart({
+            id: stripeProduct.id, 
+            name: stripeProduct.name, 
+            price: formattedPrice, 
+            image: stripeProduct.images, 
+            quantity: 1,
+            product: stripeProduct.default_price.id,
+            currency: stripeProduct.default_price.currency
+        }));   
       };
     
       const handleRemoveFromCart = () => {
@@ -54,6 +62,7 @@ interface ProductCardProps {
           <Typography gutterBottom variant="h5" component="div">
            {stripeProduct.name}
           </Typography>
+    
           <Typography variant="body2" color="text.secondary">
             {stripeProduct.description}
           </Typography>
@@ -69,7 +78,7 @@ interface ProductCardProps {
       <ButtonGroup variant="outlined" aria-label="outlined button group">
         <Button onClick={handleRemoveFromCart}> - </Button>
           <Button onClick={handleAddToCart}> + </Button>
-</ButtonGroup>
+        </ButtonGroup>
       </CardActions>
     </Card>
     

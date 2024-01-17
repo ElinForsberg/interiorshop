@@ -59,7 +59,7 @@ Content-Type: application/json
 ###
 
 // Create a checkout session in stripe
-POST http://localhost:3000/api/registerCheckout
+POST http://localhost:3000/api/create-checkout-session
 Content-Type: application/json
 
 [

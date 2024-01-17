@@ -2,7 +2,7 @@ const express = require("express");
 const { registerCheckout, verifyPayment } = require("./checkout.controller")
 const checkoutRouter = express.Router()
 
-.post("/registerCheckout",registerCheckout)
+.post("/create-checkout-session",registerCheckout)
 .post("/verifySession", verifyPayment)
 
 
