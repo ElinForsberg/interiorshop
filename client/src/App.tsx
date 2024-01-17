@@ -3,6 +3,7 @@ import './App.css'
 import HomePage from './pages/Home/HomePage'
 import ProductPage from './pages/ProductPage/ProductPage'
 import Login from './pages/Login/LoginPage'
+import ConfirmationPage from './pages/Confirmation/ConfirmationPage'
 
 function App() {
  
@@ -12,6 +13,7 @@ function App() {
       <Route path="/products" element={<HomePage/>}/>
       <Route path="/products/:id" element={<ProductPage/>}/> 
       <Route path="/login" element={<Login/>}/> 
+      <Route path="/confirmation" element={<ConfirmationPage/>}/> 
     </Routes>
    </BrowserRouter>
   )

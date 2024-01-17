@@ -42,6 +42,9 @@ const verifyPayment = async (req, res) => {
         const { sessionId } = req.body;
 
         const session = await stripe.checkout.sessions.retrieve(sessionId);
+        if(session.payment_status !== "paid") {
+            return res.status(400).json({verified: false});
+        }
         const products = await stripe.checkout.sessions.listLineItems(sessionId);
 
         const createdDate = new Date(session.created * 1000);
