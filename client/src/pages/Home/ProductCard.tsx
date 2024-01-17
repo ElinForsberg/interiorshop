@@ -6,6 +6,9 @@ import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { Button, ButtonGroup, CardActionArea, CardActions } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { addToCart, removeFromCart } from '../../redux/slices/shoppingCartSlice';
+
 
 interface ProductCardProps {
     stripeProduct: StripeProduct;
@@ -15,14 +18,28 @@ interface ProductCardProps {
   const ProductCard: React.FC<ProductCardProps> = ({ stripeProduct, productInStock }) => {
     // Render your product details using the 'product' prop
     const navigate = useNavigate();
+    const dispatch = useDispatch();
+    
+    
     const formattedPrice = new Intl.NumberFormat('sv-SE', {
         style: 'currency',
         currency: 'SEK',
         minimumFractionDigits: 2,
       }).format(stripeProduct.default_price.unit_amount_decimal / 100);
+
     const handleClick = () => {
         // Navigate to the product page with the specific product ID
         navigate(`/products/${stripeProduct.id}`);
+      };
+
+      const handleAddToCart = () => {
+        // Dispatch addToCart action with the selected product
+        dispatch(addToCart({ id: stripeProduct.id, name: stripeProduct.name, price: formattedPrice, image: stripeProduct.images, quantity:1 }));   
+      };
+    
+      const handleRemoveFromCart = () => {
+        // Dispatch removeFromCart action with the product ID
+        dispatch(removeFromCart(stripeProduct.id));
       };
     return (
       
@@ -50,8 +67,8 @@ interface ProductCardProps {
       </CardActionArea>
       <CardActions>
       <ButtonGroup variant="outlined" aria-label="outlined button group">
-        <Button> - </Button>
-        <Button> + </Button>
+        <Button onClick={handleRemoveFromCart}> - </Button>
+          <Button onClick={handleAddToCart}> + </Button>
 </ButtonGroup>
       </CardActions>
     </Card>

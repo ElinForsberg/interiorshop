@@ -2,8 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App.tsx';
 import './index.css';
-import { store, setupListeners } from './redux/store.ts'; // Import the setupApiListeners function
+import { store, setupListeners, persistor } from './redux/store.ts'; // Import the setupApiListeners function
 import { Provider } from 'react-redux';
+import { PersistGate } from 'redux-persist/integration/react';
 
 
 // Call the setupApiListeners function to set up API listeners
@@ -13,7 +14,9 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     
     <Provider store={store}>
-      <App />
+      <PersistGate loading={null} persistor={persistor}>
+        <App />
+      </PersistGate>
     </Provider>
   </React.StrictMode>,
 );
