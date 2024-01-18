@@ -7,7 +7,7 @@ import ListItem from '@mui/material/ListItem';
 import IconButton from '@mui/material/IconButton';
 import { ShoppingCartItem } from '../redux/slices/shoppingCartSlice';
 import { RootState } from '../redux/store';
-import { Button } from '@mui/material';
+import { Badge, Button } from '@mui/material';
 import { useCreateCheckoutSessionMutation } from '../redux/services/checkoutApi';
 
 
@@ -74,11 +74,13 @@ function ShoppingCart() {
   return (
     <div>
       <IconButton onClick={handleDrawerOpen}>
-        <ShoppingCartIcon />
+        <Badge badgeContent={4} color="primary">
+          <ShoppingCartIcon />
+        </Badge>
       </IconButton>
 
       <Drawer
-        anchor="bottom"
+        anchor="right"
         open={isDrawerOpen}
         onClose={handleDrawerClose}
       >

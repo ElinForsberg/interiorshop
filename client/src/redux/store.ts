@@ -15,6 +15,8 @@ import storage from 'redux-persist/lib/storage';
 import { usersApi } from './services/usersApi'
 import shoppingCartReducer from './slices/shoppingCartSlice';
 import { checkoutApi } from './services/checkoutApi';
+import userSliceReducer from './slices/userSlice';
+
 
 // Define persist config
 const persistConfig = {
@@ -33,6 +35,7 @@ export const store = configureStore({
     [usersApi.reducerPath]: usersApi.reducer,
     [checkoutApi.reducerPath]: checkoutApi.reducer,
     shoppingCart: persistedReducer,
+    user: userSliceReducer,
   },
   middleware: (getDefaultMiddleware) =>
   getDefaultMiddleware({
@@ -54,3 +57,4 @@ export { setupListeners }
 
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
+

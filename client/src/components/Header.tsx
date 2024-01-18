@@ -3,13 +3,14 @@ import styled from '@emotion/styled';
 import ShoppingCart from './ShoppingCart';
 import { Link } from 'react-router-dom';
 import { Box, Grid } from '@mui/material';
+import LoginDialog from './Login/LoginDialog';
 
 function Header() {
   return (
     <Box>
         <HeaderContainer container direction="row">
             <Grid item xs={10}><Link to={'/products'}>InteriorShop</Link></Grid>     
-            <Grid item xs={1}><Link to={'/login'}>Logga in</Link></Grid>    
+            <Grid item xs={1}><LoginDialog/></Grid>   
             <Grid item xs={1}><ShoppingCart/></Grid>    
         </HeaderContainer>
     </Box>
