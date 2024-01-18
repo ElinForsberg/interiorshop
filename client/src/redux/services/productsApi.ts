@@ -12,6 +12,10 @@ export type StripeProduct = {
     unit_amount: number;
     unit_amount_decimal: number;
   };
+  // prices: [{
+  //   unit_amount: number;
+  //   unit_amount_decimal: number;
+  // }];
   description: string;
   images: string;
   metadata: {

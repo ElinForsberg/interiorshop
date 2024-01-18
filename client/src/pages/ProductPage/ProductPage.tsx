@@ -1,14 +1,22 @@
 import { useParams } from 'react-router-dom';
-import { useGetProductByIdQuery } from '../../redux/services/productsApi';
+import {  StripeProduct, useGetProductByIdQuery } from '../../redux/services/productsApi';
+import Header from '../../components/Header';
+import HandleCart from '../../components/HandleCart';
 
-function ProductPage() {
+
+
+const ProductPage = () => {
     const { id } = useParams<{ id: string }>(); // Ensure 'id' is always a string
     const { data, isLoading, isError } = useGetProductByIdQuery(id || ''); // Provide a default value for 'id'
-
-  console.log("productpage", data);
-  console.log("id", id);
   
-
+    console.log(data);
+    const formattedPrice = new Intl.NumberFormat('sv-SE', {
+      style: 'currency',
+      currency: 'SEK',
+      minimumFractionDigits: 2,
+    }).format((data?.default_price.unit_amount  ?? 0) /100);
+  
+  
   if (isLoading) {
     return <div>Loading...</div>;
   }
@@ -17,11 +25,15 @@ function ProductPage() {
     return <div>Error fetching product</div>;
   }
 
-  // Render your product details using the 'data' variable here
-
   return (
     <div>
-      {/* Render product details */}
+      <Header/>
+      <p>{data?.name}</p>
+      <p>{data?.description}</p>
+      <img src={data?.images} width={400}/>
+      <p>pris: {formattedPrice} </p>
+      <HandleCart stripeProduct={data as StripeProduct}/>
+
     </div>
   );
 }
