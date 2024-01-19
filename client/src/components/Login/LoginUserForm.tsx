@@ -1,16 +1,16 @@
 import Button from "@mui/material/Button"
 import TextField from "@mui/material/TextField"
 import { Controller, useForm } from "react-hook-form"
-import { LoginUser, User, useLoginUserMutation, useLogoutUserMutation } from "../../redux/services/usersApi";
+import { LoginUser, User, useLoginUserMutation} from "../../redux/services/usersApi";
 import { useDispatch } from "react-redux";
-import { loginUser, logoutUser } from "../../redux/slices/userSlice";
+import { loginUser } from "../../redux/slices/userSlice";
 import styled from "@emotion/styled";
 
 
 function LoginUserForm() {
   const dispatch = useDispatch();
     const [loginUserMutation, { isLoading }] = useLoginUserMutation();
-    // const [logoutUserMutation] = useLogoutUserMutation();
+   
     const { control, handleSubmit } = useForm<LoginUser>({
         defaultValues: {       
           email: '',
@@ -33,15 +33,7 @@ function LoginUserForm() {
         }
       };
 
-      // const handleLogout = async () => {
-      //   try {
-      //     await logoutUserMutation();
-      //     dispatch(logoutUser());
-      //     console.log('User successfully logged out!');
-      //   } catch (error) {
-      //     console.error('User logout failed:', error);
-      //   }
-      // };
+      
   return (
     <>
      
@@ -62,10 +54,7 @@ function LoginUserForm() {
       </StyledButton>
       
     </StyledForm>
-    <div>
-        
-        {/* <Button type="submit" variant="contained" onClick={handleLogout}>Logout</Button> */}
-     </div>
+    
     </>
    
   )

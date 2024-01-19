@@ -31,7 +31,6 @@ function ConfirmationPage() {
       };
 
      useEffect(() => {    
-        console.log('Component rendered');
     handleVerifyPayment();
   }, [])
   

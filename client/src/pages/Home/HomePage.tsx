@@ -75,7 +75,7 @@ function HomePage() {
         ))}
       </Tabs>
       </TabContainer>
-      <Grid container spacing={2}>
+      <Grid container spacing={3}>
         {filteredProducts?.map((product) => {
           const quantity = quantityData?.find((q) => q.stripeId === product.id);
           const inStock = quantity?.inStock || 0;

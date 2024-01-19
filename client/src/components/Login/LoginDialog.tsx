@@ -1,19 +1,20 @@
-// import { UserState } from '../../redux/slices/userSlice';
+import { UserState } from '../../redux/slices/userSlice';
 import LoginUserForm from './LoginUserForm'
 import RegisterUserForm from './RegisterUserForm'
-// import { useAppSelector } from '../../redux/hooks';
+import { useAppSelector } from '../../redux/hooks';
 import AccountCircleSharpIcon from '@mui/icons-material/AccountCircleSharp';
 import {  Dialog, IconButton, Tab, Tabs } from '@mui/material';
 import { SetStateAction, useState } from 'react';
 import styled from '@emotion/styled';
+import LogOut from './LogOut';
 
 
 
 
 function Login() {
-  // const userState = useAppSelector<UserState>((state) => state.user);
-  // const { isLoggedIn } = userState;
-  // const { user } = userState;
+  const userState = useAppSelector<UserState>((state) => state.user);
+  const { isLoggedIn } = userState;
+  
   const [open, setOpen] = useState(false);
   
   const handleClickOpen = () => {
@@ -36,10 +37,17 @@ function Login() {
       <StyledDialog onClose={handleClose} open={open}>
         <FormContainer>
         <Tabs value={activeTab} onChange={handleTabChange} centered>
-          <Tab label="Logga in" />
+          { isLoggedIn?
+            <Tab label="Mina sidor" /> :
+            <Tab label="Logga in" /> 
+          }
+          
           <Tab label="Skapa konto" />
         </Tabs>
-        {activeTab === 0 && <LoginUserForm />}
+        { isLoggedIn ?
+              
+              activeTab === 0 && <LogOut/>  :
+              activeTab === 0 && <LoginUserForm />}
         {activeTab === 1 && <RegisterUserForm />}
         </FormContainer>
       
