@@ -17,7 +17,11 @@ const OrderSchema = new Schema({
   },
   customerId: {
     type: String,
-    required: true,
+    required: false,
+  },
+  userId: {
+    type: String,
+    required: false,
   },
   
     address: {

@@ -15,15 +15,15 @@ const getOrders = async (req, res) => {
   //get personal orders if logged in user
   const getPersonalOrders = async (req, res) => {
     try {
-      const customerId = req.session.customer; // Assuming email is stored in the session
-      
+      const customer = req.session.user; // Assuming email is stored in the session
+      const customerMail = customer.email;
       // Fetch orders from MongoDB using the OrderModel
-      const personalOrders = await OrderModel.find({ customerId });
+      const personalOrders = await OrderModel.find({ email: customerMail });
   
       if (personalOrders.length === 0) {
         return res.status(203).json("No orders found for this user");
       }
-  
+      console.log("order användare",customer.email);
       res.status(200).json(personalOrders);
     } catch (error) {
       console.error(error);

@@ -9,9 +9,11 @@ function LogOut() {
     const [logoutUserMutation] = useLogoutUserMutation();
     const dispatch = useDispatch();
     const userState = useAppSelector<UserState>((state) => state.user);
-    const { user } = userState;
+    const { user, isLoggedIn } = userState;
     
-    console.log(user);
+    console.log(user?.name);
+    console.log(isLoggedIn);
+    
     
     
    
@@ -25,11 +27,12 @@ function LogOut() {
           console.error('User logout failed:', error);
         }
       };
+
   return (
     <div>
-      {user ? (
+      {isLoggedIn ? (
         <>
-          <h2>Välkommen, {user.name}!</h2>
+          <h2>Välkommen, {user?.name}!</h2>
           <Button type="submit" variant="contained">
             Mina Sidor
           </Button>
