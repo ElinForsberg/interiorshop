@@ -43,15 +43,16 @@ export const usersApi = createApi({
             credentials: 'include',
         })
       }),
-      authentication: builder.query<User, void>({
+      authorize: builder.query<User, void>({
         query: () => ({
             url: '/authorize',
             credentials: 'include',
+         
         })      
       })
     }),
   });
   
-  export const { useRegisterUserMutation, useLoginUserMutation, useLogoutUserMutation, useAuthenticationQuery } = usersApi;
+  export const { useRegisterUserMutation, useLoginUserMutation, useLogoutUserMutation, useAuthorizeQuery } = usersApi;
   
   

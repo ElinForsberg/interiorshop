@@ -9,7 +9,14 @@ function LogOut() {
     const [logoutUserMutation] = useLogoutUserMutation();
     const dispatch = useDispatch();
     const userState = useAppSelector<UserState>((state) => state.user);
-    const { user } = userState;
+    const { user, isLoggedIn } = userState;
+    
+    console.log(user?.name);
+    console.log(isLoggedIn);
+    
+    
+    
+   
 
     const handleLogout = async () => {
         try {
@@ -20,11 +27,22 @@ function LogOut() {
           console.error('User logout failed:', error);
         }
       };
+
   return (
     <div>
-        <h2>Välkommen, {user?.name}!</h2>
-        <Button type="submit" variant="contained">Mina Sidor</Button>
-        <Button type="submit" variant="contained" onClick={handleLogout}>Logout</Button>
+      {isLoggedIn ? (
+        <>
+          <h2>Välkommen, {user?.name}!</h2>
+          <Button type="submit" variant="contained">
+            Mina Sidor
+          </Button>
+          <Button type="submit" variant="contained" onClick={handleLogout}>
+            Logout
+          </Button>
+        </>
+      ) : (
+        <p>Loading user data...</p>
+      )}
     </div>
   )
 }

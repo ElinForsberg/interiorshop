@@ -7,6 +7,6 @@ const {validate} = require('../middlewares')
 userRouter.post("/user/register",validate(userValidateSchema),registerUser)
 userRouter.post("/user/login", validate(userValidateSchema), loginUser)
 userRouter.post("/user/logout", logoutUser)
-userRouter.get("/users/authorize", authorize);
+userRouter.get("/user/authorize", authorize);
 
 module.exports = { userRouter };

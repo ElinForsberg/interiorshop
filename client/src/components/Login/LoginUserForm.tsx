@@ -1,16 +1,21 @@
 import Button from "@mui/material/Button"
 import TextField from "@mui/material/TextField"
 import { Controller, useForm } from "react-hook-form"
-import { LoginUser, User, useLoginUserMutation} from "../../redux/services/usersApi";
-import { useDispatch } from "react-redux";
+import { LoginUser, User,  useLoginUserMutation} from "../../redux/services/usersApi";
+// import { useDispatch } from "react-redux";
 import { loginUser } from "../../redux/slices/userSlice";
 import styled from "@emotion/styled";
+import { useAppDispatch } from "../../redux/hooks";
+
 
 
 function LoginUserForm() {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
     const [loginUserMutation, { isLoading }] = useLoginUserMutation();
+    
+
    
+    
     const { control, handleSubmit } = useForm<LoginUser>({
         defaultValues: {       
           email: '',
@@ -74,3 +79,5 @@ background-color: black;
 `
 
 export default LoginUserForm
+
+
