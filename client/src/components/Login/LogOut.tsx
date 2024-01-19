@@ -3,6 +3,7 @@ import { useLogoutUserMutation } from "../../redux/services/usersApi";
 import { useDispatch } from "react-redux";
 import { UserState, logoutUser } from "../../redux/slices/userSlice";
 import { useAppSelector } from "../../redux/hooks";
+import { Link } from "react-router-dom";
 
 
 function LogOut() {
@@ -33,9 +34,12 @@ function LogOut() {
       {isLoggedIn ? (
         <>
           <h2>Välkommen, {user?.name}!</h2>
+          <Link to={'/mypage'}>
           <Button type="submit" variant="contained">
             Mina Sidor
           </Button>
+          </Link>
+         
           <Button type="submit" variant="contained" onClick={handleLogout}>
             Logout
           </Button>
