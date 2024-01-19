@@ -3,11 +3,14 @@ import { Button, Grid, Tab, Tabs } from '@mui/material';
 import Header from '../../components/Header';
 import {  useGetProductsQuery, useGetQuantityInStockQuery } from '../../redux/services/productsApi'
 import ProductCard from './ProductCard';
-import { useDispatch, useSelector } from 'react-redux';
+import {  useSelector } from 'react-redux';
 import { RootState } from '../../redux/store';
 import { clearCart } from '../../redux/slices/shoppingCartSlice';
 import { useEffect, useState } from 'react';
 import styled from '@emotion/styled';
+import { loginUser } from '../../redux/slices/userSlice';
+import { useAuthorizeQuery } from '../../redux/services/usersApi';
+import { useAppDispatch } from '../../redux/hooks';
 
 
 
@@ -16,7 +19,7 @@ function HomePage() {
     const { data: productsData, isLoading: productsIsLoading, isError: productsIsError } = useGetProductsQuery();
     const { data: quantityData, isLoading: quantityIsLoading, isError: quantityIsError } = useGetQuantityInStockQuery();
   
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
     const shoppingCart = useSelector((state: RootState) => state.shoppingCart);
 
     const [selectedCategory, setSelectedCategory] = useState<string | undefined>(undefined);
@@ -30,7 +33,19 @@ function HomePage() {
         setCategories(uniqueCategories);
       }
     }, [productsData]);
-    
+
+    const { data, error } = useAuthorizeQuery();
+
+  useEffect(() => {
+    if (data) {
+      console.log(data);
+      dispatch(loginUser(data));
+    } else if (error) {
+      console.error(error);
+    }
+  }, [data, error, dispatch]);
+
+
     const filteredProducts = productsData?.data.filter(
       (product) => !selectedCategory || product.metadata.category === selectedCategory
     );

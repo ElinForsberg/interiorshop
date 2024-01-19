@@ -10,6 +10,11 @@ function LogOut() {
     const dispatch = useDispatch();
     const userState = useAppSelector<UserState>((state) => state.user);
     const { user } = userState;
+    
+    console.log(user);
+    
+    
+   
 
     const handleLogout = async () => {
         try {
@@ -22,9 +27,19 @@ function LogOut() {
       };
   return (
     <div>
-        <h2>Välkommen, {user?.name}!</h2>
-        <Button type="submit" variant="contained">Mina Sidor</Button>
-        <Button type="submit" variant="contained" onClick={handleLogout}>Logout</Button>
+      {user ? (
+        <>
+          <h2>Välkommen, {user.name}!</h2>
+          <Button type="submit" variant="contained">
+            Mina Sidor
+          </Button>
+          <Button type="submit" variant="contained" onClick={handleLogout}>
+            Logout
+          </Button>
+        </>
+      ) : (
+        <p>Loading user data...</p>
+      )}
     </div>
   )
 }

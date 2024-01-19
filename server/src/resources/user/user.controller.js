@@ -67,9 +67,10 @@ async function loginUser(req, res) {
   }
 
   async function authorize(req, res) {
-    if (!req.session.user._id) {
+    if (!req.session.user) {
       return res.status(401).json("You are not logged in");
     }
+    console.log(req.session.user);
     res.status(200).json(req.session);
   }
 
