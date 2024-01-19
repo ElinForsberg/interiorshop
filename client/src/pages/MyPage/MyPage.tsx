@@ -49,6 +49,7 @@ function MyPage() {
               {/* Add other product details as needed */}
             </div>
           ))}
+          <p>total summa: {order.totalSum} sek</p>
           {order.isShipped ?
           <p>din order är skickad</p> : 
           <p>din order väntar på att bli skickad</p>} 

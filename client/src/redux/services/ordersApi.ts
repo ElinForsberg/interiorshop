@@ -21,6 +21,7 @@ products: [{
     currency: string,
     total: number,
 }],
+totalSum: number,
 isShipped: false,
 }
 
