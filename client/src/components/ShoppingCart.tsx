@@ -1,14 +1,15 @@
-import  { useState } from 'react';
-import { useSelector } from 'react-redux';
+import  { useMemo, useState } from 'react';
+
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import Drawer from '@mui/material/Drawer';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import IconButton from '@mui/material/IconButton';
-import { ShoppingCartItem } from '../redux/slices/shoppingCartSlice';
-import { RootState } from '../redux/store';
+import { ShoppingCartItem, ShoppingCartState } from '../redux/slices/shoppingCartSlice';
+
 import { Badge, Button } from '@mui/material';
 import { useCreateCheckoutSessionMutation } from '../redux/services/checkoutApi';
+import { useAppSelector } from '../redux/hooks';
 
 
 
@@ -16,12 +17,17 @@ function ShoppingCart() {
   
   const [isDrawerOpen, setDrawerOpen] = useState(false);
 
-  const shoppingCart = useSelector((state: RootState) => state.shoppingCart);
+  const shoppingCart = useAppSelector<ShoppingCartState>((state) => state.shoppingCart);
 
   const cartItems = shoppingCart.cartItems;
 
   const [createCheckoutSession] = useCreateCheckoutSessionMutation();
 
+console.log(shoppingCart.cartItems);
+
+const totalItems = useMemo(() => {
+  return cartItems.reduce((sum, item) => sum + item.quantity, 0);
+}, [cartItems]);
 
   const handleDrawerOpen = () => {
     setDrawerOpen(true);
@@ -30,6 +36,7 @@ function ShoppingCart() {
   const handleDrawerClose = () => {
     setDrawerOpen(false);
   };
+
 
   const handlePayment = async () => {
     try {
@@ -74,7 +81,7 @@ function ShoppingCart() {
   return (
     <div>
       <IconButton onClick={handleDrawerOpen}>
-        <Badge badgeContent={4} color="primary">
+        <Badge badgeContent={totalItems} color="primary">
           <ShoppingCartIcon />
         </Badge>
       </IconButton>
