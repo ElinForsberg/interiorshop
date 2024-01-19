@@ -57,7 +57,7 @@ const verifyPayment = async (req, res) => {
             second: '2-digit',
             hour12: true,
         });
-
+        
         const customerDetails = session.customer_details || {};
         const orderData = {
             created: formattedDate,
@@ -78,6 +78,7 @@ const verifyPayment = async (req, res) => {
                 description: item.description,
                 stripeId: item.price.product,
                 quantity: item.quantity,
+                image: item.image,
                 price: (parseFloat(item.price.unit_amount) / 100).toFixed(2),
                 currency: item.price.currency,
                 total: (parseFloat(item.amount_total) / 100).toFixed(2),

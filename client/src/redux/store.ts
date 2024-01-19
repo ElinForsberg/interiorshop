@@ -16,6 +16,7 @@ import { usersApi } from './services/usersApi'
 import shoppingCartReducer from './slices/shoppingCartSlice';
 import { checkoutApi } from './services/checkoutApi';
 import userSliceReducer from './slices/userSlice';
+import { ordersApi } from './services/ordersApi';
 
 
 // Define persist config
@@ -34,6 +35,7 @@ export const store = configureStore({
     [productsApi.reducerPath]: productsApi.reducer,
     [usersApi.reducerPath]: usersApi.reducer,
     [checkoutApi.reducerPath]: checkoutApi.reducer,
+    [ordersApi.reducerPath]: ordersApi.reducer,
     shoppingCart: persistedReducer,
     user: userSliceReducer,
   },
@@ -46,6 +48,8 @@ export const store = configureStore({
     productsApi.middleware,
     usersApi.middleware,
     checkoutApi.middleware,
+    ordersApi.middleware,
+   
   ), 
 })
 

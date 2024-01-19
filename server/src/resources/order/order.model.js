@@ -42,6 +42,7 @@ const OrderSchema = new Schema({
       quantity: Number,
       price: Number,
       currency: String,
+      image: String,
       total: Number,
       _id: String,
       stripeId: String,
