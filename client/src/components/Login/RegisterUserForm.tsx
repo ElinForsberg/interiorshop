@@ -1,6 +1,7 @@
 import { useForm, Controller } from 'react-hook-form';
 import { TextField, Button } from '@mui/material';
 import { useRegisterUserMutation, RegisterUser } from '../../redux/services/usersApi';
+import styled from '@emotion/styled';
 
 function RegisterUserForm() {
   
@@ -24,11 +25,11 @@ function RegisterUserForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <StyledForm onSubmit={handleSubmit(onSubmit)}>
       <Controller
         name="name"
         control={control}
-        render={({ field }) => <TextField id="name" label="Name" variant="standard" {...field} />}
+        render={({ field }) => <TextField id="name" label="Namn" variant="standard" {...field} />}
       />
       <Controller
         name="email"
@@ -38,14 +39,25 @@ function RegisterUserForm() {
       <Controller
         name="password"
         control={control}
-        render={({ field }) => <TextField id="password" label="Password" type="password" variant="standard" {...field} />}
+        render={({ field }) => <TextField id="password" label="Lösenord" type="password" variant="standard" {...field} />}
       />
-      <Button type="submit" variant="contained" disabled={isLoading}>
-        Register
-      </Button>
+      <StyledButton type="submit" variant="contained" disabled={isLoading}>
+        Registrera
+      </StyledButton>
       
-    </form>
+    </StyledForm>
   );
 }
+const StyledForm = styled.form`
+display: flex;
+flex-direction: column;
+padding: 5px;
+margin-top: 1rem;
+`;
 
+const StyledButton = styled(Button)`
+margin-top: 4rem;
+margin-bottom: 6px;
+background-color: black;
+`
 export default RegisterUserForm;
