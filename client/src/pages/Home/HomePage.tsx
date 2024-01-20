@@ -103,8 +103,7 @@ function HomePage() {
           );
         })}
       </Grid>
-  <Button onClick={seeCart}> Se varukorgen</Button>
-  <Button onClick= {emptyCart}>Töm varukorgen</Button>
+
   </>
   );
 }

@@ -5,6 +5,7 @@ import { Box, Grid } from '@mui/material';
 import LoginDialog from './Login/LoginDialog';
 import { useAppSelector } from '../redux/hooks';
 import { selectUser } from '../redux/slices/userSlice';
+import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
 
 function Header() {
   const user = useAppSelector(selectUser);
@@ -13,12 +14,13 @@ function Header() {
   return (
     <Box>
       <HeaderContainer container direction="row">
-        <Grid item xs={9}>
+        <Grid item xs={6}>
           <Link to={'/'}>interiorshop</Link>
         </Grid>
         {isAdmin ? (
           <Link to={'/adminpanel'}>
-            <Grid item xs={1}>
+            <Grid item xs={4}>
+            <AdminPanelSettingsIcon/>
               Admin Panel
             </Grid>
           </Link>

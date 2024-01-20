@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import {  isLoggedIn, logoutUser, selectUser } from "../../redux/slices/userSlice";
 import { useAppSelector } from "../../redux/hooks";
 import { Link } from "react-router-dom";
+import styled from "@emotion/styled";
 
 
 function LogOut() {
@@ -28,16 +29,19 @@ function LogOut() {
     <div>
       {LoggedIn ? (
         <>
-          <h2>Välkommen, {user?.name}!</h2>
+        <StyledForm>
+        <h2>Välkommen, {user?.name}!</h2>
+          
+          <StyledButton type="submit" variant="contained">
           <Link to={'/mypage'}>
-          <Button type="submit" variant="contained">
             Mina Sidor
-          </Button>
-          </Link>
-         
-          <Button type="submit" variant="contained" onClick={handleLogout}>
+            </Link>
+          </StyledButton>
+          <LogoutButton type="submit" variant="contained" onClick={handleLogout}>
             Logout
-          </Button>
+          </LogoutButton>
+        </StyledForm>
+          
         </>
       ) : (
         <p>Loading user data...</p>
@@ -45,5 +49,19 @@ function LogOut() {
     </div>
   )
 }
-
+const StyledForm = styled.form`
+display: flex;
+flex-direction: column;
+padding: 5px;
+margin-top: 1rem;
+`;
+const StyledButton = styled(Button)`
+margin-top: 4rem;
+margin-bottom: 6px;
+background-color: lightgray;
+`
+const LogoutButton = styled(Button)`
+margin-bottom: 6px;
+background-color: black;
+`
 export default LogOut
