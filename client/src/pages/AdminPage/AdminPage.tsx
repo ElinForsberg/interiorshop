@@ -5,7 +5,7 @@ function AdminPage() {
 
     const { data } = useGetAllOrdersQuery();
 
-    console.log(data);
+    console.log("ordrar", data);
     
   return (
     <div>

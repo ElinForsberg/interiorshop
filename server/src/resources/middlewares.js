@@ -9,8 +9,8 @@ const validate = (schema) => {
   }
 
   const authorization = (req, res, next) => {
-    console.log(req.session);
-    if (req.session.user){
+    console.log("moddleware",req.session);
+    if (req.session){
         next();
     } else {
       return res.status(401).json("You need to log in");
@@ -18,7 +18,7 @@ const validate = (schema) => {
   }
   
   const isAdmin = (req, res, next) => {
-    const user = req.session.user;
+    const user = req.session;
     if(user.isAdmin === false){
       return res.status(403).json("You are not admin");
      

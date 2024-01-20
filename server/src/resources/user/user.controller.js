@@ -48,7 +48,7 @@ async function loginUser(req, res) {
       }
       req.session = user;
       
-    console.log(req.session);
+    console.log("login", user);
     const loggedInUser = await UserModel.findOne({email: email}).select('-password');
     
     res.status(200).json(loggedInUser);
@@ -66,7 +66,7 @@ async function loginUser(req, res) {
     if (!req.session._id) {
       return res.status(401).json("You are not logged in");
     }
-    console.log(req.session);
+    console.log("autentic",req.session);
     res.status(200).json(req.session);
   }
 

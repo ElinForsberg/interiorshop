@@ -4,7 +4,7 @@ const { OrderModel } = require("./order.model")
 const getOrders = async (req, res) => {
   
     try {
-      const user = req.session.user;
+      const user = req.session;
   
       const orders = await OrderModel.find({});
       if (user && user.isAdmin) {
@@ -24,7 +24,7 @@ const getOrders = async (req, res) => {
   //get personal orders if logged in user
   const getPersonalOrders = async (req, res) => {
     try {
-      const customer = req.session.user; // Assuming email is stored in the session
+      const customer = req.session; // Assuming email is stored in the session
       const customerMail = customer.email;
       // Fetch orders from MongoDB using the OrderModel
       const personalOrders = await OrderModel.find({ email: customerMail });
