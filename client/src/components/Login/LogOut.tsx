@@ -1,7 +1,7 @@
 import { Button } from "@mui/material";
 import { useLogoutUserMutation } from "../../redux/services/usersApi";
 import { useDispatch } from "react-redux";
-import { UserState, logoutUser } from "../../redux/slices/userSlice";
+import {  isLoggedIn, logoutUser, selectUser } from "../../redux/slices/userSlice";
 import { useAppSelector } from "../../redux/hooks";
 import { Link } from "react-router-dom";
 
@@ -9,13 +9,8 @@ import { Link } from "react-router-dom";
 function LogOut() {
     const [logoutUserMutation] = useLogoutUserMutation();
     const dispatch = useDispatch();
-    const userState = useAppSelector<UserState>((state) => state.user);
-    const { user, isLoggedIn } = userState;
-    
-    console.log(user?.name);
-    console.log(isLoggedIn);
-    
-    
+    const user = useAppSelector(selectUser);
+    const LoggedIn = useAppSelector(isLoggedIn);
     
    
 
@@ -31,9 +26,9 @@ function LogOut() {
 
   return (
     <div>
-      {isLoggedIn ? (
+      {LoggedIn ? (
         <>
-          <h2>Välkommen, {user?.name}!</h2>
+          <h2>Välkommen, {user?.user.name}!</h2>
           <Link to={'/mypage'}>
           <Button type="submit" variant="contained">
             Mina Sidor

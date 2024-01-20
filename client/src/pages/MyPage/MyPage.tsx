@@ -1,28 +1,19 @@
 
-import { useEffect } from 'react';
+
 import Header from '../../components/Header'
 import { useGetPersonalOrdersQuery } from '../../redux/services/ordersApi';
-import { useAuthorizeQuery } from '../../redux/services/usersApi';
-import { useDispatch } from 'react-redux';
-import { loginUser } from '../../redux/slices/userSlice';
+
+import {  selectUser } from '../../redux/slices/userSlice';
 import { Order } from "../../redux/services/ordersApi";
 import styled from '@emotion/styled';
+import { useAppSelector } from '../../redux/hooks';
 
 function MyPage() {
-    const dispatch= useDispatch();
-    const { data, error } = useAuthorizeQuery();
+   
     const { data: orderData } = useGetPersonalOrdersQuery();
+    const user = useAppSelector(selectUser);
 
-    useEffect(() => {
-      if (data) {
-        console.log(data);
-        dispatch(loginUser(data));
-        console.log(orderData);
-      } else if (error) {
-        console.error(error);
-      }
-    }, [data, error, dispatch, orderData]);
-
+   
 
     
     
@@ -30,6 +21,7 @@ function MyPage() {
         <>
           <Header />
           <div>Mina Sidor</div>
+          <p>{user?.user.name}</p>
           <p>Dina ordrar</p>
           {Array.isArray(orderData) && orderData.length > 0 ? (
             orderData.map((order: Order) => (

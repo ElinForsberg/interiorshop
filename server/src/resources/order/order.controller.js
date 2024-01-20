@@ -2,10 +2,19 @@ const { OrderModel } = require("./order.model")
 
 //get all orders only as admin
 const getOrders = async (req, res) => {
-    const orders = await OrderModel.find({});
+  
     try {
-      console.log("orders", orders);
-      res.status(200).json(orders);
+      const user = req.session.user;
+  
+      const orders = await OrderModel.find({});
+      if (user && user.isAdmin) {
+        const orders = await OrderModel.find({});
+        console.log("orders", orders);
+        res.status(200).json(orders);
+    } else {
+        res.status(403).json({ error: "Unauthorized access. Admins only." });
+    }
+      
     } catch (error) {
         console.log("orders", orders);
       res.status(400).json({ error: error.message });

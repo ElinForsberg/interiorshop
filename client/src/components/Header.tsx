@@ -4,18 +4,29 @@ import ShoppingCart from './ShoppingCart';
 import { Link } from 'react-router-dom';
 import { Box, Grid } from '@mui/material';
 import LoginDialog from './Login/LoginDialog';
+import { useAppSelector } from '../redux/hooks';
+import { UserState } from '../redux/slices/userSlice';
+
 
 function Header() {
+  const userState = useAppSelector<UserState>((state) => state.user);
+    const { user } = userState;
+    const isAdmin = user?.user.isAdmin;
+  
   return (
     <Box>
         <HeaderContainer container direction="row">
-            <Grid item xs={10}><Link to={'/products'}>InteriorShop</Link></Grid>     
+            <Grid item xs={9}><Link to={'/'}>interiorshop</Link></Grid> 
+            { isAdmin &&
+            <Link to={'/adminpanel'}>
+                <Grid item xs={1}>Admin Panel</Grid> 
+            </Link>        
+} 
             <Grid item xs={1}><LoginDialog/></Grid>   
             <Grid item xs={1}><ShoppingCart/></Grid>    
         </HeaderContainer>
     </Box>
-    
-    
+  
   )
 }
 const HeaderContainer = styled(Grid)`

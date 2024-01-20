@@ -8,9 +8,10 @@ import { RootState } from '../../redux/store';
 import { clearCart } from '../../redux/slices/shoppingCartSlice';
 import { useEffect, useState } from 'react';
 import styled from '@emotion/styled';
-import { loginUser } from '../../redux/slices/userSlice';
+// import { loginUser } from '../../redux/slices/userSlice';
 import { useAuthorizeQuery } from '../../redux/services/usersApi';
 import { useAppDispatch } from '../../redux/hooks';
+import { loginUser } from '../../redux/slices/userSlice';
 
 
 
@@ -34,17 +35,17 @@ function HomePage() {
       }
     }, [productsData]);
 
-    const { data, error } = useAuthorizeQuery();
+  //   const { data, error } = useAuthorizeQuery();
 
-  useEffect(() => {
-    if (data) {
-      console.log(data);
-      dispatch(loginUser(data));
-    } else if (error) {
-      console.error(error);
-    }
-  }, [data, error, dispatch]);
-
+  // useEffect(() => {
+  //   if (data) {
+  //     console.log(data);
+  //     dispatch(loginUser(data));
+  //   } else if (error) {
+  //     console.error(error);
+  //   }
+  // }, [data, error, dispatch]);
+  
 
     const filteredProducts = productsData?.data.filter(
       (product) => !selectedCategory || product.metadata.category === selectedCategory

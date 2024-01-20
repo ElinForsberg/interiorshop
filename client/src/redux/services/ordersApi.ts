@@ -37,8 +37,15 @@ export const ordersApi = createApi({
         })
          
       }),
+      getAllOrders: builder.query<Order[], void>({
+        query: () => ({
+            url: '/orders',
+            credentials: 'include',
+        })
+         
+      }),
     }),
   });
 
 
-  export const { useGetPersonalOrdersQuery } = ordersApi;
+  export const { useGetPersonalOrdersQuery, useGetAllOrdersQuery } = ordersApi;

@@ -34,8 +34,8 @@ POST http://localhost:3000/api/user/login
 Content-Type: application/json
 
  {
-    "email": "blixten2@hotmail.com",
-    "password": "Sixten10?"
+    "email": "test@hotmail.com",
+    "password": "Test1234?"
      
 }
 ###
@@ -45,8 +45,8 @@ POST http://localhost:3000/api/user/logout
 Content-Type: application/json
 
 {
-     "email": "blixten2@hotmail.com",
-    "password": "Sixten10?"
+     "email": "test@hotmail.com",
+    "password": "Test1234?"
     
 }
 ###
