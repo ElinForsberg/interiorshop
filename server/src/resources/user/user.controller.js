@@ -46,13 +46,9 @@ async function loginUser(req, res) {
     if (!user || !await bcrypt.compare(password, user.password)) {
         return res.status(401).json("Wrong email or password");
       }
-      req.session.user = {
-        _id: user._id,
-        email: user.email,
-        name: user.name,
-        isAdmin: user.isAdmin
-      };
-    console.log(req.session.user);
+      req.session = user;
+      
+    console.log(req.session);
     const loggedInUser = await UserModel.findOne({email: email}).select('-password');
     
     res.status(200).json(loggedInUser);
@@ -67,10 +63,10 @@ async function loginUser(req, res) {
   }
 
   async function authorize(req, res) {
-    if (!req.session.user) {
+    if (!req.session._id) {
       return res.status(401).json("You are not logged in");
     }
-    console.log(req.session.user);
+    console.log(req.session);
     res.status(200).json(req.session);
   }
 

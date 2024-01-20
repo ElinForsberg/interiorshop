@@ -1,8 +1,5 @@
-
-
 import Header from '../../components/Header'
 import { useGetPersonalOrdersQuery } from '../../redux/services/ordersApi';
-
 import {  selectUser } from '../../redux/slices/userSlice';
 import { Order } from "../../redux/services/ordersApi";
 import styled from '@emotion/styled';
@@ -13,15 +10,12 @@ function MyPage() {
     const { data: orderData } = useGetPersonalOrdersQuery();
     const user = useAppSelector(selectUser);
 
-   
-
-    
-    
+  
     return (
         <>
           <Header />
           <div>Mina Sidor</div>
-          <p>{user?.user.name}</p>
+          <p>{user?.name}</p>
           <p>Dina ordrar</p>
           {Array.isArray(orderData) && orderData.length > 0 ? (
             orderData.map((order: Order) => (

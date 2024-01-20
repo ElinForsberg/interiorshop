@@ -1,14 +1,14 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 export type User = {
-  user: {
+  
     _id: string,
     stripeId: string,
     email: string,
     name: string,
     password: string,
     isAdmin: boolean,
-  } 
+ 
 }
 export type RegisterUser = {
     email: string,

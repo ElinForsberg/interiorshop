@@ -29,7 +29,7 @@ function LoginUserForm() {
           if('data' in response){
             const userData = response.data as User;
             console.log('User successfully logged in!');
-            console.log(userData);
+            console.log("från login", userData);
             dispatch(loginUser(userData))
           }
         } catch (error) {

@@ -28,7 +28,7 @@ function LogOut() {
     <div>
       {LoggedIn ? (
         <>
-          <h2>Välkommen, {user?.user.name}!</h2>
+          <h2>Välkommen, {user?.name}!</h2>
           <Link to={'/mypage'}>
           <Button type="submit" variant="contained">
             Mina Sidor
