@@ -19,11 +19,13 @@ import userSliceReducer from './slices/userSlice';
 import { ordersApi } from './services/ordersApi';
 
 
+
 // Define persist config
 const persistConfig = {
   key: 'root',
   storage,
-  // whitelist: ['shoppingCart'], 
+  // whitelist: ['shoppingCart', 'user'], 
+ 
   // Specify the slices you want to persist
 };
 
@@ -45,11 +47,10 @@ export const store = configureStore({
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
 }).concat(
-    productsApi.middleware,
     usersApi.middleware,
+    productsApi.middleware, 
     checkoutApi.middleware,
     ordersApi.middleware,
-   
   ), 
 })
 

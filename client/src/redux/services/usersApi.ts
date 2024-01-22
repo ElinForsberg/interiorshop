@@ -1,12 +1,14 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 export type User = {
+  
     _id: string,
     stripeId: string,
     email: string,
     name: string,
     password: string,
     isAdmin: boolean,
+ 
 }
 export type RegisterUser = {
     email: string,
@@ -47,12 +49,13 @@ export const usersApi = createApi({
         query: () => ({
             url: '/authorize',
             credentials: 'include',
+            
          
         })      
       })
     }),
   });
   
-  export const { useRegisterUserMutation, useLoginUserMutation, useLogoutUserMutation, useAuthorizeQuery } = usersApi;
+  export const { useRegisterUserMutation, useLoginUserMutation, useLogoutUserMutation, useAuthorizeQuery} = usersApi;
   
   

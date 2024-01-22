@@ -1,13 +1,29 @@
 // auth.ts
-// import { useAuthenticationQuery } from './usersApi';
+import { loginUser, logoutUser } from '../slices/userSlice';
+import { useAuthorizeQuery } from './usersApi';
+import { Dispatch } from '@reduxjs/toolkit';
+import { useEffect } from 'react';
 
-// export const useAuth = () => {
-//   const { data: userData, isLoading, isError } = useAuthenticationQuery();
+export const useAuthorization = (dispatch: Dispatch) => {
 
-//   return {
-//     userData,
-//     isLoading,
-//     isError,
-//     isAuthenticated: Boolean(userData),
-//   };
-// };
+    const { data, error } =  useAuthorizeQuery();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        
+        if (data) {
+          dispatch(loginUser(data));
+        } else if (error) {
+          console.error('Authorization error:', error);
+          dispatch(logoutUser());
+        }
+      } catch (error) {
+        console.error('Unexpected error during authorization:', error);
+        // Handle unexpected errors if needed
+      }
+    };
+
+    fetchData();
+  }, []);
+};

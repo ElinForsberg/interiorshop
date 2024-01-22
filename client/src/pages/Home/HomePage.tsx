@@ -1,5 +1,5 @@
 
-import { Button, Grid, Tab, Tabs } from '@mui/material';
+import {  Grid, Tab, Tabs } from '@mui/material';
 import Header from '../../components/Header';
 import {  useGetProductsQuery, useGetQuantityInStockQuery } from '../../redux/services/productsApi'
 import ProductCard from './ProductCard';
@@ -8,9 +8,9 @@ import { RootState } from '../../redux/store';
 import { clearCart } from '../../redux/slices/shoppingCartSlice';
 import { useEffect, useState } from 'react';
 import styled from '@emotion/styled';
-import { loginUser } from '../../redux/slices/userSlice';
-import { useAuthorizeQuery } from '../../redux/services/usersApi';
+// import { loginUser } from '../../redux/slices/userSlice';
 import { useAppDispatch } from '../../redux/hooks';
+
 
 
 
@@ -34,17 +34,17 @@ function HomePage() {
       }
     }, [productsData]);
 
-    const { data, error } = useAuthorizeQuery();
+  //   const { data, error } = useAuthorizeQuery();
 
-  useEffect(() => {
-    if (data) {
-      console.log(data);
-      dispatch(loginUser(data));
-    } else if (error) {
-      console.error(error);
-    }
-  }, [data, error, dispatch]);
-
+  // useEffect(() => {
+  //   if (data) {
+  //     console.log(data);
+  //     dispatch(loginUser(data));
+  //   } else if (error) {
+  //     console.error(error);
+  //   }
+  // }, [data, error, dispatch]);
+  
 
     const filteredProducts = productsData?.data.filter(
       (product) => !selectedCategory || product.metadata.category === selectedCategory
@@ -55,16 +55,7 @@ function HomePage() {
       
       
     };
-    const seeCart = () => {
-        console.log(shoppingCart);
-        
-    }
-    const emptyCart = () => {
-        dispatch(clearCart());
-        console.log(selectedCategory);
-    }
-
-  
+   
     
   if (productsIsLoading || quantityIsLoading) {
     return <div>Loading...</div>;
@@ -78,7 +69,7 @@ function HomePage() {
     <>
     <Header/>
     <TabContainer>
-          <Tabs
+          <Tabs 
         value={selectedCategory}
         onChange={(e, value) => handleCategoryChange(value as string)}
         variant="scrollable"
@@ -102,8 +93,7 @@ function HomePage() {
           );
         })}
       </Grid>
-  <Button onClick={seeCart}> Se varukorgen</Button>
-  <Button onClick= {emptyCart}>Töm varukorgen</Button>
+
   </>
   );
 }
@@ -111,5 +101,7 @@ function HomePage() {
 const TabContainer = styled.div`
 display: flex;
 justify-content: center;
+background-color: #7CB7AF;
+margin-bottom: 1rem;
 `;
 export default HomePage

@@ -2,10 +2,19 @@ const { OrderModel } = require("./order.model")
 
 //get all orders only as admin
 const getOrders = async (req, res) => {
-    const orders = await OrderModel.find({});
+  
     try {
-      console.log("orders", orders);
-      res.status(200).json(orders);
+      const user = req.session;
+  
+      const orders = await OrderModel.find({});
+      if (user && user.isAdmin) {
+        const orders = await OrderModel.find({});
+        console.log("orders", orders);
+        res.status(200).json(orders);
+    } else {
+        res.status(403).json({ error: "Unauthorized access. Admins only." });
+    }
+      
     } catch (error) {
         console.log("orders", orders);
       res.status(400).json({ error: error.message });
@@ -15,7 +24,7 @@ const getOrders = async (req, res) => {
   //get personal orders if logged in user
   const getPersonalOrders = async (req, res) => {
     try {
-      const customer = req.session.user; // Assuming email is stored in the session
+      const customer = req.session; // Assuming email is stored in the session
       const customerMail = customer.email;
       // Fetch orders from MongoDB using the OrderModel
       const personalOrders = await OrderModel.find({ email: customerMail });

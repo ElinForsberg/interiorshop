@@ -44,7 +44,7 @@ interface ProductCardProps {
           height="250"
           image= {stripeProduct.images}
         />
-        <CardContent>
+        <StyledCardContent>
           <Typography gutterBottom variant="h5" component="div">
            {stripeProduct.name}
           </Typography>
@@ -57,7 +57,7 @@ interface ProductCardProps {
              <Typography variant="body2" color="text.secondary">
             {stockStatus}
           </Typography>  
-        </CardContent>
+        </StyledCardContent>
       </CardActionArea>
       <CardActions>
         <HandleCart
@@ -80,7 +80,7 @@ interface ProductCardProps {
           height="250"
           image= {stripeProduct.images}
         />
-        <CardContent>
+        <StyledCardContent>
           <Typography gutterBottom variant="h5" component="div">
            {stripeProduct.name}
           </Typography>
@@ -93,7 +93,7 @@ interface ProductCardProps {
              <Typography variant="body2" color="text.secondary">
             {stockStatus}
           </Typography>  
-        </CardContent>
+        </StyledCardContent>
       </CardActionArea>
       <CardActions>
         <HandleCart
@@ -107,6 +107,8 @@ interface ProductCardProps {
   const OutOfStockCard = styled(Card)`
   background-color: #f8f0f0a0;
   `
-  
+  const StyledCardContent = styled(CardContent)`
+  height: 150px;
+  `
   
   export default ProductCard;

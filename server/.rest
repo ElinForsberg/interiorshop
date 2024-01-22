@@ -45,10 +45,14 @@ POST http://localhost:3000/api/user/logout
 Content-Type: application/json
 
 {
-     "email": "blixten2@hotmail.com",
-    "password": "Sixten10?"
+     "email": "test@hotmail.com",
+    "password": "Test1234?"
     
 }
+###
+//autentication
+GET http://localhost:3000/api/user/authorize
+
 ###
 GET http://localhost:3000/api/user/authorize
 ###
