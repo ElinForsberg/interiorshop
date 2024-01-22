@@ -43,15 +43,15 @@ const getOrders = async (req, res) => {
   // as Admin, mark an order as Shipped
   const markOrderAsShipped = async (req, res) => {
     try {
-      const orderId = req.params.id;
-      const { isShipped } = req.body; // Extract isShipped from the request body
+      // const orderId = req.params.id;
+      // const { isShipped } = req.body; 
   
       const updatedOrder = await OrderModel.findOneAndUpdate(
-        { _id: orderId },
-        { $set: { isShipped } }, // Update isShipped based on the received value
+        { _id: String(req.params.id) },
+        { $set: { isShipped: true } }, // Update isShipped based on the received value
         { new: true }
       );
-  
+        console.log("isShipped?", req.params.id)
       res.status(200).json(updatedOrder);
     } catch (error) {
       res.status(401).json(error.message);

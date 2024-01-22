@@ -29,6 +29,7 @@ isShipped: false,
 export const ordersApi = createApi({
     reducerPath: 'ordersApi',
     baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:3000/api' }),
+    tagTypes: ['Order'],
     endpoints: (builder) => ({
       getPersonalOrders: builder.query<Order[], void>({
         query: () => ({
@@ -41,11 +42,20 @@ export const ordersApi = createApi({
         query: () => ({
             url: '/orders',
             credentials: 'include',
-        })
+        }),
+        providesTags: ['Order']
          
       }),
+      markOrderAsshipped: builder.mutation<void, string>({
+        query: (orderId) => ({
+          url: `/orders/${orderId}`,
+          method: 'PATCH',
+          body: {isShipped: true},
+        }),
+        invalidatesTags: ['Order']
+      })
     }),
   });
 
 
-  export const { useGetPersonalOrdersQuery, useGetAllOrdersQuery } = ordersApi;
+  export const { useGetPersonalOrdersQuery, useGetAllOrdersQuery, useMarkOrderAsshippedMutation } = ordersApi;
