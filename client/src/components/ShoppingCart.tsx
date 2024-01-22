@@ -1,15 +1,14 @@
 import  { useMemo, useState } from 'react';
-
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import Drawer from '@mui/material/Drawer';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import IconButton from '@mui/material/IconButton';
 import { ShoppingCartItem, ShoppingCartState } from '../redux/slices/shoppingCartSlice';
-
 import { Badge, Button } from '@mui/material';
 import { useCreateCheckoutSessionMutation } from '../redux/services/checkoutApi';
 import { useAppSelector } from '../redux/hooks';
+import { styled } from '@mui/system';
 
 
 
@@ -81,9 +80,9 @@ const totalItems = useMemo(() => {
   return (
     <div>
       <IconButton onClick={handleDrawerOpen}>
-        <Badge badgeContent={totalItems} color="primary">
+        <StyledBadge badgeContent={totalItems} color="secondary">
           <ShoppingCartIcon />
-        </Badge>
+        </StyledBadge>
       </IconButton>
 
       <Drawer
@@ -106,5 +105,9 @@ const totalItems = useMemo(() => {
     </div>
   );
 }
+
+const StyledBadge = styled(Badge)(({theme}) => ({
+  color: theme.palette.primary.main,
+}))
 
 export default ShoppingCart;

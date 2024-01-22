@@ -1,5 +1,5 @@
 
-import { Button, Grid, Tab, Tabs } from '@mui/material';
+import {  Grid, Tab, Tabs } from '@mui/material';
 import Header from '../../components/Header';
 import {  useGetProductsQuery, useGetQuantityInStockQuery } from '../../redux/services/productsApi'
 import ProductCard from './ProductCard';
@@ -9,9 +9,8 @@ import { clearCart } from '../../redux/slices/shoppingCartSlice';
 import { useEffect, useState } from 'react';
 import styled from '@emotion/styled';
 // import { loginUser } from '../../redux/slices/userSlice';
-import { useAuthorizeQuery } from '../../redux/services/usersApi';
 import { useAppDispatch } from '../../redux/hooks';
-import { loginUser } from '../../redux/slices/userSlice';
+
 
 
 
@@ -56,16 +55,7 @@ function HomePage() {
       
       
     };
-    const seeCart = () => {
-        console.log(shoppingCart);
-        
-    }
-    const emptyCart = () => {
-        dispatch(clearCart());
-        console.log(selectedCategory);
-    }
-
-  
+   
     
   if (productsIsLoading || quantityIsLoading) {
     return <div>Loading...</div>;
@@ -79,7 +69,7 @@ function HomePage() {
     <>
     <Header/>
     <TabContainer>
-          <Tabs
+          <Tabs 
         value={selectedCategory}
         onChange={(e, value) => handleCategoryChange(value as string)}
         variant="scrollable"
@@ -111,5 +101,6 @@ function HomePage() {
 const TabContainer = styled.div`
 display: flex;
 justify-content: center;
+background-color: #7CB7AF;
 `;
 export default HomePage

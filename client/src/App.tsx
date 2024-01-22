@@ -13,6 +13,8 @@ import { useDispatch } from 'react-redux'
 import { useAuthorizeQuery } from './redux/services/usersApi'
 import { useEffect } from 'react'
 import { loginUser } from './redux/slices/userSlice'
+import { ThemeProvider } from '@mui/material/styles'
+import theme from './Theme'
 
 function App() {
   const dispatch = useDispatch();
@@ -30,7 +32,8 @@ function App() {
 
 
   return (
-    <BrowserRouter>
+    <ThemeProvider theme={theme}>
+  <BrowserRouter>
     <Routes>
       <Route path="/" element={<HomePage/>}/>
       <Route path="/products/:id" element={<ProductPage/>}/> 
@@ -39,6 +42,8 @@ function App() {
       <Route path="/adminpanel" element={<AdminPage/>}/>
     </Routes>
    </BrowserRouter>
+    </ThemeProvider>
+  
   )
 }
 

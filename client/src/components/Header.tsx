@@ -37,7 +37,7 @@ function Header() {
 }
 
 const HeaderContainer = styled(Grid)`
-  background-color: lightgrey;
+  background-color: "secondary";
   height: 100px;
   justify-content: space-between;
   align-items: center;
