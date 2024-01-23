@@ -1,46 +1,87 @@
 import styled from '@emotion/styled';
 import ShoppingCart from './ShoppingCart';
-import { Link } from 'react-router-dom';
-import { Box, Grid } from '@mui/material';
+import { Box, Grid,  Typography } from '@mui/material';
 import LoginDialog from './Login/LoginDialog';
 import { useAppSelector } from '../redux/hooks';
 import { selectUser } from '../redux/slices/userSlice';
 import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
+import { StyledLink } from '../Theme';
+import { useMediaQuery } from '@mui/material';
+
 
 function Header() {
   const user = useAppSelector(selectUser);
   const isAdmin = user?.isAdmin;
+  const isSmallScreen = useMediaQuery('(max-width:600px)');
 
   return (
-    <Box>
-      <HeaderContainer container direction="row">
-        <Grid item xs={6}>
-          <Link to={'/'}>interiorshop</Link>
-        </Grid>
-        {isAdmin ? (
-          <Link to={'/adminpanel'}>
-            <Grid item xs={4}>
+    <>
+    {isSmallScreen ? (
+      
+    <StyledBox>
+      <div>
+      <StyledLink to={'/'}>
+            <Typography variant="h2">
+              TrendigaRum
+            </Typography>
+          </StyledLink>
+      </div>
+      <SmallscreenContainer>
+      {isAdmin ? (
+          <StyledLink to={'/adminpanel'}>           
             <AdminPanelSettingsIcon/>
-              Admin Panel
-            </Grid>
-          </Link>
+          </StyledLink>
         ) : <></>}
-        <Grid item xs={1}>
           <LoginDialog />
-        </Grid>
-        <Grid item xs={1}>
           <ShoppingCart />
+      </SmallscreenContainer>
+    </StyledBox>
+    ):(
+      <StyledBox>
+      <HeaderContainer container direction="row">
+        <Grid item xs="auto">
+          <StyledLink to={'/'}>
+            <Typography variant="h2">
+              TrendigaRum
+            </Typography>
+          </StyledLink>
         </Grid>
+        <HeaderContainer container direction="row" xs="auto">
+        {isAdmin ? (
+          <StyledLink to={'/adminpanel'}>           
+            <AdminPanelSettingsIcon/>
+          </StyledLink>
+        ) : <></>}
+          <LoginDialog />
+          <ShoppingCart />
+        </HeaderContainer>
+
       </HeaderContainer>
-    </Box>
+    </StyledBox>
+    )
+    }
+    </>
   );
 }
-
+const StyledBox = styled(Box)`
+height: 100px;
+width: 100%;
+background-color: white;
+/* position: fixed;
+z-index: 1; */
+`;
 const HeaderContainer = styled(Grid)`
-  background-color: "secondary";
   height: 100px;
   justify-content: space-between;
   align-items: center;
 `;
-
+const SmallscreenContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  height: 50px;
+  gap: 4px; 
+  padding: 10px;
+`;
 export default Header;

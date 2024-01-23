@@ -5,6 +5,8 @@ import {  isLoggedIn, logoutUser, selectUser } from "../../redux/slices/userSlic
 import { useAppSelector } from "../../redux/hooks";
 import { Link } from "react-router-dom";
 import styled from "@emotion/styled";
+import { ordersApi } from "../../redux/services/ordersApi";
+import { StyledLink } from "../../Theme";
 
 
 function LogOut() {
@@ -13,12 +15,12 @@ function LogOut() {
     const user = useAppSelector(selectUser);
     const LoggedIn = useAppSelector(isLoggedIn);
     
-   
-
+  
     const handleLogout = async () => {
         try {
           await logoutUserMutation();
           dispatch(logoutUser());
+          ordersApi.util.resetApiState();
           console.log('User successfully logged out!');
         } catch (error) {
           console.error('User logout failed:', error);
@@ -33,13 +35,17 @@ function LogOut() {
         <h2>Välkommen, {user?.name}!</h2>
           
           <StyledButton type="submit" variant="contained">
-          <Link to={'/mypage'}>
+          <StyledLink to={'/mypage'}>
             Mina Sidor
-            </Link>
+            </StyledLink>
           </StyledButton>
+          
           <LogoutButton type="submit" variant="contained" onClick={handleLogout}>
+          <StyledLink to={'/'}>
             Logout
+            </StyledLink>
           </LogoutButton>
+          
         </StyledForm>
           
         </>

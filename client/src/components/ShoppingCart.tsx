@@ -11,6 +11,7 @@ import { useAppDispatch, useAppSelector } from '../redux/hooks';
 import { clearCart } from '../redux/slices/shoppingCartSlice';
 import HandleCart from './HandleCart';
 import styled from '@emotion/styled';
+import CloseIcon from '@mui/icons-material/Close';
 
 
 function ShoppingCart() {
@@ -81,6 +82,10 @@ const totalPrice = useMemo(() => {
         open={isDrawerOpen}
         onClose={handleDrawerClose}
       >
+        <IconButton onClick={handleDrawerClose}>
+        <CloseIcon/>
+        </IconButton>
+        
         {cartItems.length > 0 ? (
             <>
         <StyledList>

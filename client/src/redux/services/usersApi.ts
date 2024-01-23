@@ -22,6 +22,7 @@ export type LoginUser = {
 export const usersApi = createApi({
     reducerPath: 'usersApi',
     baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:3000/api/user' }),
+   
     endpoints: (builder) => ({
       registerUser: builder.mutation<User, Partial<RegisterUser>>({
         query: (userData) => ({
@@ -37,21 +38,23 @@ export const usersApi = createApi({
             credentials: 'include',
             body: userData,
           }),
+         
       }),
       logoutUser: builder.mutation<void, void>({
         query: () => ({
             url: 'logout',
             method: 'POST',
             credentials: 'include',
-        })
+        }),
+       
       }),
       authorize: builder.query<User, void>({
         query: () => ({
             url: '/authorize',
-            credentials: 'include',
-            
-         
-        })      
+            credentials: 'include',   
+                
+        }),
+        
       })
     }),
   });

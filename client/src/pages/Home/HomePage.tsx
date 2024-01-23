@@ -51,7 +51,8 @@ function HomePage( ) {
  
 
   return (
-    <>
+    <div>
+      <div>
     <Header/>
     <TabContainer>
           <Tabs 
@@ -80,8 +81,8 @@ function HomePage( ) {
           );
         })}
       </Grid>
-
-  </>
+      </div>
+  </div>
   );
 }
 
@@ -90,5 +91,8 @@ display: flex;
 justify-content: center;
 background-color: #7CB7AF;
 margin-bottom: 1rem;
+position: relative;
 `;
+
+
 export default HomePage

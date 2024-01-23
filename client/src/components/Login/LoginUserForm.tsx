@@ -6,13 +6,14 @@ import { LoginUser, User,  useLoginUserMutation} from "../../redux/services/user
 import { loginUser } from "../../redux/slices/userSlice";
 import styled from "@emotion/styled";
 import { useAppDispatch } from "../../redux/hooks";
+import { useGetPersonalOrdersQuery } from "../../redux/services/ordersApi";
 
 
 
 function LoginUserForm() {
   const dispatch = useAppDispatch();
     const [loginUserMutation, { isLoading }] = useLoginUserMutation();
-    
+    const { refetch: refetchOrders } = useGetPersonalOrdersQuery();   
 
    
     
@@ -31,6 +32,7 @@ function LoginUserForm() {
             console.log('User successfully logged in!');
             console.log("från login", userData);
             dispatch(loginUser(userData))
+            refetchOrders();
           }
         } catch (error) {
           // Handle registration error
