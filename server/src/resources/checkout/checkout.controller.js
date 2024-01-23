@@ -103,7 +103,7 @@ const verifyPayment = async (req, res) => {
         
         console.log(order);
         
-        return res.status(201).json(order);
+        return res.status(201).json({ verified: true, order });
     } catch (error) {
         console.error('Error in verifyPayment:', error);
         return res.status(400).json({ error: error.message });

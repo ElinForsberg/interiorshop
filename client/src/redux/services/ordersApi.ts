@@ -3,6 +3,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 export type Order = {
 _id: string,
 created: string,
+customerId: string,
 name: string,
 email: string,
 address: {
