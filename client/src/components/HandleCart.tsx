@@ -1,13 +1,14 @@
 import { useDispatch } from "react-redux";
 import { StripeProduct } from "../redux/services/productsApi";
-import { addToCart, removeFromCart } from "../redux/slices/shoppingCartSlice";
+import { ShoppingCartItem, addToCart, removeFromCart } from "../redux/slices/shoppingCartSlice";
 import { ButtonGroup, Button } from "@mui/material";
 
 export type  HandleCartProps = {
     stripeProduct: StripeProduct;
+    quantity: ShoppingCartItem['quantity'];
   }
 
-const HandleCart: React.FC<HandleCartProps> = ({stripeProduct}) => {
+const HandleCart: React.FC<HandleCartProps> = ({stripeProduct, quantity}) => {
        
 const dispatch = useDispatch();
 const formattedPrice = new Intl.NumberFormat('sv-SE', {
@@ -37,6 +38,7 @@ const handleAddToCart = () => {
     <div>
         <ButtonGroup variant="outlined" aria-label="outlined button group">
             <Button onClick={handleRemoveFromCart}> - </Button>
+            <Button>{quantity}</Button>
             <Button onClick={handleAddToCart}> + </Button>
         </ButtonGroup>
     </div>

@@ -8,14 +8,16 @@ import { CardActionArea, CardActions } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import HandleCart from '../../components/HandleCart';
 import styled from '@emotion/styled';
+import { ShoppingCartItem } from '../../redux/slices/shoppingCartSlice';
 
 
 interface ProductCardProps {
     stripeProduct: StripeProduct;
     productInStock: ProductInStock["inStock"];
+    quantity: ShoppingCartItem['quantity'];
   }
 
-  const ProductCard: React.FC<ProductCardProps> = ({ stripeProduct, productInStock }) => {
+  const ProductCard: React.FC<ProductCardProps> = ({ stripeProduct, productInStock, quantity }) => {
     
     const navigate = useNavigate();
    
@@ -61,7 +63,7 @@ interface ProductCardProps {
       </CardActionArea>
       <CardActions>
         <HandleCart
-        stripeProduct={stripeProduct}/>
+            stripeProduct={stripeProduct} quantity={quantity}/>
       </CardActions>
     </OutOfStockCard>
     )
@@ -97,7 +99,7 @@ interface ProductCardProps {
       </CardActionArea>
       <CardActions>
         <HandleCart
-        stripeProduct={stripeProduct}/>
+            stripeProduct={stripeProduct} quantity={quantity}/>
       </CardActions>
     </Card>
     

@@ -5,11 +5,12 @@ import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import IconButton from '@mui/material/IconButton';
 import { ShoppingCartItem, ShoppingCartState } from '../redux/slices/shoppingCartSlice';
-import { Badge, Button } from '@mui/material';
+import { Badge, Button, Typography } from '@mui/material';
 import { useCreateCheckoutSessionMutation } from '../redux/services/checkoutApi';
-import { useAppSelector } from '../redux/hooks';
-import { styled } from '@mui/system';
-
+import { useAppDispatch, useAppSelector } from '../redux/hooks';
+import { clearCart } from '../redux/slices/shoppingCartSlice';
+import HandleCart from './HandleCart';
+import styled from '@emotion/styled';
 
 
 function ShoppingCart() {
@@ -21,11 +22,19 @@ function ShoppingCart() {
   const cartItems = shoppingCart.cartItems;
 
   const [createCheckoutSession] = useCreateCheckoutSessionMutation();
+  const dispatch = useAppDispatch();
 
-console.log(shoppingCart.cartItems);
+
 
 const totalItems = useMemo(() => {
   return cartItems.reduce((sum, item) => sum + item.quantity, 0);
+}, [cartItems]);
+
+const totalPrice = useMemo(() => {
+  return cartItems.reduce((sum, item) => {
+    const numericPrice = parseFloat(item.price.replace(/[^\d.,]/g, '').replace(',', '.')); // Parse numeric price
+    return sum + numericPrice * item.quantity;
+  }, 0).toFixed(2);
 }, [cartItems]);
 
   const handleDrawerOpen = () => {
@@ -35,6 +44,10 @@ const totalItems = useMemo(() => {
   const handleDrawerClose = () => {
     setDrawerOpen(false);
   };
+
+  const emptyCart = () => {
+    dispatch(clearCart());
+}
 
 
   const handlePayment = async () => {
@@ -54,28 +67,6 @@ const totalItems = useMemo(() => {
     }
   };
   
-// const handlePayment = async () => {
-//     const response = await fetch(
-//         "http://localhost:3000/api/create-checkout-session", 
-//         {
-//           method: "POST",
-//           headers: {
-//             "Content-Type": "application/json"
-//           },
-//           credentials: 'include',
-//           body: JSON.stringify(cartItems),
-          
-//         }
-//         );
-//         if (!response.ok) {
-//             return;
-//           }
-//         const { url, sessionId } = await response.json();
-//         localStorage.setItem("session-id", sessionId);
-//         window.location = url;
-        
-// }
-
 
   return (
     <div>
@@ -90,17 +81,62 @@ const totalItems = useMemo(() => {
         open={isDrawerOpen}
         onClose={handleDrawerClose}
       >
-        <List>
+        {cartItems.length > 0 ? (
+            <>
+        <StyledList>
+        
+          <StyledContainer>
+            <Typography variant='h4'>Varukorg</Typography>
+          </StyledContainer>
           { cartItems.map((item: ShoppingCartItem ) => (
           <ListItem key={item.id}>
-            <img src={item.image} alt={item.name} style={{ width: '50px', height: '50px' }} />
-            {item.name}
-            pris: {item.price}
+            <ImgContainer>
+            <StyledImg src={item.image} alt={item.name} />
+            </ImgContainer>
+            
+            <TextContainer>
+            <Typography>{item.name}</Typography>
+            <Typography> á pris: {item.price}</Typography>
+            </TextContainer>
+           
+            
+           <HandleCart stripeProduct={{
+                id: item.id,
+                active: false,
+                created: 0,
+                default_price: {
+                  id: '',
+                  active: false,
+                  currency: item.currency,
+                  product: item.product,
+                  unit_amount: 0,
+                  unit_amount_decimal: 0
+                },
+                description: '',
+                images: item.image,
+                metadata: {
+                  category: ''
+                },
+                name: ''
+              }} quantity={item.quantity}/>
           </ListItem>
           ))}
           {/* Add more ListItems as needed */}
-        </List>
-        <Button onClick={handlePayment}>Betala</Button>
+          <StyledContainer>
+            <Typography variant='h5'>Totalt: {totalPrice} kr</Typography>
+          </StyledContainer>
+          </StyledList>
+        <StyledBtn variant="contained" onClick={handlePayment}>Betala</StyledBtn>
+        <StyledBtn variant="outlined" onClick={emptyCart}>Töm varukorgen</StyledBtn>
+        </>
+        ) : (
+          <EmptyCartContainer>
+            <Typography variant="h5">Din varukorg är tom</Typography>
+            <BackBtn variant="outlined" onClick={handleDrawerClose}>Fortsätt handla</BackBtn>
+          </EmptyCartContainer>
+          
+        )}
+        
       </Drawer>
     </div>
   );
@@ -110,4 +146,40 @@ const StyledBadge = styled(Badge)(({theme}) => ({
   color: theme.palette.primary.main,
 }))
 
+const StyledList = styled(List)`
+padding:8px;
+`
+const StyledBtn = styled(Button)`
+  margin-left: 8px;
+  margin-right: 8px;
+  margin-bottom: 5px;
+`
+const TextContainer = styled.div`
+display: flex;
+flex-direction: column;
+padding: 1.5rem;
+`
+const ImgContainer = styled.div`
+height: 100px;
+width: 100px;
+`
+const StyledImg = styled.img`
+  object-fit: cover;
+   width: 100%;
+  height: 100%;
+`
+const StyledContainer = styled(ListItem)`
+display: flex;
+justify-content: center;
+align-items: center;
+`
+const EmptyCartContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 2rem;
+`
+const BackBtn = styled(Button)`
+margin-top: 2rem;
+`
 export default ShoppingCart;
