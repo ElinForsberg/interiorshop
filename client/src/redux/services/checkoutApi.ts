@@ -1,5 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { ShoppingCartItem } from '../slices/shoppingCartSlice';
+import { Order } from './ordersApi';
 
 export const checkoutApi = createApi({
   reducerPath: 'checkoutApi',
@@ -13,7 +14,7 @@ export const checkoutApi = createApi({
         body: cart, // Assuming cart is the correct shape and content for your API
       }),
     }),
-    verifyPayment: builder.mutation<{ verified: boolean }, { sessionId: string }>({
+    verifyPayment: builder.mutation<{ verified: boolean; order?: Order }, { sessionId: string }>({
         query: ({sessionId}) => ({
             url: '/verifySession',
             method: 'POST',
