@@ -3,28 +3,24 @@ import {  Grid, Tab, Tabs } from '@mui/material';
 import Header from '../../components/Header';
 import {  useGetProductsQuery, useGetQuantityInStockQuery } from '../../redux/services/productsApi'
 import ProductCard from './ProductCard';
-import {  useSelector } from 'react-redux';
-import { RootState } from '../../redux/store';
-import { clearCart } from '../../redux/slices/shoppingCartSlice';
 import { useEffect, useState } from 'react';
 import styled from '@emotion/styled';
-// import { loginUser } from '../../redux/slices/userSlice';
-import { useAppDispatch } from '../../redux/hooks';
+import { useAppSelector } from '../../redux/hooks';
+import { RootState } from '../../redux/store';
 
 
 
 
-function HomePage() {
+function HomePage( ) {
     
     const { data: productsData, isLoading: productsIsLoading, isError: productsIsError } = useGetProductsQuery();
     const { data: quantityData, isLoading: quantityIsLoading, isError: quantityIsError } = useGetQuantityInStockQuery();
-  
-    const dispatch = useAppDispatch();
-    const shoppingCart = useSelector((state: RootState) => state.shoppingCart);
-
+    
     const [selectedCategory, setSelectedCategory] = useState<string | undefined>(undefined);
     const [categories, setCategories] = useState<string[]>([]);
-    // const categories: string[] = Array.from(new Set(productsData?.data.map((product) => product.metadata.category || '')));
+
+    const shoppingCart = useAppSelector((state: RootState) => state.shoppingCart);
+    const cartItems = shoppingCart.cartItems;
 
     useEffect(() => {
       if (productsData?.data) {
@@ -34,26 +30,13 @@ function HomePage() {
       }
     }, [productsData]);
 
-  //   const { data, error } = useAuthorizeQuery();
-
-  // useEffect(() => {
-  //   if (data) {
-  //     console.log(data);
-  //     dispatch(loginUser(data));
-  //   } else if (error) {
-  //     console.error(error);
-  //   }
-  // }, [data, error, dispatch]);
-  
 
     const filteredProducts = productsData?.data.filter(
       (product) => !selectedCategory || product.metadata.category === selectedCategory
     );
 
     const handleCategoryChange = (value: string) => {
-      setSelectedCategory(value);
-      
-      
+      setSelectedCategory(value);  
     };
    
     
@@ -64,6 +47,8 @@ function HomePage() {
   if (productsIsError || quantityIsError) {
     return <div>Error fetching products</div>;
   }
+
+ 
 
   return (
     <>
@@ -85,10 +70,12 @@ function HomePage() {
         {filteredProducts?.map((product) => {
           const quantity = quantityData?.find((q) => q.stripeId === product.id);
           const inStock = quantity?.inStock || 0;
+          const cartItem = cartItems.find((item) => item.id === product.id);
+          const quantityInCart = cartItem?.quantity || 0;
 
           return (
             <Grid item key={product.id} xs={12} sm={6} md={4} lg={3}>
-              <ProductCard key={product.id} stripeProduct={product} productInStock={inStock} />
+              <ProductCard key={product.id} stripeProduct={product} productInStock={inStock} quantity={ quantityInCart}/>
             </Grid>
           );
         })}
