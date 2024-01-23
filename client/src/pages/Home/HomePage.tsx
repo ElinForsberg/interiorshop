@@ -90,7 +90,7 @@ justify-content: center;
 background-color: #7CB7AF;
 margin-bottom: 1rem;
 position: relative;
-padding-top: 100px;
+padding-top: 110px;
 `;
 
 

@@ -1,7 +1,9 @@
 import { createTheme } from '@mui/material/styles';
 import styled from '@emotion/styled'
 import { Link } from 'react-router-dom';
+import { Badge } from '@mui/material';
 
+  
 const theme = createTheme({
   palette: {
     primary: {
@@ -18,17 +20,9 @@ const theme = createTheme({
   typography: {
     fontFamily: 'Roboto, sans-serif',
   },
-  components: {
-    MuiCssBaseline: {
-      styleOverrides: {
-        body: {
-          backgroundColor: '#692c2c', // Set your desired background color here
-        },
-      },
-    },
-  },
   
 });
+
 
 export const StyledLink = styled(Link)`
  text-decoration: none;  

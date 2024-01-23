@@ -64,11 +64,13 @@ function Header() {
   );
 }
 const StyledBox = styled(Box)`
-height: 100px;
+height: 110px;
 width: 100%;
 background-color: white;
 position: fixed; 
 z-index: 1; 
+padding-left: 5px;
+padding-right: 5px;
 `;
 const HeaderContainer = styled(Grid)`
   height: 100px;
