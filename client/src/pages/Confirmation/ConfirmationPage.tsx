@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import { useVerifyPaymentMutation } from '../../redux/services/checkoutApi';
 import { useDispatch } from 'react-redux';
 import { clearCart } from '../../redux/slices/shoppingCartSlice';
-import Header from '../../components/Header';
 import { Order } from '../../redux/services/ordersApi';
 import { Typography } from '@mui/material';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
@@ -43,12 +42,11 @@ function ConfirmationPage() {
 
      useEffect(() => {    
     handleVerifyPayment();
-  }, [])
+  },[])
   
   return (
     isPaymentVerified ?
   <div>
-    <Header/>
     <OrderWrapper>
     <OrderContainer>
      <Typography>{orderDetails?.name},</Typography> 

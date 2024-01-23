@@ -1,4 +1,3 @@
-import Header from '../../components/Header'
 import { useGetPersonalOrdersQuery } from '../../redux/services/ordersApi';
 import {  isLoggedIn, selectUser } from '../../redux/slices/userSlice';
 import { Order } from "../../redux/services/ordersApi";
@@ -17,7 +16,6 @@ function MyPage() {
   }
     return (
         <>
-          <Header />
           {loggedInUser ? (
             <>
             <div>Mina Sidor</div>

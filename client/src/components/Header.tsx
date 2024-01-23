@@ -67,8 +67,8 @@ const StyledBox = styled(Box)`
 height: 100px;
 width: 100%;
 background-color: white;
-/* position: fixed;
-z-index: 1; */
+position: fixed; 
+z-index: 1; 
 `;
 const HeaderContainer = styled(Grid)`
   height: 100px;

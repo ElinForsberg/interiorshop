@@ -1,6 +1,5 @@
 
 import {  Grid, Tab, Tabs } from '@mui/material';
-import Header from '../../components/Header';
 import {  useGetProductsQuery, useGetQuantityInStockQuery } from '../../redux/services/productsApi'
 import ProductCard from './ProductCard';
 import { useEffect, useState } from 'react';
@@ -53,11 +52,10 @@ function HomePage( ) {
   return (
     <div>
       <div>
-    <Header/>
     <TabContainer>
           <Tabs 
         value={selectedCategory}
-        onChange={(e, value) => handleCategoryChange(value as string)}
+        onChange={(_e, value) => handleCategoryChange(value as string)}
         variant="scrollable"
         scrollButtons="auto"
       >
@@ -92,6 +90,7 @@ justify-content: center;
 background-color: #7CB7AF;
 margin-bottom: 1rem;
 position: relative;
+padding-top: 100px;
 `;
 
 

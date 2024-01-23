@@ -1,6 +1,5 @@
 import { useParams } from 'react-router-dom';
 import {  StripeProduct, useGetProductByIdQuery } from '../../redux/services/productsApi';
-import Header from '../../components/Header';
 import HandleCart from '../../components/HandleCart';
 import { useAppSelector } from '../../redux/hooks';
 import { RootState } from '../../redux/store';
@@ -34,7 +33,6 @@ const ProductPage = () => {
 
   return (
     <div>
-      <Header/>
       <p>{data?.name}</p>
       <p>{data?.description}</p>
       <img src={data?.images} width={400}/>

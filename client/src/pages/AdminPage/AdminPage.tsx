@@ -9,7 +9,6 @@ import DialogTitle from '@mui/material/DialogTitle';
 import DialogContent from '@mui/material/DialogContent';
 import DialogActions from '@mui/material/DialogActions';
 import Button from '@mui/material/Button';
-import Header from '../../components/Header';
 import { useGetAllOrdersQuery } from '../../redux/services/ordersApi';
 import { Order } from '../../redux/services/ordersApi';
 import { useMarkOrderAsshippedMutation} from '../../redux/services/ordersApi'
@@ -62,7 +61,6 @@ function AdminPage() {
 
   return (
     <div>
-      <Header />
       <FilterButtonContainer>
       <Button variant="outlined" size="small" onClick={() => setShowShippedOrders(!showShippedOrders)}>
         {showShippedOrders ? 'Visa alla ordrar' : 'Visa endast ej skickade ordrar'}
