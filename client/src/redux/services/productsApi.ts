@@ -46,10 +46,19 @@ export const productsApi = createApi({
     }),
     getQuantityInStock: builder.query<ProductsInStock, void>({
      query: () => 'dbproducts',   
+    }),
+    updateProductInStock: builder.mutation<void, { productId: string; inStock: number }>({
+      query: ({ productId, inStock }) => ({
+        url: `/products/${productId}`,
+        credentials: 'include',
+        method: 'PATCH',
+        body: { inStock },
+      }),
+      
     })
   }),
 });
 
-export const { useGetProductsQuery, useGetProductByIdQuery, useGetQuantityInStockQuery } = productsApi;
+export const { useGetProductsQuery, useGetProductByIdQuery, useGetQuantityInStockQuery, useUpdateProductInStockMutation } = productsApi;
 
 

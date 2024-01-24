@@ -8,14 +8,11 @@ const validate = (schema) => {
     };
   }
 
-  const authorization = (req, res, next) => {
-    console.log("moddleware",req.session);
-    if (req.session){
-        next();
-    } else {
-      return res.status(401).json("You need to log in");
-    }
+  function authorization (req, res, next) {
+    if (req.session?._id) return next();
+    res.status(401).json("You must login to perform this request");
   }
+
   
   const isAdmin = (req, res, next) => {
     const user = req.session;

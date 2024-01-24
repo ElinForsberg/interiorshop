@@ -9,6 +9,6 @@ productRouter.get("/dbproducts", getAllProducts)
 productRouter.get ('/products/:id', getProductById)
 productRouter.get('/products/price/:id', getProductWithPrice )
 productRouter.post('/products', validate(productValidateSchema) ,createProduct);
-productRouter.put('/products/:id', authorization, isAdmin, updateProductInStock);
+productRouter.patch('/products/:id', authorization, isAdmin, updateProductInStock);
 
 module.exports = { productRouter };

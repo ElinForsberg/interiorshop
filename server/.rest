@@ -54,8 +54,7 @@ Content-Type: application/json
 GET http://localhost:3000/api/user/authorize
 
 ###
-GET http://localhost:3000/api/user/authorize
-###
+
 // create product in mongoDb
 POST http://localhost:3000/api/products
 Content-Type: application/json
@@ -118,11 +117,11 @@ GET http://localhost:3000/api/orders/personal
 ###
 
 // as admin change quantity in stock
-PUT http://localhost:3000/api/products/659360aed83f1476b314a4f7
+PATCH http://localhost:3000/api/products/659360aed83f1476b314a4f7
 Content-Type: application/json
 
 {
-  "inStock": 90
+  "inStock": 100
 }
 ###
 

@@ -2,6 +2,7 @@ const { initStripe } = require("../../stripe");
 const stripe = initStripe();
 const { ProductModel } = require("./product.model")
 
+
 //Get all products from Stripe
 const getProducts = async (req, res) => {
     try {
@@ -89,6 +90,7 @@ const getProductWithPrice = async (req, res) => {
 
 //Update inStock as admin in mongoDb
 const updateProductInStock = async (req, res) => {
+    
         try{
          const product = await ProductModel.findOne({_id: req.params.id})
             if(!product){
