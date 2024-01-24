@@ -36,7 +36,8 @@ export const ordersApi = createApi({
         query: () => ({
             url: '/orders/personal',
             credentials: 'include',
-        })
+        }),
+        providesTags: ['Order'] 
          
       }),
       getAllOrders: builder.query<Order[], void>({

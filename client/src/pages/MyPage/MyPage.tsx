@@ -1,20 +1,24 @@
-import Header from '../../components/Header'
 import { useGetPersonalOrdersQuery } from '../../redux/services/ordersApi';
-import {  selectUser } from '../../redux/slices/userSlice';
+import {  isLoggedIn, selectUser } from '../../redux/slices/userSlice';
 import { Order } from "../../redux/services/ordersApi";
 import styled from '@emotion/styled';
 import { useAppSelector } from '../../redux/hooks';
 
 function MyPage() {
    
-    const { data: orderData } = useGetPersonalOrdersQuery();
+    const { data: orderData, isSuccess } = useGetPersonalOrdersQuery();
     const user = useAppSelector(selectUser);
+    const loggedInUser = useAppSelector(isLoggedIn);
 
-  
+
+  if(!isSuccess) {
+    return <div>Ordrar kunde inte hämtas</div>
+  }
     return (
         <>
-          <Header />
-          <div>Mina Sidor</div>
+          {loggedInUser ? (
+            <>
+            <div>Mina Sidor</div>
           <p>{user?.name}</p>
           <p>Dina ordrar</p>
           {Array.isArray(orderData) && orderData.length > 0 ? (
@@ -48,6 +52,11 @@ function MyPage() {
       
             </NoOrdersContainer>
           )}
+            </>
+          ):( <div>
+            <p>Du måste vara inloggad för att kunna se Mina Sidor </p>
+          </div>)}
+          
         </>
       );
     }

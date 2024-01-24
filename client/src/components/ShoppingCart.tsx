@@ -5,13 +5,13 @@ import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import IconButton from '@mui/material/IconButton';
 import { ShoppingCartItem, ShoppingCartState } from '../redux/slices/shoppingCartSlice';
-import { Badge, Button, Typography } from '@mui/material';
+import { Badge, Button,  Typography } from '@mui/material';
 import { useCreateCheckoutSessionMutation } from '../redux/services/checkoutApi';
 import { useAppDispatch, useAppSelector } from '../redux/hooks';
 import { clearCart } from '../redux/slices/shoppingCartSlice';
 import HandleCart from './HandleCart';
 import styled from '@emotion/styled';
-
+import CloseIcon from '@mui/icons-material/Close';
 
 function ShoppingCart() {
   
@@ -81,6 +81,10 @@ const totalPrice = useMemo(() => {
         open={isDrawerOpen}
         onClose={handleDrawerClose}
       >
+        <IconButton onClick={handleDrawerClose}>
+        <CloseIcon/>
+        </IconButton>
+        
         {cartItems.length > 0 ? (
             <>
         <StyledList>
@@ -142,9 +146,10 @@ const totalPrice = useMemo(() => {
   );
 }
 
-const StyledBadge = styled(Badge)(({theme}) => ({
-  color: theme.palette.primary.main,
-}))
+const StyledBadge = styled(Badge)`
+color: #444444
+`
+;
 
 const StyledList = styled(List)`
 padding:8px;

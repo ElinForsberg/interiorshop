@@ -5,6 +5,7 @@ const { OrderModel } = require("../order/order.model")
 const { ProductModel } = require("../product/product.model")
 
 
+//Go to checkout and go to Stripe
 const registerCheckout = async (req,res) => {
     
     try {
@@ -29,6 +30,7 @@ const registerCheckout = async (req,res) => {
             allow_promotion_codes: true,   
             
         });
+        console.log(req.session);
         res.status(200).json({url: session.url, sessionId: session.id, session: session})
                
     } catch (error) {
