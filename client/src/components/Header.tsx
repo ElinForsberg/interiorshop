@@ -68,7 +68,7 @@ height: 110px;
 width: 100%;
 background-color: white;
 position: fixed; 
-z-index: 1; 
+z-index: 2; 
 padding-left: 5px;
 padding-right: 5px;
 `;

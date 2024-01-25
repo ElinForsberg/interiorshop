@@ -25,7 +25,7 @@ function Login() {
     };
     const [activeTab, setActiveTab] = useState(0);
 
-    const handleTabChange = (event: unknown, newValue: SetStateAction<number>) => {
+    const handleTabChange = (_event: unknown, newValue: SetStateAction<number>) => {
       setActiveTab(newValue);
     };
 

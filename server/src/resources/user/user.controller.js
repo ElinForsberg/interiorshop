@@ -39,23 +39,50 @@ async function registerUser(req, res, next) {
   }
 }
 
-async function loginUser(req, res) {
-    const { email, password} = req.body;
-    const user = await UserModel.findOne({email});
-  try{
-    if (!user || !await bcrypt.compare(password, user.password)) {
-        return res.status(401).json("Wrong email or password");
-      }
-      req.session = user;
+// async function loginUser(req, res) {
+//     const { email, password} = req.body;
+//     const user = await UserModel.findOne({email});
+//   try{
+//     if (!user || !await bcrypt.compare(password, user.password)) {
+//         return res.status(401).json("Wrong email or password");
+//       }
+//       req.session = user;
       
-    console.log("login", user);
-    const loggedInUser = await UserModel.findOne({email: email}).select('-password');
+//     console.log("login", user);
+//     const loggedInUser = await UserModel.findOne({email: email}).select('-password');
     
-    res.status(200).json(loggedInUser);
-  } catch(error) {
-    res.status(404).json(error.message);
+//     res.status(200).json(loggedInUser);
+//   } catch(error) {
+//     res.status(404).json(error.message);
+//   }
+//   }
+async function loginUser(req, res) {
+  // Check if username and password is correct
+  const existingUser = await UserModel.findOne({
+    email: req.body.email,
+  }).select("+password");
+
+  if (
+    !existingUser ||
+    !(await bcrypt.compare(req.body.password, existingUser.password))
+  ) {
+    return res.status(401).json("Wrong password or username");
   }
+
+  const user = existingUser.toJSON();
+  user._id = existingUser._id;
+  delete user.password;
+
+  // Check if user already is logged in
+  if (req.session._id) {
+    return res.status(200).json(user);
   }
+
+  // Save info about the user to the session (an encrypted cookie stored on the client)
+  req.session = user;
+  res.status(200).json(user);
+
+}
     
   async function logoutUser(req, res) {
     req.session = null;
