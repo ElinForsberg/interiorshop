@@ -51,6 +51,7 @@ export const ordersApi = createApi({
       markOrderAsshipped: builder.mutation<void, string>({
         query: (orderId) => ({
           url: `/orders/${orderId}`,
+          credentials: 'include',
           method: 'PATCH',
           body: {isShipped: true},
         }),
