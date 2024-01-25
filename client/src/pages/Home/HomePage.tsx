@@ -54,7 +54,7 @@ function HomePage( ) {
       <div>
     <TabContainer>
           <Tabs 
-        value={selectedCategory}
+        value={selectedCategory || ""}
         onChange={(_e, value) => handleCategoryChange(value as string)}
         variant="scrollable"
         scrollButtons="auto"

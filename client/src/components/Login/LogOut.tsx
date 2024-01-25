@@ -41,9 +41,9 @@ function LogOut() {
           </StyledButton>
           
           <LogoutButton type="submit" variant="contained" onClick={handleLogout}>
-          <StyledLink to={'/'}>
+          
             Logout
-            </StyledLink>
+          
           </LogoutButton>
           
         </StyledForm>

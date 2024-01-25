@@ -80,7 +80,7 @@ interface ProductCardProps {
         <CardMedia
           component="img"
           height="250"
-          image= {stripeProduct.images}
+          image= {stripeProduct.images as string}
         />
         <StyledCardContent>
           <Typography gutterBottom variant="h5" component="div">
