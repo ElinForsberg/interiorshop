@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Tabs, Tab, Typography,  } from '@mui/material';
+import { Tabs, Tab,  } from '@mui/material';
 import styled from '@emotion/styled';
 import AdminOrders from './AdminOrders';
 import AdminProducts from './AdminProducts';

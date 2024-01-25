@@ -3,6 +3,8 @@ import {  StripeProduct, useGetProductByIdQuery } from '../../redux/services/pro
 import HandleCart from '../../components/HandleCart';
 import { useAppSelector } from '../../redux/hooks';
 import { RootState } from '../../redux/store';
+import styled from '@emotion/styled';
+import { Typography } from '@mui/material';
 
 
 
@@ -32,15 +34,46 @@ const ProductPage = () => {
   }
 
   return (
-    <div>
-      <p>{data?.name}</p>
-      <p>{data?.description}</p>
-      <img src={data?.images} width={400}/>
-      <p>pris: {formattedPrice} </p>
+    <PageContainer>
+      <ImgContainer>
+      <img src={data?.images} width={350}/>
+      </ImgContainer>
+      <InformationContainer>
+        <TextContainer>
+          <Typography variant="h3" >{data?.name}</Typography>
+        </TextContainer>
+        <TextContainer>
+          <Typography>{data?.description}</Typography>
+        </TextContainer>
+      
+        <TextContainer>
+          <Typography>pris: {formattedPrice} </Typography>
+        </TextContainer>
+      <Typography variant="caption">Lägg i varukorgen</Typography>
       <HandleCart stripeProduct={data as StripeProduct} quantity={quantityInCart}/>
+      </InformationContainer>
+      
 
-    </div>
+    </PageContainer>
   );
 }
 
+const PageContainer = styled.div`
+padding-top: 160px;
+display: flex;
+@media (max-width: 650px) {
+    flex-direction: column;
+  }
+`
+const ImgContainer = styled.div`
+  padding-left: 1rem;
+`
+
+const InformationContainer = styled.div`
+padding-left: 4rem;
+padding-right: 1rem;
+`
+const TextContainer = styled.div`
+  padding-bottom: 2rem;
+`
 export default ProductPage;

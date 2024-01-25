@@ -2,7 +2,7 @@ import { Button, TextField } from "@mui/material";
 import { useGetProductsQuery, useGetQuantityInStockQuery, useUpdateProductInStockMutation } from "../../redux/services/productsApi";
 
 import styled from "@emotion/styled";
-import { useEffect, useState } from "react";
+import {  useState } from "react";
 
 
 function AdminProducts() {
@@ -12,7 +12,7 @@ function AdminProducts() {
     const [newStockValue, setNewStockValue] = useState<number>(0);
     const [isInStockChanged, setIsInStockChanged] = useState<boolean>(false);
 
-    
+
     const handleSaveChanges = async (event: React.MouseEvent<HTMLElement>, productId: string) => {
       event.preventDefault();
   

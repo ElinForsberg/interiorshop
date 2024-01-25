@@ -63,6 +63,7 @@ function Header() {
     </>
   );
 }
+
 const StyledBox = styled(Box)`
 height: 110px;
 width: 100%;
