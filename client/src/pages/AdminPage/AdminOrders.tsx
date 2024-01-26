@@ -13,6 +13,7 @@ import { useGetAllOrdersQuery } from '../../redux/services/ordersApi';
 import { Order } from '../../redux/services/ordersApi';
 import { useMarkOrderAsshippedMutation} from '../../redux/services/ordersApi'
 import styled from '@emotion/styled';
+import { Typography } from '@mui/material';
 
 
 function AdminOrders() {
@@ -73,37 +74,37 @@ function AdminOrders() {
           <Accordion key={order._id}>
             <AccordionSummary expandIcon={<ExpandMoreIcon/>}>
             <OrderTitleContainer>
-            <p>Ordernummer: {order._id}</p>
+            <Typography>Ordernummer: {order._id}</Typography>
             {order.isShipped ? (
-                    <p>Skickad</p>
+                    <Typography>Skickad</Typography>
                   ) : (
                     
-                      <p>Ej skickad</p>
+                      <Typography>Ej skickad</Typography>
                       )} 
             </OrderTitleContainer>
            
             </AccordionSummary>
             <AccordionDetails>
-            <p>Order skapad: {formatDate(order.created)}</p>
-            <p>{order.name}</p>
-                <p>{order.email}</p>
-                <p>Leverans adress: {order.address.street}, {order.address.postal_code}, {order.address.city}, {order.address.country}</p>
+            <Typography>Order skapad: {formatDate(order.created)}</Typography>
+            <Typography>{order.name}</Typography>
+                <Typography>{order.email}</Typography>
+                <Typography>Leverans adress: {order.address.street}, {order.address.postal_code}, {order.address.city}, {order.address.country}</Typography>
                 <Divider/>
-                <p>Köpta produkter</p>
+                <Typography>Köpta produkter</Typography>
                 {order.products && order.products.map(product => (
                   <div key={product.stripeId}>
-                    <p>{product.description}</p>
-                    <p>Antal: {product.quantity}</p>
-                    <p>Pris: {product.price} {product.currency}</p>
-                    <p>Summa: {product.total} {product.currency}</p>
+                    <Typography>{product.description}</Typography>
+                    <Typography>Antal: {product.quantity}</Typography>
+                    <Typography>Pris: {product.price} {product.currency}</Typography>
+                    <Typography>Summa: {product.total} {product.currency}</Typography>
                     <Divider light/>
                 </div>
                  ))}
                  {order.isShipped ? (
-                    <p>Ordern är skickad</p>
+                    <Typography>Ordern är skickad</Typography>
                   ) : (
                     <>
-                      <p>Ordern väntar på att skickas</p>
+                      <Typography>Ordern väntar på att skickas</Typography>
                       <Button variant="outlined" color= "secondary" onClick={() => handleCheckboxChange(order._id)}>
                         Markera order som skickad
                       </Button>
@@ -121,7 +122,7 @@ function AdminOrders() {
       <Dialog open={openDialog} onClose={handleCloseDialog}>
         <DialogTitle>Confirmation</DialogTitle>
         <DialogContent>
-          <p>Är du säker på att du vill markera ordern som skickad?</p>
+          <Typography>Är du säker på att du vill markera ordern som skickad?</Typography>
         </DialogContent>
         <DialogActions>
         <Button onClick={handleCloseDialog} color="primary">
