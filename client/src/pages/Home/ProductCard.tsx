@@ -37,7 +37,7 @@ interface ProductCardProps {
       let stockStatus = '';
   
   if (productInStock === 0) {
-    stockStatus = 'Out of stock';
+    stockStatus = 'Slut i lager';
     return (
       <OutOfStockCard sx={{ maxWidth: 345 }}>
       <CardActionArea onClick={handleClick}>
@@ -68,9 +68,9 @@ interface ProductCardProps {
     </OutOfStockCard>
     )
   } else if (productInStock <= 10) {
-    stockStatus = 'Low in stock';
+    stockStatus = 'Få i lager';
   } else {
-    stockStatus = 'In stock';
+    stockStatus = 'Finns i lager';
   }
 
     return (
@@ -80,7 +80,7 @@ interface ProductCardProps {
         <CardMedia
           component="img"
           height="250"
-          image= {stripeProduct.images}
+          image= {stripeProduct.images as string}
         />
         <StyledCardContent>
           <Typography gutterBottom variant="h5" component="div">

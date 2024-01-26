@@ -54,7 +54,7 @@ function HomePage( ) {
       <div>
     <TabContainer>
           <Tabs 
-        value={selectedCategory}
+        value={selectedCategory || ""}
         onChange={(_e, value) => handleCategoryChange(value as string)}
         variant="scrollable"
         scrollButtons="auto"
@@ -65,7 +65,7 @@ function HomePage( ) {
         ))}
       </Tabs>
       </TabContainer>
-      <Grid container spacing={3}>
+      <StyledGrid container spacing={3}>
         {filteredProducts?.map((product) => {
           const quantity = quantityData?.find((q) => q.stripeId === product.id);
           const inStock = quantity?.inStock || 0;
@@ -78,7 +78,7 @@ function HomePage( ) {
             </Grid>
           );
         })}
-      </Grid>
+      </StyledGrid>
       </div>
   </div>
   );
@@ -92,6 +92,12 @@ margin-bottom: 1rem;
 position: relative;
 padding-top: 110px;
 `;
+
+const StyledGrid = styled(Grid)`
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-bottom: 1rem;
+`
 
 
 export default HomePage

@@ -18,13 +18,13 @@ async function registerUser(req, res, next) {
   const password = await bcrypt.hash(plainTextPassword, salt)
    
   try {
-    const stripeUser = await stripe.customers.create({
-        email: email,
-        name: name,
-      }) 
+    // const stripeUser = await stripe.customers.create({
+    //     email: email,
+    //     name: name,
+    //   }) 
 
    await UserModel.create({
-    stripeId: stripeUser.id,
+    // stripeId: stripeUser.id,
     email,
     name,
     password,

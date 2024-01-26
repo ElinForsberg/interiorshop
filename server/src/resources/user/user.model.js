@@ -8,7 +8,7 @@ const userValidateSchema = Joi.object({
   name:Joi.string(),
   password: Joi.string()
   .required()
-  .min(6)
+  .min(8)
   .pattern(passwordRegex)
   .message('Password must contain at least one capital letter, one number, one special character, and be at least 8 characters long'),
   isAdmin: Joi.boolean() 
