@@ -1,11 +1,7 @@
 import  { useMemo, useState } from 'react';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import Drawer from '@mui/material/Drawer';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import IconButton from '@mui/material/IconButton';
+import { Drawer, List, ListItem, IconButton, Badge, Button,  Typography} from '@mui/material';
 import { ShoppingCartItem, ShoppingCartState } from '../redux/slices/shoppingCartSlice';
-import { Badge, Button,  Typography } from '@mui/material';
 import { useCreateCheckoutSessionMutation } from '../redux/services/checkoutApi';
 import { useAppDispatch, useAppSelector } from '../redux/hooks';
 import { clearCart } from '../redux/slices/shoppingCartSlice';

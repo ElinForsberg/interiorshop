@@ -1,19 +1,10 @@
 import  { useState } from 'react';
-import Accordion from '@mui/material/Accordion';
-import Divider from '@mui/material/Divider';
-import AccordionSummary from '@mui/material/AccordionSummary';
-import AccordionDetails from '@mui/material/AccordionDetails';
+import {Accordion, Divider, AccordionSummary, AccordionDetails, Dialog, DialogTitle, DialogContent, DialogActions, Button, Typography }from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import Dialog from '@mui/material/Dialog';
-import DialogTitle from '@mui/material/DialogTitle';
-import DialogContent from '@mui/material/DialogContent';
-import DialogActions from '@mui/material/DialogActions';
-import Button from '@mui/material/Button';
 import { useGetAllOrdersQuery } from '../../redux/services/ordersApi';
 import { Order } from '../../redux/services/ordersApi';
 import { useMarkOrderAsshippedMutation} from '../../redux/services/ordersApi'
 import styled from '@emotion/styled';
-import { Typography } from '@mui/material';
 
 
 function AdminOrders() {
@@ -22,7 +13,6 @@ function AdminOrders() {
   const [openDialog, setOpenDialog] = useState(false);
   const [markOrderAsShipped] = useMarkOrderAsshippedMutation();
   const [showShippedOrders, setShowShippedOrders] = useState(false);
-  
   
   const handleCheckboxChange = (orderId: string) => {
     setSelectedOrderId(orderId);
