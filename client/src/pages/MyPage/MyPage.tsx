@@ -88,7 +88,7 @@ console.log("logged", loggedInUser);
 
     const MyPageContainer = styled.div`
     padding-top: 130px;
-    background-color: #4db6ac ;
+    background-color: #7CB7AF ;
     text-align: center;
     margin-bottom: 2rem;
     `;
