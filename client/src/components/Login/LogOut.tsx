@@ -3,17 +3,21 @@ import { useLogoutUserMutation } from "../../redux/services/usersApi";
 import { useDispatch } from "react-redux";
 import {  isLoggedIn, logoutUser, selectUser } from "../../redux/slices/userSlice";
 import { useAppSelector } from "../../redux/hooks";
-import { Link } from "react-router-dom";
 import styled from "@emotion/styled";
 import { ordersApi } from "../../redux/services/ordersApi";
-import { StyledLink } from "../../Theme";
+// import { StyledLink } from "../../Theme";
+import { useNavigate } from 'react-router-dom';
 
+interface LogoutProps {
+  handleClose: () => void;
+}
 
-function LogOut() {
+function LogOut({ handleClose }: LogoutProps) {
     const [logoutUserMutation] = useLogoutUserMutation();
     const dispatch = useDispatch();
     const user = useAppSelector(selectUser);
     const LoggedIn = useAppSelector(isLoggedIn);
+    const navigate = useNavigate();
     
   
     const handleLogout = async () => {
@@ -26,6 +30,10 @@ function LogOut() {
           console.error('User logout failed:', error);
         }
       };
+      const handleGoToMyPages = () => {
+          handleClose();
+          navigate('/mypage');
+      }
 
   return (
     <div>
@@ -34,10 +42,10 @@ function LogOut() {
         <StyledForm>
         <h2>Välkommen, {user?.name}!</h2>
           
-          <StyledButton type="submit" variant="contained">
-          <StyledLink to={'/mypage'}>
+          <StyledButton type="submit" onClick={handleGoToMyPages}variant="contained">
+          {/* <StyledLink to={'/mypage'}> */}
             Mina Sidor
-            </StyledLink>
+            {/* </StyledLink> */}
           </StyledButton>
           
           <LogoutButton type="submit" variant="contained" onClick={handleLogout}>

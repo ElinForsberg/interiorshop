@@ -9,6 +9,8 @@ const { ProductModel } = require("../product/product.model")
 const registerCheckout = async (req,res) => {
     
     try {
+        const customer = req.session; // Assuming email is stored in the session
+        const customerMail = customer.email;
         const session = await stripe.checkout.sessions.create({
             
             line_items: req.body.map((item) => {
@@ -24,6 +26,7 @@ const registerCheckout = async (req,res) => {
               },          
             customer: req.session.id,
             customer_creation: "always",
+            customer_email: customerMail,
             mode: "payment",
             success_url: `${CLIENT_URL}/confirmation`,
             cancel_url: CLIENT_URL,

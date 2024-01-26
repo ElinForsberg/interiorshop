@@ -46,7 +46,7 @@ function Login() {
         </Tabs>
         { isLoggedIn ?
               
-              activeTab === 0 && <LogOut/>  :
+              activeTab === 0 && <LogOut handleClose={handleClose} />  :
               activeTab === 0 && <LoginUserForm />}
         {activeTab === 1 && <RegisterUserForm />}
         </FormContainer>

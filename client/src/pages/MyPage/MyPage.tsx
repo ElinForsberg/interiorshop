@@ -12,7 +12,19 @@ function MyPage() {
     const user = useAppSelector(selectUser);
     const loggedInUser = useAppSelector(isLoggedIn);
 
-console.log("logged", loggedInUser);
+    function formatDate(createdDate: string) {
+      const date = new Date(createdDate);
+      const formattedDate = date.toLocaleDateString('sv-SE'); 
+      const formattedTime = date.toLocaleTimeString('sv-SE'); 
+    
+      return `${formattedDate} ${formattedTime}`;
+    }
+
+    const compareOrderDates = (a: Order, b: Order) => {
+      const dateA = new Date(a.created).getTime();
+      const dateB = new Date(b.created).getTime();
+      return dateB - dateA; // Compare in descending order
+    };
 
   if(!isSuccess) {
     return <div>Ordrar kunde inte hämtas</div>
@@ -30,10 +42,13 @@ console.log("logged", loggedInUser);
               </TitleContainer>
           
           {Array.isArray(orderData) && orderData.length > 0 ? (
-            orderData.map((order: Order) => (
+            [...orderData]
+            .sort(compareOrderDates)
+            .map((order: Order) => (
               <OrderContainer key={order._id}>
                 {/* Render order details here */}
                 <Typography>Order ID: {order._id}</Typography>
+                <Typography>Datum: {formatDate(order.created)}</Typography>
                 <Divider/>
                 <Typography>Namn: {order.name}</Typography>
                 <Typography>Email: {order.email}</Typography>
@@ -54,11 +69,11 @@ console.log("logged", loggedInUser);
                 <Divider/>
                 {order.isShipped ?
                 <OrderShippedContainer>
-<                 Typography>din order är skickad</Typography> 
+<                 Typography>Din order är skickad</Typography> 
                   <SentimentSatisfiedAltIcon/>
                 </OrderShippedContainer>
                   :
-                  <Typography>din order väntar på att bli skickad</Typography>}
+                  <Typography>Din order väntar på att bli skickad</Typography>}
                   
               </OrderContainer>
               
