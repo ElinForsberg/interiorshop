@@ -1,6 +1,15 @@
 #root {
   margin: 0 auto;
   padding: 0;
-  box-sizing: border-box;
- 
+  /* box-sizing: border-box; */
+  background-color: #faf9f3;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
+* {
+  padding: 0;
+  margin: 0;
+  /* box-sizing: border-box ; */
+}
+
