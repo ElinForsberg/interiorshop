@@ -58,6 +58,8 @@ function HomePage( ) {
         onChange={(_e, value) => handleCategoryChange(value as string)}
         variant="scrollable"
         scrollButtons="auto"
+        allowScrollButtonsMobile
+        
       >
         <Tab label="Visa alla" value= "" />
         {categories.map((category) => (
@@ -88,8 +90,9 @@ const TabContainer = styled.div`
 display: flex;
 justify-content: center;
 background-color: #7CB7AF;
+/* padding-bottom: 1rem; */
 margin-bottom: 1rem;
-position: relative;
+/* position: relative; */
 padding-top: 110px;
 `;
 

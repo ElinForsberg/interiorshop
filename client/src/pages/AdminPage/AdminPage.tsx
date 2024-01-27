@@ -15,7 +15,7 @@ function AdminPage() {
   return (
     <PageContainer>
         <TabContainer>
-            <Tabs value={selectedTab} onChange={handleChange}>
+            <Tabs value={selectedTab} onChange={handleChange} variant="fullWidth">
                 <Tab label="Ordrar" />
                 <Tab label="Produkter" />
             </Tabs>

@@ -24,6 +24,7 @@ function Footer() {
                         <StyledBtn variant="contained" color="secondary">
                             Skicka
                         </StyledBtn>
+                        <Typography color="primary.light">© 2024 ElinForsberg</Typography>
                     </GridContainer>
                 </Grid>
             <Grid item xs={4}>
@@ -47,7 +48,7 @@ const FooterContainer = styled.div`
   margin-top: auto;
   width: 100%;
   /* height: 10rem;  */
-  margin-top: 1rem;       
+  margin-top: 3rem;       
 `;
 const GridContainer = styled.div`
 padding-top: 1.5rem;
@@ -71,6 +72,7 @@ const StyledBtn = styled(Button)`
    width: 50px;
    border-radius: 2px;
    margin-left: 4px;
+   margin-bottom: 3rem;
 `;
 const StyledTextfield = styled(TextField)`
    height: 40px;
