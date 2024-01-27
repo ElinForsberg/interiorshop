@@ -90,8 +90,7 @@ const TabContainer = styled.div`
 display: flex;
 justify-content: center;
 background-color: #7CB7AF;
-/* padding-bottom: 1rem; */
-margin-bottom: 1rem;
+margin-bottom: 2.5rem;
 /* position: relative; */
 padding-top: 110px;
 `;
