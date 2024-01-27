@@ -5,7 +5,6 @@ import {  isLoggedIn, logoutUser, selectUser } from "../../redux/slices/userSlic
 import { useAppSelector } from "../../redux/hooks";
 import styled from "@emotion/styled";
 import { ordersApi } from "../../redux/services/ordersApi";
-// import { StyledLink } from "../../Theme";
 import { useNavigate } from 'react-router-dom';
 
 interface LogoutProps {

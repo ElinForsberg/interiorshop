@@ -8,6 +8,7 @@ import { Typography } from '@mui/material';
 
 
 
+
 const ProductPage = () => {
     const { id } = useParams<{ id: string }>(); // Ensure 'id' is always a string
     const { data, isLoading, isError } = useGetProductByIdQuery(id || ''); // Provide a default value for 'id'
@@ -53,7 +54,7 @@ const ProductPage = () => {
       <HandleCart stripeProduct={data as StripeProduct} quantity={quantityInCart}/>
       </InformationContainer>
       
-
+     
     </PageContainer>
   );
 }

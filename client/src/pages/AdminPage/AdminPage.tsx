@@ -15,7 +15,7 @@ function AdminPage() {
   return (
     <PageContainer>
         <TabContainer>
-            <Tabs value={selectedTab} onChange={handleChange}>
+            <Tabs value={selectedTab} onChange={handleChange} variant="fullWidth">
                 <Tab label="Ordrar" />
                 <Tab label="Produkter" />
             </Tabs>
@@ -49,7 +49,7 @@ const TabContainer = styled.div`
 display: flex;
 justify-content: center;
 background-color: #7CB7AF;
-margin-bottom: 1rem;
+margin-bottom: 2rem;
 
 `;
 export default AdminPage;

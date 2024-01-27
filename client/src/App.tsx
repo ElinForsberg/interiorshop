@@ -12,6 +12,7 @@ import { ThemeProvider } from '@mui/material/styles'
 import theme from './Theme'
 import Router from './Router'
 import Header from './components/Header'
+import Footer from './components/Footer'
 
 
 function App() {
@@ -33,6 +34,7 @@ function App() {
     <ThemeProvider theme={theme}>
      <Header/>
       <Router/>
+      <Footer/>
     </ThemeProvider>
   
   )

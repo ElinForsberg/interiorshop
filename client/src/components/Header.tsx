@@ -1,12 +1,12 @@
 import styled from '@emotion/styled';
 import ShoppingCart from './ShoppingCart';
-import { Box, Grid,  Typography } from '@mui/material';
+import { Box, Grid,  Typography, useMediaQuery } from '@mui/material';
 import LoginDialog from './Login/LoginDialog';
 import { useAppSelector } from '../redux/hooks';
 import { selectUser } from '../redux/slices/userSlice';
 import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
 import { StyledLink } from '../Theme';
-import { useMediaQuery } from '@mui/material';
+
 
 
 function Header() {
@@ -65,7 +65,7 @@ function Header() {
 }
 
 const StyledBox = styled(Box)`
-height: 110px;
+height: 120px;
 width: 100%;
 background-color: white;
 position: fixed; 

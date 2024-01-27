@@ -1,10 +1,6 @@
 import React from 'react'
 import { ProductInStock, StripeProduct } from '../../redux/services/productsApi';
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-import Typography from '@mui/material/Typography';
-import { CardActionArea, CardActions } from '@mui/material';
+import {Card, CardContent, CardMedia, Typography, CardActionArea, CardActions }from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import HandleCart from '../../components/HandleCart';
 import styled from '@emotion/styled';
