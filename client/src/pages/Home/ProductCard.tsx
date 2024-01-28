@@ -38,12 +38,8 @@ interface ProductCardProps {
     return (
       <OutOfStockCard sx={{ maxWidth: 345 }}>
       <CardActionArea onClick={handleClick}>
-        {/* <CardMedia
-        component="img"
-          height="250"
-          image= {stripeProduct.images}
-        /> */}
-        <LazyLoad  height={"250px"} width={"345px"} threshold={0.95}>
+     
+        <LazyLoad  height={"250px"} width={"345px"} >
           <OutOfStockImg src={stripeProduct.images}/>
         </LazyLoad>
         <StyledCardContent>
@@ -77,13 +73,8 @@ interface ProductCardProps {
       
         <Card sx={{ maxWidth: 345 }}>
       <CardActionArea onClick={handleClick}>
-        {/* <CardMedia
-          component="img"
-          loading="lazy"
-          height="250"
-          image= {stripeProduct.images as string}
-        /> */}
-        <LazyLoad height={"250px"} width={"345px"} threshold={0.95}>
+    
+        <LazyLoad height={"250px"} width={"345px"} >
           <StyledImg src={stripeProduct.images}/>
         </LazyLoad>
         <StyledCardContent>
@@ -112,19 +103,19 @@ interface ProductCardProps {
 
   const OutOfStockCard = styled(Card)`
   background-color: #f8f0f0a0;
-  `
+  `;
   const StyledCardContent = styled(CardContent)`
   height: 150px;
-  `
+  `;
   const StyledImg = styled.img`
     width: 345px;
   height: 250px;
   object-fit: cover;
-  `
+  `;
     const OutOfStockImg = styled.img`
     width: 345px;
     height: 250px;
     object-fit: cover;
     filter: blur(2px);
-  `
+  `;
   export default ProductCard;

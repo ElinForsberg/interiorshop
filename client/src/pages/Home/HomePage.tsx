@@ -99,7 +99,8 @@ padding-top: 120px;
 const StyledGrid = styled(Grid)`
   padding-left: 1rem;
   padding-right: 1rem;
-  padding-bottom: 1rem;
+  padding-bottom: 3rem;
+  min-height: 75vh;
 `
 
 

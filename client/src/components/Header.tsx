@@ -19,6 +19,9 @@ function Header() {
     {isSmallScreen ? (
       
     <StyledBox>
+      <StyledBanner>
+        <Typography variant="body2" color="secondary">Registrera dig hos oss och få rabattkod!!</Typography>
+      </StyledBanner>
       <div>
       <StyledLink to={'/'}>
             <Typography variant="h2">
@@ -38,6 +41,9 @@ function Header() {
     </StyledBox>
     ):(
       <StyledBox>
+        <StyledBanner>
+        <Typography variant="body2" color="white">Registrera dig som kund hos oss och få 10% på ett köp!!</Typography>
+        </StyledBanner>
       <HeaderContainer container direction="row">
         <Grid item xs="auto">
           <StyledLink to={'/'}>
@@ -70,8 +76,9 @@ width: 100%;
 background-color: white;
 position: fixed; 
 z-index: 2; 
-padding-left: 5px;
-padding-right: 5px;
+/* padding-left: 5px;
+padding-right: 5px; */
+box-shadow: 0px 25px 16px -30px rgba(0,0,0,0.45);
 `;
 const HeaderContainer = styled(Grid)`
   height: 100px;
@@ -88,4 +95,11 @@ const SmallscreenContainer = styled.div`
   gap: 4px; 
   padding: 10px;
 `;
+
+const StyledBanner = styled.div`
+  height: 28px;
+  background-color: black;
+  text-align: center;
+  padding-top: 2px;
+`
 export default Header;
