@@ -93,7 +93,7 @@ justify-content: center;
 background-color: #7CB7AF;
 margin-bottom: 2.5rem;
 /* position: relative; */
-padding-top: 110px;
+padding-top: 120px;
 `;
 
 const StyledGrid = styled(Grid)`

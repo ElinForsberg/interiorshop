@@ -30,7 +30,7 @@ function MyPage() {
     
   
     if (error) {
-     navigate('/');
+     navigate('/401');
      return null;
     }
 
@@ -114,6 +114,7 @@ function MyPage() {
     `;
     const MyPageContainer = styled.div`
     padding-top: 130px;
+    padding-bottom: 10px;
     background-color: #7CB7AF ;
     text-align: center;
     margin-bottom: 2rem;

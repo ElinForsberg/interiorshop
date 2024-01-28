@@ -17,7 +17,7 @@ function AdminPage() {
     setSelectedTab(newValue);
   };
   if (!user?.isAdmin) {
-    navigate('/');
+    navigate('/401');
     return null;
    }
 
@@ -52,7 +52,7 @@ function AdminPage() {
 }
 
 const PageContainer = styled.div`
-padding-top: 110px;
+padding-top: 120px;
 `
 const TabContainer = styled.div`
 display: flex;
