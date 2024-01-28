@@ -1,18 +1,23 @@
 import { useGetPersonalOrdersQuery } from '../../redux/services/ordersApi';
-import {  isLoggedIn, selectUser } from '../../redux/slices/userSlice';
+import {  selectUser } from '../../redux/slices/userSlice';
 import { Order } from "../../redux/services/ordersApi";
 import styled from '@emotion/styled';
 import { useAppSelector } from '../../redux/hooks';
 import { Divider, Typography } from '@mui/material';
 import SentimentSatisfiedAltIcon from '@mui/icons-material/SentimentSatisfiedAlt';
 import Loader from '../../components/Loader';
+import { useNavigate } from 'react-router-dom';
+import { useAuthorizeQuery } from '../../redux/services/usersApi';
 
 function MyPage() {
    
     const { data: orderData, isLoading, isSuccess } = useGetPersonalOrdersQuery();
+    const {  error } = useAuthorizeQuery();
     const user = useAppSelector(selectUser);
-    const loggedInUser = useAppSelector(isLoggedIn);
+    const navigate = useNavigate();
 
+    
+    
     function formatDate(createdDate: string) {
       const date = new Date(createdDate);
       const formattedDate = date.toLocaleDateString('sv-SE'); 
@@ -26,19 +31,26 @@ function MyPage() {
       const dateB = new Date(b.created).getTime();
       return dateB - dateA; // Compare in descending order
     };
+    
+  
+    if (error) {
+     navigate('/');
+     return null;
+    }
 
     if (isLoading) {
       return <Loader/>;
     }
+    
 
   if(!isSuccess) {
     return <div>Ordrar kunde inte hämtas</div>
   }
-
+    
     return (
         <>
        
-          {loggedInUser ? (
+          {user && 
             <>
               <MyPageContainer>
                 <Typography>Välkommen till mina sidor, {user?.name} </Typography>
@@ -91,9 +103,7 @@ function MyPage() {
             </NoOrdersContainer>
           )}
             </>
-          ):( <NotAuthContainer>
-            <Typography>Du måste vara inloggad för att kunna se Mina Sidor </Typography>
-          </NotAuthContainer>)}
+          }
           
         </>
       );
@@ -106,27 +116,20 @@ function MyPage() {
       border-radius: 8px;
       box-shadow: 0px 25px 20px -20px rgba(0,0,0,0.45);
     `;
-
     const MyPageContainer = styled.div`
     padding-top: 130px;
     background-color: #7CB7AF ;
     text-align: center;
     margin-bottom: 2rem;
     `;
-
     const TitleContainer = styled.div`
       margin-left: 2rem;
-    `
-    
+    `;   
     const NoOrdersContainer = styled.div`
       text-align: center;
       margin-top: 20px;
       padding-top: 150px;
     `;
-    const NotAuthContainer = styled.div`
-      padding-top: 250px;
-    `;
-
     const OrderShippedContainer = styled.div`
     padding-top: 5px;
       display: flex;

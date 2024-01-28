@@ -17,7 +17,6 @@ function Router() {
         <Route path="/" element={<HomePage/>}/>
         <Route path="/products/:id" element={<ProductPage/>}/> 
         <Route path="/confirmation" element={<ConfirmationPage/>}/> 
- 
         <Route path="/mypage" element={<MyPage />} />
         {/* <Route
         path="/mypage"
@@ -27,7 +26,7 @@ function Router() {
             </ProtectedRoute>
         }
       /> */}
-       
+        
         <Route path="/adminpanel" element={<AdminPage/>}/>
       </Routes>
     

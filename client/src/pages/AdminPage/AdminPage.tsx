@@ -3,14 +3,24 @@ import { Tabs, Tab,  } from '@mui/material';
 import styled from '@emotion/styled';
 import AdminOrders from './AdminOrders';
 import AdminProducts from './AdminProducts';
+import { useNavigate } from 'react-router-dom';
+import { useAppSelector } from '../../redux/hooks';
+import { selectUser } from '../../redux/slices/userSlice';
 
 
 function AdminPage() {
+  const user = useAppSelector(selectUser);
+  const navigate = useNavigate();
   const [selectedTab, setSelectedTab] = useState(0);
 
   const handleChange = (_event: React.SyntheticEvent, newValue: number) => {
     setSelectedTab(newValue);
   };
+  if (!user?.isAdmin) {
+    navigate('/');
+    return null;
+   }
+
 
   return (
     <PageContainer>
@@ -24,7 +34,6 @@ function AdminPage() {
 
       {selectedTab === 0 && (
         <div>
-          {/* Content for Tab 1 */}
           <AdminOrders />
         </div>
       )}
