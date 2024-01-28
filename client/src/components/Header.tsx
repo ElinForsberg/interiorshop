@@ -77,6 +77,7 @@ const HeaderContainer = styled(Grid)`
   height: 100px;
   justify-content: space-between;
   align-items: center;
+  padding-right: 8px;
 `;
 const SmallscreenContainer = styled.div`
   display: flex;

@@ -133,7 +133,7 @@ function AdminOrders() {
   );
 }
 const PageContainer = styled.div`
-
+padding-bottom: 3rem;
 `
 const OrderTitleContainer = styled.div`
 width: 90%;
