@@ -4,9 +4,7 @@ import ConfirmationPage from "./pages/Confirmation/ConfirmationPage"
 import HomePage from "./pages/Home/HomePage"
 import MyPage from "./pages/MyPage/MyPage"
 import ProductPage from "./pages/ProductPage/ProductPage"
-import ProtectedRoute from "./ProtectedRoute";
-
-
+import MissingPage from "./pages/MissingPage/MissingPage"
 
 
 function Router() {
@@ -18,16 +16,8 @@ function Router() {
         <Route path="/products/:id" element={<ProductPage/>}/> 
         <Route path="/confirmation" element={<ConfirmationPage/>}/> 
         <Route path="/mypage" element={<MyPage />} />
-        {/* <Route
-        path="/mypage"
-        element={
-            <ProtectedRoute>
-                <MyPage />
-            </ProtectedRoute>
-        }
-      /> */}
-        
         <Route path="/adminpanel" element={<AdminPage/>}/>
+        <Route path="*" element={<MissingPage/>}/>
       </Routes>
     
   )

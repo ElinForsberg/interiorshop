@@ -7,17 +7,13 @@ import { Divider, Typography } from '@mui/material';
 import SentimentSatisfiedAltIcon from '@mui/icons-material/SentimentSatisfiedAlt';
 import Loader from '../../components/Loader';
 import { useNavigate } from 'react-router-dom';
-import { useAuthorizeQuery } from '../../redux/services/usersApi';
 
 function MyPage() {
    
-    const { data: orderData, isLoading, isSuccess } = useGetPersonalOrdersQuery();
-    const {  error } = useAuthorizeQuery();
+    const { data: orderData, isLoading, isSuccess, error } = useGetPersonalOrdersQuery(); 
     const user = useAppSelector(selectUser);
     const navigate = useNavigate();
 
-    
-    
     function formatDate(createdDate: string) {
       const date = new Date(createdDate);
       const formattedDate = date.toLocaleDateString('sv-SE'); 
