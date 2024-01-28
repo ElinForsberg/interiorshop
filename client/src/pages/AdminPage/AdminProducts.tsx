@@ -2,11 +2,12 @@ import { Button, TextField } from "@mui/material";
 import { useGetProductsQuery, useGetQuantityInStockQuery, useUpdateProductInStockMutation } from "../../redux/services/productsApi";
 import styled from "@emotion/styled";
 import {  useState } from "react";
+import Loader from "../../components/Loader";
 
 
 function AdminProducts() {
-    const { data: productsData} = useGetProductsQuery();
-    const { data: quantityData } = useGetQuantityInStockQuery();
+    const { data: productsData, isLoading: productsIsLoading} = useGetProductsQuery();
+    const { data: quantityData, isLoading: quantityIsLoading } = useGetQuantityInStockQuery();
     const [updateProductInStock] = useUpdateProductInStockMutation();
     const [newStockValue, setNewStockValue] = useState<number>(0);
     const [isInStockChanged, setIsInStockChanged] = useState<boolean>(false);
@@ -29,6 +30,10 @@ function AdminProducts() {
       setIsInStockChanged(true); // Set the flag when the value changes
     };
 
+    
+    if (productsIsLoading || quantityIsLoading) {
+      return <Loader/>;
+    }
 
   return (
    <div>

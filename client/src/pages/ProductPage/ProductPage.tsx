@@ -5,6 +5,8 @@ import { useAppSelector } from '../../redux/hooks';
 import { RootState } from '../../redux/store';
 import styled from '@emotion/styled';
 import { Typography } from '@mui/material';
+import LazyLoad from 'react-lazy-load';
+import Loader from '../../components/Loader';
 
 
 
@@ -27,7 +29,7 @@ const ProductPage = () => {
   
   
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <Loader/>
   }
 
   if (isError) {
@@ -37,7 +39,10 @@ const ProductPage = () => {
   return (
     <PageContainer>
       <ImgContainer>
+      <LazyLoad width={350} offset={300}>
       <img src={data?.images} width={350}/>
+      </LazyLoad>
+      
       </ImgContainer>
       <InformationContainer>
         <TextContainer>
@@ -68,6 +73,7 @@ display: flex;
 `
 const ImgContainer = styled.div`
   padding-left: 1rem;
+  padding-bottom: 3rem;
 `
 
 const InformationContainer = styled.div`

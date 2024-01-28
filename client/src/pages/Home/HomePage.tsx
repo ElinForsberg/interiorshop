@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react';
 import styled from '@emotion/styled';
 import { useAppSelector } from '../../redux/hooks';
 import { RootState } from '../../redux/store';
+import Loader from '../../components/Loader';
 
 
 
@@ -40,7 +41,7 @@ function HomePage( ) {
    
     
   if (productsIsLoading || quantityIsLoading) {
-    return <div>Loading...</div>;
+    return <Loader/>;
   }
 
   if (productsIsError || quantityIsError) {

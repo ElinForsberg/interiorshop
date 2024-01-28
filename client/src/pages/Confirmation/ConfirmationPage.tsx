@@ -6,10 +6,11 @@ import { Order } from '../../redux/services/ordersApi';
 import { Typography } from '@mui/material';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import styled from '@emotion/styled';
+import Loader from '../../components/Loader';
 
 function ConfirmationPage() {
     const [verifyPayment] = useVerifyPaymentMutation();
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const [loading, setLoading] = useState(true);
     const [isPaymentVerified, setIsPaymentVerified] = useState(false);
    const [orderDetails, setOrderDetails] = useState<Order | null>();
     const dispatch= useDispatch();
@@ -37,6 +38,8 @@ function ConfirmationPage() {
         } catch (error) {
           console.error('Error during verifyPayment:', error);
           // Handle the error as needed
+        } finally {
+          setLoading(false); // Set loading to false once the verification is complete
         }
       };
 
@@ -45,22 +48,26 @@ function ConfirmationPage() {
   },[])
   
   return (
-    isPaymentVerified ?
-  <div>
-    <OrderWrapper>
-    <OrderContainer>
-     <Typography>{orderDetails?.name},</Typography> 
-     <Typography>Tack för din order </Typography>
-     <Typography>ordernummer: {orderDetails?._id}</Typography>
-     <Typography>Vi skickar dina varor så fort vi kan</Typography>
-      <FavoriteBorderIcon/>
-    </OrderContainer>
-    </OrderWrapper>
-    
-   </div> :
-   <div>
-   Din order gick inte igenom
-  </div>
+    <div>
+      {loading ? (
+        <Loader/>
+      
+      ) : (
+        isPaymentVerified ?
+          <OrderWrapper>
+            <OrderContainer>
+              <Typography>{orderDetails?.name},</Typography>
+              <Typography>Tack för din order </Typography>
+              <Typography>ordernummer: {orderDetails?._id}</Typography>
+              <Typography>Vi skickar dina varor så fort vi kan</Typography>
+              <FavoriteBorderIcon />
+            </OrderContainer>
+          </OrderWrapper> :
+          <div>
+            Din order gick inte igenom
+          </div>
+      )}
+    </div>
   )
 }
 

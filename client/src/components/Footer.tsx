@@ -1,5 +1,5 @@
 import styled from "@emotion/styled"
-import { Button, Divider,  Grid, Input, TextField, Typography } from "@mui/material";
+import { Button, Divider,  Grid,  TextField, Typography } from "@mui/material";
 import InstagramIcon from '@mui/icons-material/Instagram';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import TwitterIcon from '@mui/icons-material/Twitter';
@@ -48,15 +48,14 @@ const FooterContainer = styled.div`
   margin-top: auto;
   width: 100%;
   /* height: 10rem;  */
-  margin-top: 3rem;       
+  /* margin-top: 3rem;        */
 `;
 const GridContainer = styled.div`
 padding-top: 1.5rem;
 padding-left: 1rem;
 padding-right: 3rem;  
 padding-bottom: 1.5rem;
-
-`
+`;
 const ContentContainer = styled.div`
 display: flex;
 flex-direction: row; 
@@ -66,7 +65,7 @@ justify-content:space-between ;
     display: flex;
     flex-direction: column;
 }
-`
+`;
 const StyledBtn = styled(Button)`
    height: 40px;
    width: 50px;
@@ -79,5 +78,5 @@ const StyledTextfield = styled(TextField)`
    width: 150px;
    border-radius: 0;
    background-color: #B1B1B1;
-`
+`;
 export default Footer

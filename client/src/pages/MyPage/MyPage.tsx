@@ -5,10 +5,11 @@ import styled from '@emotion/styled';
 import { useAppSelector } from '../../redux/hooks';
 import { Divider, Typography } from '@mui/material';
 import SentimentSatisfiedAltIcon from '@mui/icons-material/SentimentSatisfiedAlt';
+import Loader from '../../components/Loader';
 
 function MyPage() {
    
-    const { data: orderData, isSuccess } = useGetPersonalOrdersQuery();
+    const { data: orderData, isLoading, isSuccess } = useGetPersonalOrdersQuery();
     const user = useAppSelector(selectUser);
     const loggedInUser = useAppSelector(isLoggedIn);
 
@@ -26,9 +27,14 @@ function MyPage() {
       return dateB - dateA; // Compare in descending order
     };
 
+    if (isLoading) {
+      return <Loader/>;
+    }
+
   if(!isSuccess) {
     return <div>Ordrar kunde inte hämtas</div>
   }
+
     return (
         <>
        
