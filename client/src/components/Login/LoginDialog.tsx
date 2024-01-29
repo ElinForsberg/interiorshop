@@ -37,12 +37,15 @@ function Login() {
       <StyledDialog onClose={handleClose} open={open}>
         <FormContainer>
         <Tabs value={activeTab} onChange={handleTabChange} centered>
-          { isLoggedIn?
-            <Tab label="Mina sidor" /> :
-            <Tab label="Logga in" /> 
-          }
-          
+          { isLoggedIn ? (
+            <Tab label="Mina sidor" /> 
+          ) : (
+            
+          <>
+          <Tab label="Logga in" /> 
           <Tab label="Skapa konto" />
+          </>
+          )}
         </Tabs>
         { isLoggedIn ?
               

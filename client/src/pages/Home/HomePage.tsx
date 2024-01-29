@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react';
 import styled from '@emotion/styled';
 import { useAppSelector } from '../../redux/hooks';
 import { RootState } from '../../redux/store';
+import Loader from '../../components/Loader';
 
 
 
@@ -40,7 +41,7 @@ function HomePage( ) {
    
     
   if (productsIsLoading || quantityIsLoading) {
-    return <div>Loading...</div>;
+    return <Loader/>;
   }
 
   if (productsIsError || quantityIsError) {
@@ -92,13 +93,14 @@ justify-content: center;
 background-color: #7CB7AF;
 margin-bottom: 2.5rem;
 /* position: relative; */
-padding-top: 110px;
+padding-top: 120px;
 `;
 
 const StyledGrid = styled(Grid)`
   padding-left: 1rem;
   padding-right: 1rem;
-  padding-bottom: 1rem;
+  padding-bottom: 3rem;
+  min-height: 75vh;
 `
 
 

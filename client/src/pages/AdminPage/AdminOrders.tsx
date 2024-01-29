@@ -5,10 +5,11 @@ import { useGetAllOrdersQuery } from '../../redux/services/ordersApi';
 import { Order } from '../../redux/services/ordersApi';
 import { useMarkOrderAsshippedMutation} from '../../redux/services/ordersApi'
 import styled from '@emotion/styled';
+import Loader from '../../components/Loader';
 
 
 function AdminOrders() {
-  const { data } = useGetAllOrdersQuery();
+  const { data, isLoading } = useGetAllOrdersQuery();
   const [selectedOrderId, setSelectedOrderId] = useState<string | null>(null);
   const [openDialog, setOpenDialog] = useState(false);
   const [markOrderAsShipped] = useMarkOrderAsshippedMutation();
@@ -50,6 +51,10 @@ function AdminOrders() {
     const formattedTime = date.toLocaleTimeString('sv-SE'); 
   
     return `${formattedDate} ${formattedTime}`;
+  }
+
+  if (isLoading) {
+    return <Loader/>;
   }
 
   return (
@@ -128,7 +133,7 @@ function AdminOrders() {
   );
 }
 const PageContainer = styled.div`
-
+padding-bottom: 3rem;
 `
 const OrderTitleContainer = styled.div`
 width: 90%;

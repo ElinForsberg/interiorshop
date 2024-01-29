@@ -42,6 +42,7 @@ function RegisterUserForm() {
           <Typography variant="body2" >
               Du har nu registrerat dig som användare och kan logga in!
           </Typography>
+          <Typography variant="body1">Med NY10 får du 10% på ett helt köp</Typography>
         </StyledContainer>
        
       )}
