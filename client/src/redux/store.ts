@@ -24,12 +24,9 @@ import { ordersApi } from './services/ordersApi';
 const persistConfig = {
   key: 'root',
   storage,
-  // whitelist: ['shoppingCart', 'user'], 
- 
-  // Specify the slices you want to persist
 };
 
-// Create a persisted reducer
+// Create a persisted reducer, save to localstorage
 const persistedReducer = persistReducer(persistConfig, shoppingCartReducer);
 
 export const store = configureStore({
