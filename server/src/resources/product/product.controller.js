@@ -22,8 +22,6 @@ const getProducts = async (req, res) => {
     }
 };
 
-
-
 //Get all products from MongoDb
 const getAllProducts = async (req, res) => {
     try {
@@ -56,36 +54,6 @@ const getProductById = async (req,res) => {
         res.status(400).json(err.message)
     }
 }
-
-const getProductWithPrice = async (req, res) => {
-    try {
-      const productId = String(req.params.id);
-      const productById = await stripe.products.retrieve(productId);
-  
-      if (!productById || productById.deleted) {
-        return res.status(404).json(`Product with ${req.params.id} was not found`);
-      }
-  
-      // Fetch the prices associated with the product
-      const prices = await stripe.prices.list({ product: productId });
-  
-      
-      // Include price information in the response
-      const productWithPrices = {
-        ...productById,
-        prices: prices.data,
-      };
-  
-      res.status(200).json(productWithPrices);
-    } catch (err) {
-      if (err.code === 'resource_missing') {
-        return res.status(404).json(`Product with ID ${req.params.id} was not found`);
-      }
-      console.error(err);
-      res.status(500).json({ error: 'Internal Server Error' });
-    }
-  };
-  
 
 
 //Update inStock as admin in mongoDb
@@ -127,4 +95,4 @@ const createProduct = async(req,res) => {
     }   
 }
 
-module.exports = { getProducts, getAllProducts, getProductById, updateProductInStock, createProduct, getProductWithPrice  }
+module.exports = { getProducts, getAllProducts, getProductById, updateProductInStock, createProduct }

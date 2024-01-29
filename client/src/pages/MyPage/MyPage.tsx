@@ -113,7 +113,7 @@ function MyPage() {
       box-shadow: 0px 25px 20px -20px rgba(0,0,0,0.45);
     `;
     const MyPageContainer = styled.div`
-    padding-top: 130px;
+    padding-top: 160px;
     padding-bottom: 10px;
     background-color: #7CB7AF ;
     text-align: center;

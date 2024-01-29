@@ -65,7 +65,7 @@ const ProductPage = () => {
 }
 
 const PageContainer = styled.div`
-padding-top: 160px;
+padding-top: 180px;
 display: flex;
 padding-bottom: 3rem;
 @media (max-width: 650px) {

@@ -7,7 +7,7 @@ import { useState } from 'react';
 function RegisterUserForm() {
   const [registrationStatus, setRegistrationStatus] = useState<'success' | 'error' | null>(null);
   
-  const [registerUserMutation, { isLoading,  data }] = useRegisterUserMutation();
+  const [registerUserMutation, { isLoading }] = useRegisterUserMutation();
   const { control, handleSubmit, formState, reset } = useForm<RegisterUser>({
     defaultValues: {
       name: '',

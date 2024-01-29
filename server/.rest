@@ -13,10 +13,6 @@ GET http://localhost:3000/api/products/prod_PG7lIFMnfosp5H
 
 ###
 
-// get price for product by id from Stripe
-GET http://localhost:3000/api/products/price/prod_PG7lIFMnfosp5H
-
-###
 
 // create an user
 POST http://localhost:3000/api/user/register

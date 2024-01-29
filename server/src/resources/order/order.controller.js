@@ -6,10 +6,10 @@ const getOrders = async (req, res) => {
     try {
       const user = req.session;
   
-      const orders = await OrderModel.find({});
+       await OrderModel.find({});
       if (user && user.isAdmin) {
         const orders = await OrderModel.find({});
-        console.log("orders", orders);
+        
         res.status(200).json(orders);
     } else {
         res.status(403).json({ error: "Unauthorized access. Admins only." });
@@ -19,12 +19,13 @@ const getOrders = async (req, res) => {
         console.log("orders", orders);
       res.status(400).json({ error: error.message });
     }
-  }
+  };
 
   //get personal orders if logged in user
   const getPersonalOrders = async (req, res) => {
     try {
-      const customer = req.session; // Assuming email is stored in the session
+      //get all orders for a specific user based on email from session
+      const customer = req.session; 
       const customerMail = customer.email;
       // Fetch orders from MongoDB using the OrderModel
       const personalOrders = await OrderModel.find({ email: customerMail });
@@ -43,22 +44,17 @@ const getOrders = async (req, res) => {
   // as Admin, mark an order as Shipped
   const markOrderAsShipped = async (req, res) => {
     try {
-      // const orderId = req.params.id;
-      // const { isShipped } = req.body; 
-  
+     //update isShipped in database
       const updatedOrder = await OrderModel.findOneAndUpdate(
         { _id: String(req.params.id) },
-        { $set: { isShipped: true } }, // Update isShipped based on the received value
+        { $set: { isShipped: true } }, 
         { new: true }
       );
-        console.log("isShipped?", req.params.id)
+      
       res.status(200).json(updatedOrder);
     } catch (error) {
       res.status(401).json(error.message);
     }
   };
   
-  
-  
-
   module.exports = { getOrders, getPersonalOrders, markOrderAsShipped };

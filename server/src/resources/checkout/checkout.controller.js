@@ -9,8 +9,11 @@ const { ProductModel } = require("../product/product.model")
 const registerCheckout = async (req,res) => {
     
     try {
-        const customer = req.session; // Assuming email is stored in the session
+        //get customermail from session
+        const customer = req.session; 
         const customerMail = customer.email;
+
+        //create a session in stripe
         const session = await stripe.checkout.sessions.create({
             
             line_items: req.body.map((item) => {
@@ -33,7 +36,7 @@ const registerCheckout = async (req,res) => {
             allow_promotion_codes: true,   
             
         });
-        console.log(req.session);
+        
         res.status(200).json({url: session.url, sessionId: session.id, session: session})
                
     } catch (error) {
@@ -41,7 +44,7 @@ const registerCheckout = async (req,res) => {
         res.status(400).json("session was not created")
     } 
 }
-
+//If payment is verified in Stripe, go back to page and create order
 const verifyPayment = async (req, res) => {
     try {
         const { sessionId } = req.body;

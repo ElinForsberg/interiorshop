@@ -71,7 +71,7 @@ function Header() {
 }
 
 const StyledBox = styled(Box)`
-height: 120px;
+height: 150px;
 width: 100%;
 background-color: white;
 position: fixed; 

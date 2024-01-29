@@ -6,9 +6,11 @@ import AdminProducts from './AdminProducts';
 import { useNavigate } from 'react-router-dom';
 import { useAppSelector } from '../../redux/hooks';
 import { selectUser } from '../../redux/slices/userSlice';
+import { useAuthorizeQuery } from '../../redux/services/usersApi';
 
 
 function AdminPage() {
+  const { error } = useAuthorizeQuery();
   const user = useAppSelector(selectUser);
   const navigate = useNavigate();
   const [selectedTab, setSelectedTab] = useState(0);
@@ -16,7 +18,7 @@ function AdminPage() {
   const handleChange = (_event: React.SyntheticEvent, newValue: number) => {
     setSelectedTab(newValue);
   };
-  if (!user?.isAdmin) {
+  if ( error && !user?.isAdmin) {
     navigate('/401');
     return null;
    }
@@ -52,7 +54,7 @@ function AdminPage() {
 }
 
 const PageContainer = styled.div`
-padding-top: 120px;
+padding-top: 150px;
 `
 const TabContainer = styled.div`
 display: flex;
