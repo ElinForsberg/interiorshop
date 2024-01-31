@@ -7,7 +7,7 @@ export type  HandleCartProps = {
     stripeProduct: StripeProduct;
     quantity: ShoppingCartItem['quantity'];
   }
-
+//Component for adding and remove items to cart
 const HandleCart: React.FC<HandleCartProps> = ({stripeProduct, quantity}) => {
        
 const dispatch = useDispatch();

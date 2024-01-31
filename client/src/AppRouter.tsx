@@ -8,7 +8,7 @@ import MissingPage from "./pages/MissingPage/MissingPage"
 import UnauthorizedPage from "./pages/UnauthorizedPage/UnauthorizedPage"
 
 
-function Router() {
+function AppRouter() {
 
   return (
    
@@ -25,4 +25,4 @@ function Router() {
   )
 }
 
-export default Router
+export default AppRouter

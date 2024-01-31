@@ -8,7 +8,7 @@ import { Typography, Button, TextField } from "@mui/material";
 import { useState } from "react";
 
 
-
+//form for user to login, react-hook-form with validation
 function LoginUserForm() {
   const [registrationStatus, setRegistrationStatus] = useState<'success' | 'error' | null>(null);
   const dispatch = useAppDispatch();

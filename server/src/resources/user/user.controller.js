@@ -27,7 +27,7 @@ async function registerUser(req, res, next) {
    })
    
    const user = await UserModel.findOne({email: req.body.email}).select('-password');
-    console.log("isadminoo", isAdmin);
+    
     res.status(201).json(user);
   } catch (error) {
     res.status(404).json(error.message);
@@ -75,7 +75,7 @@ async function loginUser(req, res) {
     }
     res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate');
     res.setHeader('Pragma', 'no-cache');
-    console.log("autentic",req.session);
+   
     res.status(200).json(req.session);
   };
 

@@ -4,6 +4,7 @@ import { useRegisterUserMutation, RegisterUser } from '../../redux/services/user
 import styled from '@emotion/styled';
 import { useState } from 'react';
 
+//Form for register new user, form from react-hook-form with validation
 function RegisterUserForm() {
   const [registrationStatus, setRegistrationStatus] = useState<'success' | 'error' | null>(null);
   
@@ -21,16 +22,13 @@ function RegisterUserForm() {
   const onSubmit = async (formData: RegisterUser) => {
     try {
      const response =  await registerUserMutation(formData);
-      // Handle successful user registration
       if ('data' in response) {
         setRegistrationStatus('success');
         reset();
       } else if ('error' in response && Response.json(409)) {
         setRegistrationStatus('error');
-      }
-      
+      }     
     } catch (error) {
-      // Handle registration error
       console.error('User registration failed:', error);
     }
   };

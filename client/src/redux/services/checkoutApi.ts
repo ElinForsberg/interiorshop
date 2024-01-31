@@ -2,6 +2,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { ShoppingCartItem } from '../slices/shoppingCartSlice';
 import { Order } from './ordersApi';
 
+//create checkout and verify pament in Stripe
 export const checkoutApi = createApi({
   reducerPath: 'checkoutApi',
   baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:3000/api' }),
@@ -11,7 +12,7 @@ export const checkoutApi = createApi({
         url: '/create-checkout-session',
         method: 'POST',
         credentials: 'include',
-        body: cart, // Assuming cart is the correct shape and content for your API
+        body: cart, 
       }),
     }),
     verifyPayment: builder.mutation<{ verified: boolean; order?: Order }, { sessionId: string }>({

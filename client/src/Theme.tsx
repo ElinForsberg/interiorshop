@@ -3,7 +3,7 @@ import styled from '@emotion/styled'
 import { Link } from 'react-router-dom';
 
 
-  
+  //Theme file to set color and font for the entire project.
 const theme = createTheme({
   palette: {
     primary: {

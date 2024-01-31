@@ -8,7 +8,6 @@ import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
 import { StyledLink } from '../Theme';
 
 
-
 function Header() {
   const user = useAppSelector(selectUser);
   const isAdmin = user?.isAdmin;
@@ -20,7 +19,7 @@ function Header() {
       
     <StyledBox>
       <StyledBanner>
-        <Typography variant="body2" color="secondary">Registrera dig hos oss och få rabattkod!!</Typography>
+        <Typography variant="body2" color="white">Registrera dig hos oss och få rabattkod!!</Typography>
       </StyledBanner>
       <div>
       <StyledLink to={'/'}>
@@ -76,8 +75,6 @@ width: 100%;
 background-color: white;
 position: fixed; 
 z-index: 2; 
-/* padding-left: 5px;
-padding-right: 5px; */
 box-shadow: 0px 25px 16px -30px rgba(0,0,0,0.45);
 `;
 const HeaderContainer = styled(Grid)`
@@ -95,11 +92,10 @@ const SmallscreenContainer = styled.div`
   gap: 4px; 
   padding: 10px;
 `;
-
 const StyledBanner = styled.div`
   height: 28px;
   background-color: black;
   text-align: center;
   padding-top: 2px;
-`
+`;
 export default Header;

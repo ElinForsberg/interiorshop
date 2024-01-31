@@ -9,8 +9,7 @@ import styled from '@emotion/styled';
 import LogOut from './LogOut';
 
 
-
-
+//Dialog component to login, register, logout and link to mypage
 function Login() {
   const userState = useAppSelector<UserState>((state) => state.user);
   const { isLoggedIn } = userState;
@@ -34,37 +33,28 @@ function Login() {
       <IconButton onClick={handleClickOpen}>
         <AccountCircleSharpIcon />
       </IconButton>
-      <StyledDialog onClose={handleClose} open={open}>
+      <Dialog onClose={handleClose} open={open}>
         <FormContainer>
         <Tabs value={activeTab} onChange={handleTabChange} centered>
-          { isLoggedIn ? (
-            <Tab label="Mina sidor" /> 
-          ) : (
-            
-          <>
-          <Tab label="Logga in" /> 
+          { isLoggedIn?
+            <Tab label="Mina sidor" /> :
+            <Tab label="Logga in" /> 
+          }        
           <Tab label="Skapa konto" />
-          </>
-          )}
         </Tabs>
-        { isLoggedIn ?
-              
+        { isLoggedIn ?            
               activeTab === 0 && <LogOut handleClose={handleClose} />  :
               activeTab === 0 && <LoginUserForm />}
         {activeTab === 1 && <RegisterUserForm />}
         </FormContainer>
-      
-       </StyledDialog>    
+       </Dialog>    
     </div>
   );
 }
-const StyledDialog = styled(Dialog)`
-  
-`;
+
 const FormContainer = styled.div`
-/* min-height: 500px; */
 min-width: 300px;
-`
+`;
 export default Login
 
 

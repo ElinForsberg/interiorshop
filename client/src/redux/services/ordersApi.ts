@@ -26,7 +26,7 @@ totalSum: number,
 isShipped: false,
 }
 
-
+//order querys
 export const ordersApi = createApi({
     reducerPath: 'ordersApi',
     baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:3000/api' }),

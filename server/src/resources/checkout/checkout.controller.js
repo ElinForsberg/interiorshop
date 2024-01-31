@@ -94,22 +94,21 @@ const verifyPayment = async (req, res) => {
             })),
             isShipped: false,
         };
-        console.log("session", session);
-        console.log("prod", products);
+       
         const order = await new OrderModel(orderData).save();
 
         // Update inStock for purchased products
         for (const product of order.products) {
-            console.log('Searching for product :', product);
+            
             const foundProduct = await ProductModel.findOne({ stripeId: product.stripeId });
-            console.log("found product", foundProduct);
+            
             if (foundProduct) {
                 foundProduct.inStock = foundProduct.inStock - product.quantity;
                 await foundProduct.save();
             }
         }
         
-        console.log(order);
+       
         
         return res.status(201).json({ verified: true, order });
     } catch (error) {

@@ -2,6 +2,7 @@ import styled from "@emotion/styled";
 import { Button, Typography } from "@mui/material";
 import { StyledLink } from "../../Theme";
 
+//If 401, not authorized user get redirected to this page
 function UnauthorizedPage() {
   return (
     <PageContainer>

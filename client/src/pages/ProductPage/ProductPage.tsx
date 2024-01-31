@@ -9,11 +9,10 @@ import LazyLoad from 'react-lazy-load';
 import Loader from '../../components/Loader';
 
 
-
-
+//Page for presenting a single product based on id. 
 const ProductPage = () => {
-    const { id } = useParams<{ id: string }>(); // Ensure 'id' is always a string
-    const { data, isLoading, isError } = useGetProductByIdQuery(id || ''); // Provide a default value for 'id'
+    const { id } = useParams<{ id: string }>(); 
+    const { data, isLoading, isError } = useGetProductByIdQuery(id || ''); 
   
     const shoppingCart = useAppSelector((state: RootState) => state.shoppingCart);
     const cartItems = shoppingCart.cartItems;

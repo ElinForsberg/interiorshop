@@ -33,10 +33,9 @@ const getOrders = async (req, res) => {
       if (personalOrders.length === 0) {
         return res.status(203).json("No orders found for this user");
       }
-      console.log("order användare",customer.email);
       res.status(200).json(personalOrders);
     } catch (error) {
-      console.error(error);
+      
       res.status(500).json({ message: "Internal Server error" });
     }
   };

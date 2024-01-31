@@ -14,6 +14,7 @@ interface ProductCardProps {
     quantity: ShoppingCartItem['quantity'];
   }
 
+  //ProductCard for the products
   const ProductCard: React.FC<ProductCardProps> = ({ stripeProduct, productInStock, quantity }) => {
     
     const navigate = useNavigate();

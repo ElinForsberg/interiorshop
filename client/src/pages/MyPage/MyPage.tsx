@@ -8,9 +8,10 @@ import SentimentSatisfiedAltIcon from '@mui/icons-material/SentimentSatisfiedAlt
 import Loader from '../../components/Loader';
 import { useNavigate } from 'react-router-dom';
 
+//Page for logged in user to see personal orders. 
 function MyPage() {
    
-    const { data: orderData, isLoading, isSuccess, error } = useGetPersonalOrdersQuery(); 
+    const { data: orderData, isLoading, isSuccess, error, isError } = useGetPersonalOrdersQuery(); 
     const user = useAppSelector(selectUser);
     const navigate = useNavigate();
 
@@ -25,7 +26,7 @@ function MyPage() {
     const compareOrderDates = (a: Order, b: Order) => {
       const dateA = new Date(a.created).getTime();
       const dateB = new Date(b.created).getTime();
-      return dateB - dateA; // Compare in descending order
+      return dateB - dateA; 
     };
     
   
@@ -38,7 +39,9 @@ function MyPage() {
       return <Loader/>;
     }
     
-
+    if (isError) {
+      return <Typography>Failed to load orders...</Typography>
+    }
   if(!isSuccess) {
     return <div>Ordrar kunde inte hämtas</div>
   }

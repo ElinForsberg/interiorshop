@@ -34,6 +34,7 @@ export type ProductInStock = {
 
 export type ProductsInStock = ProductInStock[];
 
+//All querys for products
 export const productsApi = createApi({
   reducerPath: 'productsApi',
   baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:3000/api' }),
