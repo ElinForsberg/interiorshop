@@ -12,7 +12,7 @@ const initialState: UserState = {
     isLoggedIn: false,
    
 }
-
+//Global state for users
 const userSlice = createSlice({
     name: 'user',
     initialState,

@@ -1,4 +1,3 @@
-
 import './App.css'
 import { useDispatch } from 'react-redux';
 import { useAuthorizeQuery } from './redux/services/usersApi';
@@ -6,20 +5,18 @@ import { useEffect } from 'react';
 import { loginUser } from './redux/slices/userSlice';
 import { ThemeProvider } from '@mui/material/styles';
 import theme from './Theme';
-import Router from './Router';
 import Header from './components/Header';
 import Footer from './components/Footer';
-
+import AppRouter from './AppRouter';
 
 
 function App() {
-  const dispatch = useDispatch();
-  
+  const dispatch = useDispatch();  
    const { data, error } = useAuthorizeQuery();
 
+   //This is for authorization
   useEffect(() => {
-    if (data) {
-      console.log(data);
+    if (data) {  
       dispatch(loginUser(data));
     } else if (error) {
       console.error(error);
@@ -30,10 +27,9 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
      <Header/>
-      <Router/>
+      <AppRouter/>
       <Footer/>
     </ThemeProvider>
-  
   )
 }
 

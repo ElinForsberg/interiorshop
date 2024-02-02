@@ -22,7 +22,7 @@ const initialState: ShoppingCartState = {
 };
 
 
-
+//Global state for shoppingCart
 const shoppingCartSlice = createSlice({
   name: 'shoppingCart',
   initialState,
@@ -31,10 +31,8 @@ const shoppingCartSlice = createSlice({
       const existingItem = state.cartItems.find(item => item.id === action.payload.id);
 
       if (existingItem) {
-        // If the product already exists, increase the quantity
         existingItem.quantity += 1;
       } else {
-        // If the product is not in the cart, add it with quantity 1
         state.cartItems.push({ ...action.payload, quantity: 1 });
       }
     },
@@ -42,7 +40,6 @@ const shoppingCartSlice = createSlice({
       const existingItem = state.cartItems.find(item => item.id === action.payload);
 
       if (existingItem) {
-        // If the product exists, decrease the quantity, remove if quantity becomes 0
         existingItem.quantity -= 1;
 
         if (existingItem.quantity === 0) {

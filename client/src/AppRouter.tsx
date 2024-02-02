@@ -8,11 +8,13 @@ import MissingPage from "./pages/MissingPage/MissingPage"
 import UnauthorizedPage from "./pages/UnauthorizedPage/UnauthorizedPage"
 
 
-function Router() {
+//routing with react-router-dom and urls
+function AppRouter() {
 
   return (
    
       <Routes>
+        
         <Route path="/" element={<HomePage/>}/>
         <Route path="/products/:id" element={<ProductPage/>}/> 
         <Route path="/confirmation" element={<ConfirmationPage/>}/> 
@@ -25,4 +27,4 @@ function Router() {
   )
 }
 
-export default Router
+export default AppRouter

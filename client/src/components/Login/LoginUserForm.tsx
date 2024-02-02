@@ -8,15 +8,13 @@ import { Typography, Button, TextField } from "@mui/material";
 import { useState } from "react";
 
 
-
+//form for user to login, react-hook-form with validation
 function LoginUserForm() {
   const [registrationStatus, setRegistrationStatus] = useState<'success' | 'error' | null>(null);
   const dispatch = useAppDispatch();
     const [loginUserMutation, { isLoading }] = useLoginUserMutation();
     const { refetch: refetchOrders } = useGetPersonalOrdersQuery();   
 
-   
-    
     const { control, handleSubmit, formState, reset } = useForm<LoginUser>({
         defaultValues: {       
           email: '',
@@ -41,7 +39,6 @@ function LoginUserForm() {
             setRegistrationStatus('error');
           }
         } catch (error) {
-          // Handle registration error
           console.error('User login failed:', error);
         }
       };

@@ -3,6 +3,8 @@ import { Button, Divider,  Grid,  TextField, Typography } from "@mui/material";
 import InstagramIcon from '@mui/icons-material/Instagram';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import TwitterIcon from '@mui/icons-material/Twitter';
+
+//Footer is only visual, no functions implemented
 function Footer() {
   return (
     <FooterContainer>
@@ -47,8 +49,6 @@ const FooterContainer = styled.div`
   background-color: #0A0708;
   margin-top: auto;
   width: 100%;
-  /* height: 10rem;  */
-  /* margin-top: 3rem;        */
 `;
 const GridContainer = styled.div`
 padding-top: 1.5rem;

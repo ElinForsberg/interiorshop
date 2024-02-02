@@ -3,7 +3,7 @@ import { Button, Typography } from "@mui/material"
 import  missingImg  from"../../assets/4620096_404_icon.png"
 import { StyledLink } from "../../Theme"
 
-
+//If user try to reach a missing url, gets redirected to this page
 function MissingPage() {
   return (
     <PageContainer>
@@ -38,8 +38,8 @@ const PageContainer = styled.div`
 const StyledImg = styled.img`
     width: 100%;
     object-fit: cover;
-`
+`;
 const StyledBtn = styled(Button)`
     margin-top: 2rem;
-`
+`;
 export default MissingPage

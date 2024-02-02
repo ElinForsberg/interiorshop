@@ -6,9 +6,11 @@ import AdminProducts from './AdminProducts';
 import { useNavigate } from 'react-router-dom';
 import { useAppSelector } from '../../redux/hooks';
 import { selectUser } from '../../redux/slices/userSlice';
+import { useAuthorizeQuery } from '../../redux/services/usersApi';
 
-
+//AdminPanel page where admin for the page can tab bewteen orders and products
 function AdminPage() {
+  const { data, error } = useAuthorizeQuery();
   const user = useAppSelector(selectUser);
   const navigate = useNavigate();
   const [selectedTab, setSelectedTab] = useState(0);
@@ -16,8 +18,11 @@ function AdminPage() {
   const handleChange = (_event: React.SyntheticEvent, newValue: number) => {
     setSelectedTab(newValue);
   };
-  if (!user?.isAdmin) {
+  if ( error && !user?.isAdmin) {
     navigate('/401');
+    return null;
+   } else if ( data && !data.isAdmin) {
+    navigate('/401')
     return null;
    }
 
@@ -40,11 +45,7 @@ function AdminPage() {
 
       {selectedTab === 1 && (
         <div>
-          {/* Content for Tab 2 */}
-          
             <AdminProducts/>
-            {/* Add your additional content here */}
-         
         </div>
       )}
     </PageContainer>
@@ -52,14 +53,14 @@ function AdminPage() {
 }
 
 const PageContainer = styled.div`
-padding-top: 120px;
-`
+padding-top: 150px;
+`;
 const TabContainer = styled.div`
 display: flex;
 justify-content: center;
 background-color: #7CB7AF;
 margin-bottom: 2rem;
-
 `;
+
 export default AdminPage;
 

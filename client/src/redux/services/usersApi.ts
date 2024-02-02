@@ -19,6 +19,8 @@ export type LoginUser = {
     email: string,
     password: string
 }
+
+//All my rtk querys for users
 export const usersApi = createApi({
     reducerPath: 'usersApi',
     baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:3000/api/user' }),

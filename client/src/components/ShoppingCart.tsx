@@ -9,12 +9,11 @@ import HandleCart from './HandleCart';
 import styled from '@emotion/styled';
 import CloseIcon from '@mui/icons-material/Close';
 
+//ShoppingCart component, shows in a drawer from header
 function ShoppingCart() {
   
   const [isDrawerOpen, setDrawerOpen] = useState(false);
-
   const shoppingCart = useAppSelector<ShoppingCartState>((state) => state.shoppingCart);
-
   const cartItems = shoppingCart.cartItems;
 
   const [createCheckoutSession] = useCreateCheckoutSessionMutation();
@@ -54,12 +53,10 @@ const totalPrice = useMemo(() => {
         const { url, sessionId } = result.data;
         localStorage.setItem('session-id', sessionId);
         window.location.href = url; 
-      } else {
-        // Handle the case where data is undefined (optional)
       }
     } catch (error) {
       console.error('Error during handlePayment:', error);
-      // Handle the error as needed
+     
     }
   };
   
@@ -121,7 +118,6 @@ const totalPrice = useMemo(() => {
               }} quantity={item.quantity}/>
           </ListItem>
           ))}
-          {/* Add more ListItems as needed */}
           <StyledContainer>
             <Typography variant='h5'>Totalt: {totalPrice} kr</Typography>
           </StyledContainer>
@@ -144,43 +140,41 @@ const totalPrice = useMemo(() => {
 
 const StyledBadge = styled(Badge)`
 color: #444444
-`
-;
-
+`;
 const StyledList = styled(List)`
 padding:8px;
-`
+`;
 const StyledBtn = styled(Button)`
-  margin-left: 8px;
-  margin-right: 8px;
+  margin-left: 10px;
+  margin-right: 10px;
   margin-bottom: 5px;
-`
+`;
 const TextContainer = styled.div`
 display: flex;
 flex-direction: column;
 padding: 1.5rem;
-`
+`;
 const ImgContainer = styled.div`
 height: 100px;
 width: 100px;
-`
+`;
 const StyledImg = styled.img`
   object-fit: cover;
    width: 100%;
   height: 100%;
-`
+`;
 const StyledContainer = styled(ListItem)`
 display: flex;
 justify-content: center;
 align-items: center;
-`
+`;
 const EmptyCartContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
   padding: 2rem;
-`
+`;
 const BackBtn = styled(Button)`
 margin-top: 2rem;
-`
+`;
 export default ShoppingCart;

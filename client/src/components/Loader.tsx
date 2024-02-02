@@ -1,8 +1,7 @@
-// Loader.tsx
 import CircularProgress from '@mui/material/CircularProgress';
 import styled from '@emotion/styled';
 
-
+//Loader component, used when querys isLoading
 const Loader = () => {
   return (
     <LoaderContainer>

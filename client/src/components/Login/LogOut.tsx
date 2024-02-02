@@ -10,7 +10,7 @@ import { useNavigate } from 'react-router-dom';
 interface LogoutProps {
   handleClose: () => void;
 }
-
+//function for logout user and also link to mypages for logged in users
 function LogOut({ handleClose }: LogoutProps) {
     const [logoutUserMutation] = useLogoutUserMutation();
     const dispatch = useDispatch();
@@ -18,13 +18,13 @@ function LogOut({ handleClose }: LogoutProps) {
     const LoggedIn = useAppSelector(isLoggedIn);
     const navigate = useNavigate();
     
-  
+  //Logout user and redirect to homepage
     const handleLogout = async () => {
+      navigate('/');
         try {
           await logoutUserMutation();
-          dispatch(logoutUser());
-          ordersApi.util.resetApiState();
-          console.log('User successfully logged out!');
+          dispatch(logoutUser());   
+          ordersApi.util.resetApiState();  
         } catch (error) {
           console.error('User logout failed:', error);
         }
@@ -39,22 +39,14 @@ function LogOut({ handleClose }: LogoutProps) {
       {LoggedIn ? (
         <>
         <StyledForm>
-        <h2>Välkommen, {user?.name}!</h2>
-          
+        <h2>Välkommen, {user?.name}!</h2>      
           <StyledButton type="submit" onClick={handleGoToMyPages}variant="contained">
-          {/* <StyledLink to={'/mypage'}> */}
             Mina Sidor
-            {/* </StyledLink> */}
-          </StyledButton>
-          
-          <LogoutButton type="submit" variant="contained" onClick={handleLogout}>
-          
-            Logout
-          
-          </LogoutButton>
-          
-        </StyledForm>
-          
+          </StyledButton>       
+          <LogoutButton type="submit" variant="contained" onClick={handleLogout}>      
+            Logout        
+          </LogoutButton>         
+        </StyledForm>         
         </>
       ) : (
         <p>Loading user data...</p>
@@ -72,9 +64,9 @@ const StyledButton = styled(Button)`
 margin-top: 4rem;
 margin-bottom: 6px;
 background-color: lightgray;
-`
+`;
 const LogoutButton = styled(Button)`
 margin-bottom: 6px;
 background-color: black;
-`
+`;
 export default LogOut

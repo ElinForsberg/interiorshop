@@ -1,16 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit'
 import { productsApi } from './services/productsApi'
 import { setupListeners } from '@reduxjs/toolkit/query'
-import {
-  persistStore,
-  persistReducer,
-  FLUSH,
-  REHYDRATE,
-  PAUSE,
-  PERSIST,
-  PURGE,
-  REGISTER,
-} from 'redux-persist'
+import { persistStore, persistReducer, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE,REGISTER } from 'redux-persist'
 import storage from 'redux-persist/lib/storage';
 import { usersApi } from './services/usersApi'
 import shoppingCartReducer from './slices/shoppingCartSlice';
@@ -29,6 +20,7 @@ const persistConfig = {
 // Create a persisted reducer, save to localstorage
 const persistedReducer = persistReducer(persistConfig, shoppingCartReducer);
 
+//ReduxStore reducers and slices all here
 export const store = configureStore({
   reducer: {
     [productsApi.reducerPath]: productsApi.reducer,

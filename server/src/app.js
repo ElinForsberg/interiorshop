@@ -1,6 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const cookieSession = require("cookie-session");
+const dotenv = require("dotenv").config();
 const {productRouter} = require("./resources/product/product.router");
 const { userRouter } = require("./resources/user/user.router");
 const { checkoutRouter } = require("./resources/checkout/checkout.router");
@@ -19,7 +20,7 @@ app.use(
 app.use(
   cookieSession({
     name: "session",
-    keys: ["aVeryS3cr3tK3y"],
+    keys: [process.env.COOKIE_SESSION_SECRET_KEY],
     maxAge: 1000 * 60 * 60 * 24, // 24 Hours
     sameSite: "strict",
     httpOnly: true,

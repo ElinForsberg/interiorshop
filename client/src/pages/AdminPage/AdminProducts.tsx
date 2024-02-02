@@ -1,13 +1,13 @@
-import { Button, TextField } from "@mui/material";
+import { Button, TextField, Typography } from "@mui/material";
 import { useGetProductsQuery, useGetQuantityInStockQuery, useUpdateProductInStockMutation } from "../../redux/services/productsApi";
 import styled from "@emotion/styled";
 import {  useState } from "react";
 import Loader from "../../components/Loader";
 
-
+//Page for admin inStock value for products. Can be built out for update products in Stripe
 function AdminProducts() {
-    const { data: productsData, isLoading: productsIsLoading} = useGetProductsQuery();
-    const { data: quantityData, isLoading: quantityIsLoading } = useGetQuantityInStockQuery();
+    const { data: productsData, isLoading: productsIsLoading, isError: productsIsError } = useGetProductsQuery();
+    const { data: quantityData, isLoading: quantityIsLoading, isError: quantityIsError } = useGetQuantityInStockQuery();
     const [updateProductInStock] = useUpdateProductInStockMutation();
     const [newStockValue, setNewStockValue] = useState<number>(0);
     const [isInStockChanged, setIsInStockChanged] = useState<boolean>(false);
@@ -34,9 +34,13 @@ function AdminProducts() {
     if (productsIsLoading || quantityIsLoading) {
       return <Loader/>;
     }
+    if (productsIsError || quantityIsError) {
+      return <Typography variant="body1" color="error">Failed to load products......</Typography>
+    }
 
   return (
    <div>
+    <StyledText variant="h5"  >Uppdatera lagersaldo för produkter</StyledText>
         {productsData?.data?.map((product) => {
           const quantity = quantityData?.find((q) => q.stripeId === product.id);
           const inStock = quantity?.inStock || 0;
@@ -57,20 +61,20 @@ function AdminProducts() {
           id="outlined"
           label="Titel"
           variant="outlined"
-          defaultValue={product.name}
+          value={product.name}
             />
         <StyledTextfield
           id="outlined"
           label="Beskrivning"
           variant="outlined"
-          defaultValue={product.description}
+          value={product.description}
           multiline
         />
         <StyledTextfield
           id="outlined"
           label="Pris"
           variant="outlined"
-          defaultValue={product.default_price.unit_amount}
+          value={product.default_price.unit_amount}
           
             />
            <StyledTextfield
@@ -85,7 +89,7 @@ function AdminProducts() {
                         id="outlined"
                         label="Bild"
                         variant="outlined"
-                        defaultValue={product.images}
+                        value={product.images}
                     />
         
         <Button variant="outlined"  onClick={(e) => handleSaveChanges(e, id)}>Spara ändringar</Button>
@@ -98,18 +102,23 @@ function AdminProducts() {
    
   )
 }
+
+const StyledText = styled(Typography)`
+  margin-bottom: 2rem;
+  text-align: center;
+`;
 const Container = styled.div`
     display: flex;
     flex-direction: column;
     padding-bottom: 2rem;
     padding-left: 1rem;
     padding-right: 1rem;
-`
+`;
 const ImgContainer = styled.div`
    
     padding-bottom: 1rem;
-`
+`;
 const StyledTextfield = styled(TextField)`
 padding-bottom: 1rem;
-`
+`;
 export default AdminProducts

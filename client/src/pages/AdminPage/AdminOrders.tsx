@@ -7,9 +7,9 @@ import { useMarkOrderAsshippedMutation} from '../../redux/services/ordersApi'
 import styled from '@emotion/styled';
 import Loader from '../../components/Loader';
 
-
+//Admin can mark orders as shipped in adminpanel
 function AdminOrders() {
-  const { data, isLoading } = useGetAllOrdersQuery();
+  const { data, isLoading, isError } = useGetAllOrdersQuery();
   const [selectedOrderId, setSelectedOrderId] = useState<string | null>(null);
   const [openDialog, setOpenDialog] = useState(false);
   const [markOrderAsShipped] = useMarkOrderAsshippedMutation();
@@ -28,34 +28,37 @@ function AdminOrders() {
   const confirmMarkAsShipped = async () => {
     try {
         if(selectedOrderId) await markOrderAsShipped(selectedOrderId);
-  
-        // Handle any additional logic here after the order is marked as shipped
         setOpenDialog(false);
       } catch (error) {
-        // Handle errors if the mutation fails
         console.error('Error marking order as shipped:', error);
       }
   };
 
+  // Filter orders if isShipped
   const filteredOrders = data?.filter((order: Order) => {
     if (showShippedOrders) {
       return !order.isShipped;
     } else {
-      return true; // Show all orders when not filtered
+      return true; 
     }
   });
 
+  //format date from server
   function formatDate(createdDate: string) {
     const date = new Date(createdDate);
     const formattedDate = date.toLocaleDateString('sv-SE'); 
     const formattedTime = date.toLocaleTimeString('sv-SE'); 
   
     return `${formattedDate} ${formattedTime}`;
-  }
+  };
 
   if (isLoading) {
     return <Loader/>;
-  }
+  };
+
+  if (isError) {
+    return <Typography variant="body1" color="error">Failed to load orders...</Typography>
+  };
 
   return (
     <PageContainer>
@@ -113,7 +116,6 @@ function AdminOrders() {
         ))}
       </>
 
-      {/* Dialog component */}
       <Dialog open={openDialog} onClose={handleCloseDialog}>
         <DialogTitle>Confirmation</DialogTitle>
         <DialogContent>
@@ -134,12 +136,12 @@ function AdminOrders() {
 }
 const PageContainer = styled.div`
 padding-bottom: 3rem;
-`
+`;
 const OrderTitleContainer = styled.div`
 width: 90%;
 display: flex;
 justify-content: space-between;
-`
+`;
 const FilterButtonContainer = styled.div`
     
     display: flex;
@@ -147,6 +149,6 @@ const FilterButtonContainer = styled.div`
     padding-right:1rem;
     padding-top: 5px;
     padding-bottom: 5px;
-`
+`;
 
 export default AdminOrders;

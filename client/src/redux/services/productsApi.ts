@@ -34,9 +34,11 @@ export type ProductInStock = {
 
 export type ProductsInStock = ProductInStock[];
 
+//All querys for products
 export const productsApi = createApi({
   reducerPath: 'productsApi',
   baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:3000/api' }),
+  tagTypes: ['Products'],
   endpoints: (builder) => ({
     getProducts: builder.query<StripeProducts, void>({
       query: () => 'products',
@@ -45,8 +47,10 @@ export const productsApi = createApi({
       query: (productId) => `products/${productId}`,
     }),
     getQuantityInStock: builder.query<ProductsInStock, void>({
-     query: () => 'dbproducts',   
+     query: () => 'dbproducts',  
+     providesTags: ['Products'], 
     }),
+    
     updateProductInStock: builder.mutation<void, { productId: string; inStock: number }>({
       query: ({ productId, inStock }) => ({
         url: `/products/${productId}`,
@@ -54,6 +58,7 @@ export const productsApi = createApi({
         method: 'PATCH',
         body: { inStock },
       }),
+      invalidatesTags: ['Products']
       
     })
   }),

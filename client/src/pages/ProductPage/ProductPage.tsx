@@ -9,11 +9,10 @@ import LazyLoad from 'react-lazy-load';
 import Loader from '../../components/Loader';
 
 
-
-
+//Page for presenting a single product based on id. 
 const ProductPage = () => {
-    const { id } = useParams<{ id: string }>(); // Ensure 'id' is always a string
-    const { data, isLoading, isError } = useGetProductByIdQuery(id || ''); // Provide a default value for 'id'
+    const { id } = useParams<{ id: string }>(); 
+    const { data, isLoading, isError } = useGetProductByIdQuery(id || ''); 
   
     const shoppingCart = useAppSelector((state: RootState) => state.shoppingCart);
     const cartItems = shoppingCart.cartItems;
@@ -30,17 +29,17 @@ const ProductPage = () => {
   
   if (isLoading) {
     return <Loader/>
-  }
+  };
 
   if (isError) {
     return <div>Error fetching product</div>;
-  }
+  };
 
   return (
     <PageContainer>
       <ImgContainer>
       <LazyLoad width={350} offset={300}>
-      <img src={data?.images} width={350}/>
+      <StyledImg src={data?.images} width={350}/>
       </LazyLoad>
       
       </ImgContainer>
@@ -64,24 +63,28 @@ const ProductPage = () => {
   );
 }
 
+const StyledImg = styled.img`
+  border-radius: 8px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+`;
 const PageContainer = styled.div`
-padding-top: 160px;
+padding-top: 220px;
 display: flex;
 padding-bottom: 3rem;
 @media (max-width: 650px) {
     flex-direction: column;
   }
-`
+`;
 const ImgContainer = styled.div`
   padding-left: 1rem;
   padding-bottom: 3rem;
-`
-
+  
+`;
 const InformationContainer = styled.div`
 padding-left: 4rem;
 padding-right: 1rem;
-`
+`;
 const TextContainer = styled.div`
   padding-bottom: 2rem;
-`
+`;
 export default ProductPage;

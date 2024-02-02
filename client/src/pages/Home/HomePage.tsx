@@ -1,5 +1,5 @@
 
-import {  Grid, Tab, Tabs } from '@mui/material';
+import {  Grid, Tab, Tabs, Typography } from '@mui/material';
 import {  useGetProductsQuery, useGetQuantityInStockQuery } from '../../redux/services/productsApi'
 import ProductCard from './ProductCard';
 import { useEffect, useState } from 'react';
@@ -9,8 +9,7 @@ import { RootState } from '../../redux/store';
 import Loader from '../../components/Loader';
 
 
-
-
+//Landing page where all the product cards are displayed
 function HomePage( ) {
     
     const { data: productsData, isLoading: productsIsLoading, isError: productsIsError } = useGetProductsQuery();
@@ -45,10 +44,11 @@ function HomePage( ) {
   }
 
   if (productsIsError || quantityIsError) {
-    return <div>Error fetching products</div>;
+    return <ErrorContainer>
+      <Typography variant="body1" color="error">Failed to load products....</Typography>
+      
+      </ErrorContainer>;
   }
-
- 
 
   return (
     <div>
@@ -87,21 +87,23 @@ function HomePage( ) {
   );
 }
 
+const ErrorContainer = styled.div`
+  padding-top: 150px;
+`;
+
 const TabContainer = styled.div`
 display: flex;
 justify-content: center;
 background-color: #7CB7AF;
 margin-bottom: 2.5rem;
-/* position: relative; */
-padding-top: 120px;
+padding-top: 150px;
 `;
-
 const StyledGrid = styled(Grid)`
   padding-left: 1rem;
   padding-right: 1rem;
   padding-bottom: 3rem;
   min-height: 75vh;
-`
+`;
 
 
 export default HomePage

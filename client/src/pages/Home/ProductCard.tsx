@@ -1,6 +1,6 @@
 import React from 'react'
 import { ProductInStock, StripeProduct } from '../../redux/services/productsApi';
-import {Card, CardContent, Typography, CardActionArea, CardActions }from '@mui/material';
+import { Card, CardContent, Typography, CardActionArea, CardActions, Button }from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import HandleCart from '../../components/HandleCart';
 import styled from '@emotion/styled';
@@ -14,12 +14,11 @@ interface ProductCardProps {
     quantity: ShoppingCartItem['quantity'];
   }
 
+  //ProductCard component to display the products
   const ProductCard: React.FC<ProductCardProps> = ({ stripeProduct, productInStock, quantity }) => {
     
     const navigate = useNavigate();
-   
-    
-    
+      
       const formattedPrice = new Intl.NumberFormat('sv-SE', {
         style: 'currency',
         currency: 'SEK',
@@ -58,8 +57,7 @@ interface ProductCardProps {
         </StyledCardContent>
       </CardActionArea>
       <CardActions>
-        <HandleCart
-            stripeProduct={stripeProduct} quantity={quantity}/>
+      <Button variant='outlined'>Meddela mig när varan är åter</Button>
       </CardActions>
     </OutOfStockCard>
     )
