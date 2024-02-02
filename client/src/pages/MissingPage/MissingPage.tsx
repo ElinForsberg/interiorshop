@@ -38,8 +38,8 @@ const PageContainer = styled.div`
 const StyledImg = styled.img`
     width: 100%;
     object-fit: cover;
-`
+`;
 const StyledBtn = styled(Button)`
     margin-top: 2rem;
-`
+`;
 export default MissingPage

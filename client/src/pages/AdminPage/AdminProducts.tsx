@@ -113,12 +113,12 @@ const Container = styled.div`
     padding-bottom: 2rem;
     padding-left: 1rem;
     padding-right: 1rem;
-`
+`;
 const ImgContainer = styled.div`
    
     padding-bottom: 1rem;
-`
+`;
 const StyledTextfield = styled(TextField)`
 padding-bottom: 1rem;
-`
+`;
 export default AdminProducts

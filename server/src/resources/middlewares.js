@@ -1,3 +1,4 @@
+//validate schema
 const validate = (schema) => {
 
     return  function (req, res, next) {

@@ -101,11 +101,11 @@ margin-top: 1rem;
 
 const StyledContainer = styled.div`
   width: 270px;
-`
+`;
 
 const StyledButton = styled(Button)`
 margin-top: 4rem;
 margin-bottom: 6px;
 background-color: black;
-`
+`;
 export default RegisterUserForm;

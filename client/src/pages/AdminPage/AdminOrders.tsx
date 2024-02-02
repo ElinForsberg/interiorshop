@@ -50,15 +50,15 @@ function AdminOrders() {
     const formattedTime = date.toLocaleTimeString('sv-SE'); 
   
     return `${formattedDate} ${formattedTime}`;
-  }
+  };
 
   if (isLoading) {
     return <Loader/>;
-  }
+  };
 
   if (isError) {
     return <Typography variant="body1" color="error">Failed to load orders...</Typography>
-  }
+  };
 
   return (
     <PageContainer>

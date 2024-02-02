@@ -64,9 +64,9 @@ const StyledButton = styled(Button)`
 margin-top: 4rem;
 margin-bottom: 6px;
 background-color: lightgray;
-`
+`;
 const LogoutButton = styled(Button)`
 margin-bottom: 6px;
 background-color: black;
-`
+`;
 export default LogOut

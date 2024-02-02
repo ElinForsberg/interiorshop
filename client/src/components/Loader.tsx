@@ -1,4 +1,3 @@
-// Loader.tsx
 import CircularProgress from '@mui/material/CircularProgress';
 import styled from '@emotion/styled';
 

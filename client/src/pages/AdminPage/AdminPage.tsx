@@ -55,7 +55,6 @@ function AdminPage() {
 const PageContainer = styled.div`
 padding-top: 150px;
 `;
-
 const TabContainer = styled.div`
 display: flex;
 justify-content: center;

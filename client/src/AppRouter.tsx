@@ -8,11 +8,13 @@ import MissingPage from "./pages/MissingPage/MissingPage"
 import UnauthorizedPage from "./pages/UnauthorizedPage/UnauthorizedPage"
 
 
+//routing with react-router-dom and urls
 function AppRouter() {
 
   return (
    
       <Routes>
+        
         <Route path="/" element={<HomePage/>}/>
         <Route path="/products/:id" element={<ProductPage/>}/> 
         <Route path="/confirmation" element={<ConfirmationPage/>}/> 

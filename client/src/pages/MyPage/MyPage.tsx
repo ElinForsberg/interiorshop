@@ -33,18 +33,18 @@ function MyPage() {
     if (error) {
      navigate('/401');
      return null;
-    }
+    };
 
     if (isLoading) {
       return <Loader/>;
-    }
+    };
     
     if (isError) {
       return <Typography>Failed to load orders...</Typography>
-    }
+    };
   if(!isSuccess) {
     return <div>Ordrar kunde inte hämtas</div>
-  }
+  };
     
     return (
         <>

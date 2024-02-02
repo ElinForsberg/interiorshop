@@ -15,8 +15,6 @@ function LoginUserForm() {
     const [loginUserMutation, { isLoading }] = useLoginUserMutation();
     const { refetch: refetchOrders } = useGetPersonalOrdersQuery();   
 
-   
-    
     const { control, handleSubmit, formState, reset } = useForm<LoginUser>({
         defaultValues: {       
           email: '',
@@ -41,7 +39,6 @@ function LoginUserForm() {
             setRegistrationStatus('error');
           }
         } catch (error) {
-          // Handle registration error
           console.error('User login failed:', error);
         }
       };

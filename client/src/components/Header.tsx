@@ -19,7 +19,7 @@ function Header() {
       
     <StyledBox>
       <StyledBanner>
-        <Typography variant="body2" color="white">Registrera dig hos oss och få rabattkod!!</Typography>
+        <Typography variant="body2" color="primary.light">Registrera dig hos oss och få rabattkod!!</Typography>
       </StyledBanner>
       <div>
       <StyledLink to={'/'}>
@@ -41,15 +41,18 @@ function Header() {
     ):(
       <StyledBox>
         <StyledBanner>
-        <Typography variant="body2" color="white">Registrera dig som kund hos oss och få 10% på ett köp!!</Typography>
+        <Typography variant="body2" color="primary.light">Registrera dig som kund hos oss och få 10% på ett köp!!</Typography>
         </StyledBanner>
       <HeaderContainer container direction="row">
         <Grid item xs="auto">
+          <TitleWrapper>
           <StyledLink to={'/'}>
             <Typography variant="h2">
               TrendigaRum
             </Typography>
           </StyledLink>
+          </TitleWrapper>
+         
         </Grid>
         <HeaderContainer container direction="row" xs="auto">
         {isAdmin ? (
@@ -72,10 +75,13 @@ function Header() {
 const StyledBox = styled(Box)`
 height: 150px;
 width: 100%;
-background-color: white;
+background-color: #faf9f3;
 position: fixed; 
 z-index: 2; 
 box-shadow: 0px 25px 16px -30px rgba(0,0,0,0.45);
+`;
+const TitleWrapper = styled.div`
+  padding-left: 50px;
 `;
 const HeaderContainer = styled(Grid)`
   height: 100px;
@@ -94,7 +100,7 @@ const SmallscreenContainer = styled.div`
 `;
 const StyledBanner = styled.div`
   height: 28px;
-  background-color: black;
+  background-color: #0A0708;
   text-align: center;
   padding-top: 2px;
 `;
